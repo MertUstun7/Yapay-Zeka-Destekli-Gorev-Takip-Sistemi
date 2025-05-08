@@ -1,0 +1,6 @@
+@GorevTakipSistemi_HostAddress = http://localhost:5093
+
+GET {{GorevTakipSistemi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
