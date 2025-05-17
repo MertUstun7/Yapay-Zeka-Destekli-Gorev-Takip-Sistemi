@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -9,23 +10,10 @@ using System.Threading.Tasks;
 namespace Entities.Models
 {
     //Kullanıcı bilgilerini temsil eden entity sınıfım.
-    public class User
+    public class User:IdentityUser
     {
-        //Kullanıcının sistemdeki id numarasını temsil eden parametredir.
-        [Key]
-        public int UserId { get; set; }
-        // Kullanıcın e-posta adresini temsil eden değişkendir.
-        [Required]
-        [StringLength(100)]
-        public string Email { get; set; }
-        //Kullanıcın şifresini hashlenmiş bir şekilde temsil eden parametredir.
-        [Required]
-        [StringLength(256)]
-        public string PasswordHash { get; set; }
-        //Kullanıcı türünü belirten parametredir.
-        [Required]
-        [StringLength(20)]
-        public string UserType { get; set; } // Manager veya Worker
+
+
         //Kullanıcı adını temsil eden parametredir.
         [Required]
         [StringLength(50)]
@@ -34,6 +22,10 @@ namespace Entities.Models
         [Required]
         [StringLength(50)]
         public string LastName { get; set; }
+
+        [Required]
+        [StringLength(20)]
+        public string UserType { get; set; } // Manager veya Worker
         //Kullanıcının sisteme kayıt olduğu tarih ve saati temsil eden parametredir.
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         //Kullanıcının sistemde aktif olup olmadığını temsil eden parametredir.
@@ -45,7 +37,7 @@ namespace Entities.Models
         public Manager Manager { get; set; }
         //Kullanıcı çalışan ise bu ilişki worker nesnesini temsil eder.
         public Worker Worker { get; set; }
-       //Kullanıcının yüklediği raporları listeleyen parametredir.
+        //Kullanıcının yüklediği raporları listeleyen parametredir.
         public ICollection<Report> Reports { get; set; }
     }
 }

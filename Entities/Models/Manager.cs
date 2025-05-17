@@ -14,7 +14,7 @@ namespace Entities.Models
         //Yöneticiye ait olan kimlik numarasını temsil eden parametredir. Ayrıca useer tablosu ile birebir ilişkilidir
         [Key]
         [ForeignKey("User")]
-        public int ManagerId { get; set; }
+        public string ManagerId { get; set; }
         //Yöneticinin departmanını temsil eden parametredir.
         [StringLength(100)]
         public string Department { get; set; }
@@ -23,8 +23,8 @@ namespace Entities.Models
         //User nesnesiyle olan birebir ilişkiyi temsil eden parametredir.
         public User User { get; set; }
         //Yöneticinin sorumlu olduğu çalışanları temsil eden parametredir.
-        public ICollection<Worker> Workers { get; set; }
+        public ICollection<Worker> Worker { get; set; }
         //Yöneticinin sistemde atadığı görevlerin listesini tutan parametredir.
-        public ICollection<Assignment> AssignedTasks { get; set; }
+        public ICollection<Assignment> AssignedTask { get; set; }
     }
 }

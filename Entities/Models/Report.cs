@@ -12,7 +12,7 @@ namespace Entities.Models
     {
         //Raporların id numaraların temsil eden parametredir.
         [Key]
-        public int ReportId { get; set; }
+        public string ReportId { get; set; }
         //Rapor başlığını temsil eden parametredir
         [Required]
         [StringLength(200)]
@@ -23,9 +23,9 @@ namespace Entities.Models
         public string Detail { get; set; }
         //Raporu yükleyen kullanıcının id numarasını temsil eden parametredir.
         [Required]
-        public int UploadedBy { get; set; }
+        public string UploadedBy { get; set; }
         //Bu raporun bağlı olduğu görevin id numarasını temsil eden parametredir.
-        public int? TaskId { get; set; }
+        public string? TaskId { get; set; }
         //Raporun sisteme yüklendiği zamanı temsil eden parametredir.
         public DateTime UploadedAt { get; set; } = DateTime.UtcNow;
 

@@ -1,9 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35913.81 d17.13
+VisualStudioVersion = 17.13.35913.81
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GorevTakipSistemi", "GorevTakipSistemi\GorevTakipSistemi.csproj", "{E48CDB90-DB87-4C4F-B5F0-93AE46E32FD6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{B4696B63-3B35-4ADE-BAA2-CE05D9518C20}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repositories", "Repositories\Repositories.csproj", "{27E8031E-EE15-4C99-8068-7CB61B195A2E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{90092AFD-11C2-4C3B-B56B-190F05C96048}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +21,18 @@ Global
 		{E48CDB90-DB87-4C4F-B5F0-93AE46E32FD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E48CDB90-DB87-4C4F-B5F0-93AE46E32FD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E48CDB90-DB87-4C4F-B5F0-93AE46E32FD6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4696B63-3B35-4ADE-BAA2-CE05D9518C20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4696B63-3B35-4ADE-BAA2-CE05D9518C20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4696B63-3B35-4ADE-BAA2-CE05D9518C20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4696B63-3B35-4ADE-BAA2-CE05D9518C20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27E8031E-EE15-4C99-8068-7CB61B195A2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27E8031E-EE15-4C99-8068-7CB61B195A2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27E8031E-EE15-4C99-8068-7CB61B195A2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27E8031E-EE15-4C99-8068-7CB61B195A2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90092AFD-11C2-4C3B-B56B-190F05C96048}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90092AFD-11C2-4C3B-B56B-190F05C96048}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90092AFD-11C2-4C3B-B56B-190F05C96048}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90092AFD-11C2-4C3B-B56B-190F05C96048}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
