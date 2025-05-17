@@ -14,7 +14,7 @@ namespace Entities.Models
         //Görevin id numarasını temsil eden parametredir.
         
         [Key]
-        public int TaskId { get; set; }
+        public string TaskId { get; set; }
         
         // Görevin başlığını temsil eden parametredir
         [Required]
@@ -24,10 +24,10 @@ namespace Entities.Models
         public string Description { get; set; }
        //Görevin atandığı çalışanın kimlik numarasını temsil eden parametredir.
         [Required]
-        public int AssignedTo { get; set; }
+        public string AssignedTo { get; set; }
         //Görevi atayan kişinin kimlik numarasını temsil eden parametredir.
         [Required]
-        public int AssignedBy { get; set; }
+        public string AssignedBy { get; set; }
       //Görevin mevcut durumunu temsil eden parametredir.
         [StringLength(50)]
         public string Status { get; set; } = "Pending";

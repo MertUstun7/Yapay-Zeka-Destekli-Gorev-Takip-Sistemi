@@ -14,16 +14,16 @@ namespace Entities.Models
         //Çalışanın id numarasını temsil eden parametredir.
         [Key]
         [ForeignKey("User")]
-        public int WorkerId { get; set; }
+        public string WorkerId { get; set; }
         //Çalışanın bağlı olduğu yöneticiyi temsil eden parametredir.
         [Required]
-        public int ManagerId { get; set; }
+        public string ManagerId { get; set; }
         //Çalışanın görev unvanını temsil eden parametredir.
         [StringLength(100)]
         public string JobTitle { get; set; }
 
         // Aşağıda ilişkisel verileri tutan parametreler bulunmaktadır.
-        public User User { get; set; }
+        public User Users { get; set; }
         //Çalışanın bağlı olduğu yöneticiyi temsil eden parametredir.
         public Manager Manager { get; set; }
         //Çalışana atanan görevleri temsil eden parametredir.
