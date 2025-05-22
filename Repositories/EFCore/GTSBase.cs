@@ -1,0 +1,71 @@
+﻿using Entities;
+using Microsoft.EntityFrameworkCore;
+using Repositories.Contracts;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Repositories.EFCore
+{
+    public abstract class GTSBase<T> : IGTSBase<T> where T :class
+    {
+        //Context işlemi yapıldı burada veri tabanına erişildi. gtsbase ile işlem interfacelere erişim yapıldı.
+        protected readonly GTSDbContext _context;
+        public GTSBase (GTSDbContext context)
+        {
+            _context = context;
+        }
+
+        public async Task<List<T>> FindAllAsync(bool trackChanges)
+        {
+            return await (trackChanges
+                ? _context.Set<T>()
+                : _context.Set<T>().AsNoTracking())
+                .ToListAsync();
+        }
+
+
+        public async Task<List<T>> FindByConditionAsync(Expression<Func<T, bool>> expression, bool trackChanges)
+        {
+            
+            IQueryable<T> query = _context.Set<T>().Where(expression);
+
+            
+            if (!trackChanges)
+                query = query.AsNoTracking();
+
+            
+            return await query.ToListAsync();
+        }
+
+        public async Task CreateAsync(T entity)
+        {
+            if (entity == null)
+                throw new ArgumentNullException(nameof(entity));
+
+            _context.Set<T>().Add(entity);
+           
+        }
+
+        public async Task UpdateAsync(T entity)
+        {
+            if (entity == null)
+                throw new ArgumentNullException(nameof(entity));
+
+            _context.Set<T>().Update(entity);
+            
+        }
+
+        public async Task DeleteAsync(T entity)
+        {
+            if (entity == null)
+                throw new ArgumentNullException(nameof(entity));
+
+            _context.Set<T>().Remove(entity);
+            
+        }
+    }
+}
