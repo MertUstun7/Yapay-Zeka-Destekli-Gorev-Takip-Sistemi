@@ -18,14 +18,14 @@ namespace Repositories.Contracts
         Task<bool> CheckUserId(string userId);
 
         // İlişkili verilerle kullanıcı çekme fonksiyonunun tanımı 
-        Task<User> GetUserWithDetailsAsync(string userId);
+        
 
         // Durum bazlı sorgular fonksiyonunun tanımı yapılmıştır.
         Task<List<User>> GetActiveUsersAsync();
 
         // Görev ve raporlarla ilgili sorgulama fonksiyonlarının tanımı yapılmıştır.
-        Task<List<Assignment>> GetUserAssignmentsAsync(string userId);
-        Task<List<Report>> GetUserReportsAsync(string userId);
+        
+    
 
         // Arama ve filtreleme fonksiyonunun tanımı yapılmıştır.
         Task<List<User>> SearchUsersAsync(string searchTerm);

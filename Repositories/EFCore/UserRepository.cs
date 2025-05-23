@@ -34,15 +34,6 @@ namespace Repositories.EFCore
 
         // İlişkili verilerle kullanıcı çekme
         
-        public async Task<User> GetUserWithDetailsAsync(string userId)
-        {
-            return  await
-                _context.Users
-                .Include(u => u.Manager)
-                .Include(u => u.Worker)
-                .Include(u => u.Reports)
-                .FirstOrDefaultAsync(u => u.Id == userId.ToString());
-        }
         
         // Durum bazlı sorgular
         public async Task<List<User>> GetActiveUsersAsync()
@@ -50,27 +41,8 @@ namespace Repositories.EFCore
             return await FindByConditionAsync(u => u.IsActive, false);
         }
 
-        // Görev ve raporlarla ilgili sorgular
-        public async Task<List<Assignment>> GetUserAssignmentsAsync(string userId)
-        {
-            return await _context.Assignments
-                .Where(a => a.AssignedTo == userId)
-                .Include(a => a.AssignedWorker)
-                .Include(a => a.AssignedManager)
-                .AsNoTracking()
-                .ToListAsync();
-        }
-
-        public async Task<List<Report>> GetUserReportsAsync(string userId)
-        {
-            return await _context.Reports
-                .Where(r => r.UploadedBy == userId)
-                .Include(r => r.Uploader)
-                .Include(r => r.Task)
-                .AsNoTracking()
-                .ToListAsync();
-        }
-
+       
+       
         // Arama ve filtreleme
         public async Task<List<User>> SearchUsersAsync(string searchTerm)
         {
