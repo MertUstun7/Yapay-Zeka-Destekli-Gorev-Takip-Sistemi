@@ -10,30 +10,35 @@ using System.Threading.Tasks;
 namespace Entities.Models
 {
     //Kullanıcı bilgilerini temsil eden entity sınıfım.
-    public class User:IdentityUser
+    public class User : IdentityUser
     {
-        //Kullanıcı adını temsil eden parametredir.
         [Required]
         [StringLength(50)]
         public string FirstName { get; set; }
-        //Kullanıcı soyadını temsil eden parametredir.
 
         [Required]
         [StringLength(50)]
         public string LastName { get; set; }
-        
-        //Kullanıcının sisteme kayıt olduğu tarih ve saati temsil eden parametredir.
+
+        [Phone]
+        public override string PhoneNumber { get; set; }
+
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-        //Kullanıcının sistemde aktif olup olmadığını temsil eden parametredir.
         public bool IsActive { get; set; } = true;
 
-        // Aşağıda ilişkisel verileri tutan parametreler bulunmaktadır.
+        public string? RefreshToken { get; set; }
+        public DateTime? RefreshTokenExpiryTime { get; set; }
 
-        //Kullanıcı yönetici ise bu ilişki yönetici nesnesini temsil eder.
-        public Manager Manager { get; set; }
-        //Kullanıcı çalışan ise bu ilişki worker nesnesini temsil eder.
-        public Worker Worker { get; set; }
-        //Kullanıcının yüklediği raporları listeleyen parametredir.
-        public ICollection<Report> Reports { get; set; }
+        // Şirket bağlantısı
+        public Guid? CompanyId { get; set; }
+        public Company? Company { get; set; }
+
+        // İlişkiler
+        public ICollection<TaskAssignment> AssignedTasks { get; set; } = new List<TaskAssignment>();
+        public ICollection<TaskAssignment> GivenTasks { get; set; } = new List<TaskAssignment>();
+        public ICollection<TaskReport> TaskReports { get; set; } = new List<TaskReport>();
+        public ICollection<TaskItem> CreatedTasks { get; set; } = new List<TaskItem>();
     }
+
+
 }

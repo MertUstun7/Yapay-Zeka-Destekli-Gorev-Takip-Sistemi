@@ -1,6 +1,7 @@
 ﻿using Entities.DataTransferObjects;
 using Entities.Exceptions;
 using Entities.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services.Contracts;
 using System;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace Presentation.Controllers
 {
+    
     [Route("api/user")]
     [ApiController]
     public class UserController:ControllerBase
@@ -26,7 +28,7 @@ namespace Presentation.Controllers
             _logger = logger;
         }
 
-
+        [Authorize(Roles = "CompanyOwner,Manager")]
         [HttpGet("all")]
         public async Task<IActionResult> GetAllUsers()
         {
@@ -48,7 +50,7 @@ namespace Presentation.Controllers
          
             
         }
-     
+        [Authorize(Roles = "CompanyOwner")]
         [HttpGet("active-users")]
 
         public async Task<IActionResult> GetActiveUsers()
@@ -73,78 +75,11 @@ namespace Presentation.Controllers
 
 
         }
+        
 
-        [HttpGet("{userId}")]
+      
 
-        public async Task<IActionResult> GetUser(string userId)
-        {
-            try
-            {
-                await _logger.LogInfo($"{userId} kullanıcısı ekranda gösteriliyor...");
-
-                var users = await _manager.UserService.GetUserWithDetailsAsync(userId);
-                
-                await _logger.LogInfo("İşlem başarılı bir şekilde gerçekleşti.");
-
-                return Ok(users);
-            }
-            catch (Exception ex)
-            {
-                await _logger.LogError($"{userId} kullanıcısı getirilirken bir hata meydana geldi. Error:{ex} ");
-                throw;
-            }
-            
-
-        }
-
-        [HttpGet("{userId}/assignments")]
-        public async Task<ActionResult<List<Assignment>>> GetUserAssignments(string userId)
-        {
-            await _logger.LogInfo($"{userId} no'lu çalışan için görevleri getirme işlemi gerçekleşiyor...");
-
-            var user_valid = await _manager.UserService.CheckUser(userId);
-
-            if (user_valid)
-            {
-                var assignments = await _manager.UserService.GetUserAssignmentsAsync(userId);
-                if (assignments == null || assignments.Count == 0)
-                {
-                    throw new AssignmentNotFoundException(userId);
-                }
-                await _logger.LogInfo("İşlem başarılı bir şekilde gerçekleşti.");
-                return Ok(assignments);
-
-            }
-            else
-            {
-                await _logger.LogError($"{userId} kullanıcısı getirilirken bir hata meydana geldi.");
-
-                throw new UserNotFoundException(userId);
-            }
-
-        }
-
-        [HttpGet("{userId}/reports")]
-        public async Task<ActionResult<List<Report>>> GetReport(string userId)
-        {
-            await _logger.LogInfo($"{userId} numaralı kullanıcı için raporları getirme işlemi başlatılıyor...");
-            var user_valid = await _manager.UserService.CheckUser(userId);
-            if (user_valid)
-            {
-                var reports = await _manager.UserService.GetUserReportsAsync(userId);
-                if (reports == null || reports.Count == 0)
-                {
-                    throw new ReportNotFoundException(userId);
-                }
-                await _logger.LogInfo("İşlem başarılı bir şekilde gerçekleşti.");
-
-                return Ok(reports);
-            }
-            else
-            {
-                throw new UserNotFoundException(userId);
-            }
-        }
+       
         [HttpGet("user-searching")]
         public async Task<IActionResult> Search(string searchTerm)
         {
@@ -172,28 +107,7 @@ namespace Presentation.Controllers
 
         }
 
-        [HttpPost("registration")]
-        public async Task<IActionResult> Register([FromBody] UserDtoForCreate userDto)
-        {
-            await _logger.LogInfo($"Kullanıcı kayıt işlemi başlatılıyor...");
-
-            if (userDto == null)
-                return BadRequest("Kullanıcı bilgisi eksik.");
-
-            try
-            {
-                var user = await _manager.UserService.RegisterUserAsync(userDto);
-                await _logger.LogInfo("İşlem başarılı bir şekilde gerçekleşti.");
-
-                return CreatedAtAction(nameof(GetUser), new {userId=user.Id},new {Message="Kullanıcı oluşturuldu."});
-            }
-            catch (Exception ex)
-            {
-                await _logger.LogError($"Kullanıcı kayıdı esnasında bir hata meydana geldi.");
-
-                throw;
-            }
-        }
+        
 
         
 
@@ -233,19 +147,7 @@ namespace Presentation.Controllers
 
         }
 
-        [HttpPut("{userId}")]
-        public async Task <IActionResult> UpdateUser([FromBody] UserDtoForUpdate userInformation, string userId)
-        {
-            await _logger.LogInfo($"{userId} kullanıcısı için güncelleme işlemi başlatılıyor...");
-
-            var user_valid = await _manager.UserService.CheckUser(userId);
-            if (!user_valid)
-                throw new UserNotFoundException(userId);
-            await _logger.LogInfo("İşlem başarılı bir şekilde gerçekleşti.");
-
-            await _manager.UserService.UpdateUserProfileAsync(userInformation,userId);
-            return NoContent();
-        }
+        
 
         [HttpDelete("{userId}")]
         public async Task <IActionResult> DeleteUser(string userId)

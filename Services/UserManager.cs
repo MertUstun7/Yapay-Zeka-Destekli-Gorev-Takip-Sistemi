@@ -33,20 +33,7 @@ namespace Services
 
         
 
-        public async Task<UserDtoForGet> GetUserWithDetailsAsync(string userId)
-        {
-            await _logger.LogInfo($"GetUserWithDetailsAsync işlemi başlatıldı");
-
-            var user = await _userManager.User.GetUserWithDetailsAsync(userId);
-            var entity = _mapper.Map<UserDtoForGet>(user);
-            if (entity is null)
-            {
-                string message = $"{userId} nolu kullanıcı yok.";
-                await _logger.LogInfo(message);
-                throw new Exception(message);
-            }
-            return entity;
-        }
+        
 
         public async Task<List<UserDtoForGet>> GetActiveUsersAsync()
         {
@@ -64,35 +51,8 @@ namespace Services
 
         }
 
-        public async Task<List<Assignment>> GetUserAssignmentsAsync(string userId)
-        {
-            await _logger.LogInfo($"GetUserAssignmentsAsync işlemi başlatıldı");
+       
 
-            var user_assignment = await _userManager.User.GetUserAssignmentsAsync(userId);
-            if (user_assignment is null)
-            {
-                string message = $"Kullanıcıya ait bir görev bulunamadı.";
-                await _logger.LogInfo(message);
-                throw new Exception(message);
-            }
-            return user_assignment;
-        }
-
-        public async Task<List<ReportDtoForGet>> GetUserReportsAsync(string userId)
-        {
-            await _logger.LogInfo($"GetUserReportsAsync işlemi başlatıldı");
-
-            var user_report = await _userManager.User.GetUserReportsAsync(userId);
-            if (user_report is null)
-            {
-                string message = $"Kullanıcıya ait rapor bulunamadı";
-                await _logger.LogInfo(message);
-                throw new Exception(message);
-
-            }
-            var dtolist=_mapper.Map<List<ReportDtoForGet>>(user_report);
-            return dtolist;
-        }
 
         public async Task<List<UserDtoForGet>> SearchUsersAsync(string searchTerm)
         {
@@ -156,36 +116,7 @@ namespace Services
             return entity;
         }
 
-        public async Task UpdateUserProfileAsync(UserDtoForUpdate user,string userId)
-        {
-            try
-            {
-                await _logger.LogInfo($"UpdateUserProfileAsync işlemi başlatıldı");
-                var entity = await _userManager.User.GetUserWithDetailsAsync(userId);
-                if (user.FirstName!=null)
-                    entity.FirstName = user.FirstName;
-                if (user.LastName != null)
-                    entity.LastName = user.LastName;
-                if (user.Email != null)
-                    entity.Email = user.Email;
-                if (user.PhoneNumber != null) 
-                    entity.PhoneNumber = user.PhoneNumber;
-                if (user.PasswordHash!=null)
-                    entity.PasswordHash = user.PasswordHash;
-
-
-                _mapper.Map(user, entity);
-                await _userManager.User.UpdateAsync(entity);
-                await _userManager.SaveAsync();
-            }
-            catch (Exception ex)
-            {
-
-                throw new Exception(ex.Message);
-            }
-            
-            
-        }
+        
 
         public async Task<List<UserDtoForGet>> GetAllUser()
         {
