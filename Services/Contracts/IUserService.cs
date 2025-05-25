@@ -3,27 +3,35 @@ using Entities.Models;
 using Repositories.Contracts;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace Services.Contracts
 {
+    using Microsoft.AspNetCore.Identity;
+    
+
     public interface IUserService
     {
-        Task<bool> EmailExistsAsync(string email);
+        // CREATE
+        Task<UserDtoForGet> CreateAsync(UserDtoForCreate dto);
 
-        Task<List<UserDtoForGet>> GetActiveUsersAsync();
-        Task<List<Assignment>> GetUserAssignmentsAsync(string userId);
-        Task<List<ReportDtoForGet>> GetUserReportsAsync(string userId);
-        Task<UserDtoForGet> GetUserWithDetailsAsync(string userId);
-        Task<List<UserDtoForGet>> SearchUsersAsync(string searchTerm);
-        Task DeactivateUserAsync(string userId);
-        Task ActivateUserAsync(string userId);
-        Task<User> RegisterUserAsync(UserDtoForCreate userDto);   
-        Task UpdateUserProfileAsync(UserDtoForUpdate user,string userId);
+        // READ
+        Task<UserDtoForGet> GetByIdAsync(string userId);
+        Task<IEnumerable<UserDtoForGet>> GetAllAsync();
+        Task<IEnumerable<UserDtoForGet>> GetByCompanyIdAsync(Guid companyId);
+        Task<IEnumerable<UserDtoForGet>> SearchByNameAsync(string name);
 
-        Task DeleteUserProfileAsync(string userId);
-        Task<List<UserDtoForGet>> GetAllUser();
+        // UPDATE (PUT)
+        Task UpdateAsync(string userId, UserDtoForUpdate dto);
 
-        Task<bool> CheckUser(string userId);
-        
+        // PATCH
+        Task PatchAsync(string userId, JsonPatchDocument<UserDtoForUpdate> patchDoc);
+
+        // DELETE
+        Task DeleteAsync(string userId);
+
+        // PASSWORD
+        Task<IdentityResult> UpdatePasswordAsync(string userId, UserPasswordUpdateDto dto);
     }
+
 }

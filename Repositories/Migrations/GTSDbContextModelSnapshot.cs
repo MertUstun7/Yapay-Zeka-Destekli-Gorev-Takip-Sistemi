@@ -102,6 +102,9 @@ namespace Repositories.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Priority")
+                        .HasColumnType("int");
+
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
@@ -168,6 +171,9 @@ namespace Repositories.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Department")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -179,9 +185,6 @@ namespace Repositories.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -223,6 +226,9 @@ namespace Repositories.Migrations
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
+
+                    b.Property<string>("UserDescription")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
@@ -272,19 +278,19 @@ namespace Repositories.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "36ce5c1f-1110-49d5-b955-87891112dbcc",
+                            Id = "fb7a8e4c-0690-4e75-ade6-6f98fa580938",
                             Name = "CompanyOwner",
                             NormalizedName = "COMPANYOWNER"
                         },
                         new
                         {
-                            Id = "a54f93f0-fe36-47a2-bccf-5fb95a9f0fa5",
+                            Id = "dfc4c385-53d7-4c69-9edf-f4983d44bf74",
                             Name = "Manager",
                             NormalizedName = "MANAGER"
                         },
                         new
                         {
-                            Id = "89a1705a-87ba-466b-80fb-8fda82e0890b",
+                            Id = "08b720e2-e2b0-46b4-aaad-eae216379990",
                             Name = "Worker",
                             NormalizedName = "WORKER"
                         });
@@ -445,7 +451,7 @@ namespace Repositories.Migrations
                     b.HasOne("Entities.Models.User", "CreatedBy")
                         .WithMany("CreatedTasks")
                         .HasForeignKey("CreatedById")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Company");
@@ -476,7 +482,8 @@ namespace Repositories.Migrations
                 {
                     b.HasOne("Company", "Company")
                         .WithMany("Users")
-                        .HasForeignKey("CompanyId");
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Company");
                 });

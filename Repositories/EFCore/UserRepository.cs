@@ -16,91 +16,37 @@ namespace Repositories.EFCore
     {
         public UserRepository(GTSDbContext context) : base(context) { }
 
-       
-        
-
-        public async Task<bool> EmailExistsAsync(string email)
+        public async Task<IEnumerable<User>> GetUsersByCompanyIdAsync(Guid companyId, bool trackChanges)
         {
-            if (string.IsNullOrWhiteSpace(email))
-                throw new ArgumentException("Email cannot be null or empty.", nameof(email));
-
-            return await _context.Users
-                .AsNoTracking()
-                .AnyAsync(u => u.Email == email);
-        }
-
-        // Kullanıcı türüne göre filtreleme
-       
-
-        // İlişkili verilerle kullanıcı çekme
-        
-        
-        // Durum bazlı sorgular
-        public async Task<List<User>> GetActiveUsersAsync()
-        {
-            return await FindByConditionAsync(u => u.IsActive, false);
-        }
-
-       
-       
-        // Arama ve filtreleme
-        public async Task<List<User>> SearchUsersAsync(string searchTerm)
-        {
-            if (string.IsNullOrWhiteSpace(searchTerm))
-                return await FindAllAsync(false);
-
-            searchTerm = searchTerm.ToLower();
-            return await _context.Users
-                .Where(u => u.FirstName.ToLower().Contains(searchTerm) ||
-                            u.LastName.ToLower().Contains(searchTerm) ||
-                            u.Email.ToLower().Contains(searchTerm))
-                .AsNoTracking()
-                .ToListAsync();
-        }
-
-        // Soft delete ve durum güncelleme
-        public async Task DeactivateUserAsync(string userId)
-        {
-            var user = await _context.Users.FindAsync(userId);
-            if (user == null)
-                throw new Exception("Kullanıcı bulunamadı.");
-
-            user.IsActive = false;
-            
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task ActivateUserAsync(string userId)
-        {
-            var user = await _context.Users.FindAsync(userId);
-            if (user == null)
-                throw new Exception("Kullanıcı bulunamadı.");
-
-            user.IsActive = true;
-
-            await _context.SaveChangesAsync();
-        }
-        public async Task DeleteUserAsync(string userId)
-        {
-            var user = await _context.Users.FindAsync(userId);
-            await DeleteAsync(user);
-            
-            await _context.SaveChangesAsync();
-        }
-
-        public IQueryable<User> GetAllQuery(bool trackChanges)
-        {
-            var query = _context.Users.AsQueryable();
+            IQueryable<User> query = _context.Users.Where(u => u.CompanyId == companyId);
             if (!trackChanges)
                 query = query.AsNoTracking();
-            return query;
+
+            return await query.ToListAsync();
         }
 
-        public async Task<bool> CheckUserId(string userId)
+        public async Task<IEnumerable<User>> SearchByNameAsync(string name, bool trackChanges)
         {
-            return await _context.Users
-            .AsNoTracking()
-            .AnyAsync(u => u.Id == userId.ToString());
+            IQueryable<User> query = _context.Users
+                .Where(u => u.FirstName.Contains(name) || u.LastName.Contains(name));
+
+            if (!trackChanges)
+                query = query.AsNoTracking();
+
+            return await query.ToListAsync();
+        }
+
+        public async Task<User> GetUserWithCompanyAsync(string userId, bool trackChanges)
+        {
+            IQueryable<User> query = _context.Users
+                .Include(u => u.Company)
+                .Where(u => u.Id == userId);
+
+            if (!trackChanges)
+                query = query.AsNoTracking();
+
+            return await query.SingleOrDefaultAsync()
+                ?? throw new KeyNotFoundException($"User with ID {userId} not found.");
         }
 
     }

@@ -26,30 +26,56 @@ namespace Entities
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
             modelBuilder.Entity<Company>()
-           .HasOne(c => c.Owner)
-           .WithOne() // Tek yönlü ilişki: User sınıfında CompanyOwner için özel navigation yok
-           .HasForeignKey<Company>(c => c.OwnerId)
-           .OnDelete(DeleteBehavior.Restrict);
+            .HasOne(c => c.Owner)
+            .WithOne() 
+            .HasForeignKey<Company>(c => c.OwnerId)
+            .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<TaskAssignment>()
-        .HasOne(a => a.AssignedBy)
-        .WithMany(u => u.GivenTasks) // User sınıfındaki ICollection<TaskAssignment>
-        .HasForeignKey(a => a.AssignedById)
-        .OnDelete(DeleteBehavior.Restrict); // Silerken hata almasın
+            .HasOne(a => a.AssignedBy)
+            .WithMany(u => u.GivenTasks) 
+            .HasForeignKey(a => a.AssignedById)
+            .OnDelete(DeleteBehavior.Restrict); 
 
             modelBuilder.Entity<TaskAssignment>()
-                .HasOne(a => a.AssignedTo)
-                .WithMany(u => u.AssignedTasks) // User sınıfındaki ICollection<TaskAssignment>
-                .HasForeignKey(a => a.AssignedToId)
-                .OnDelete(DeleteBehavior.Restrict); // Ayn
+            .HasOne(a => a.AssignedTo)
+            .WithMany(u => u.AssignedTasks) 
+            .HasForeignKey(a => a.AssignedToId)
+            .OnDelete(DeleteBehavior.Restrict); 
 
             modelBuilder.Entity<TaskReport>()
-    .HasOne(tr => tr.CreatedBy)
-    .WithMany(u => u.TaskReports)
-    .HasForeignKey(tr => tr.CreatedById)
-    .OnDelete(DeleteBehavior.Restrict);
+            .HasOne(tr => tr.CreatedBy)
+            .WithMany(u => u.TaskReports)
+            .HasForeignKey(tr => tr.CreatedById)
+            .OnDelete(DeleteBehavior.Restrict);
 
-             // veya burada da Restrict deneyebilirsiniz
+            modelBuilder.Entity<User>()
+            .HasOne(u => u.Company)
+            .WithMany(c => c.Users)
+            .HasForeignKey(u => u.CompanyId)
+            .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<TaskItem>()
+            .HasOne(t => t.Company)
+            .WithMany(c => c.Tasks)
+            .HasForeignKey(t => t.CompanyId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<TaskItem>()
+            .HasOne(t => t.CreatedBy)
+            .WithMany(u => u.CreatedTasks)
+            .HasForeignKey(t => t.CreatedById)
+            .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<TaskAssignment>()
+            .HasOne(a => a.TaskItem)
+            .WithMany(t => t.Assignments)
+            .HasForeignKey(a => a.TaskItemId)
+            .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<TaskReport>()
+            .HasOne(tr => tr.TaskItem)
+            .WithMany() 
+            .HasForeignKey(tr => tr.TaskItemId)
+            .OnDelete(DeleteBehavior.Cascade);
 
 
         }
