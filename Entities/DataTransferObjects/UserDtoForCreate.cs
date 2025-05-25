@@ -6,24 +6,28 @@ using System.Threading.Tasks;
 
 namespace Entities.DataTransferObjects
 {
-    public record UserDtoForCreate
+    public enum UserRole
     {
-        public string Id { get; init; }
-
-        public string FirstName {  get; init; }
-
-        public string LastName { get; init; }
-
-        public string Email { get; init; }
-
-        public string PasswordHash{ get; init; }
-
-        public string PhoneNumber { get; init; }
-
-        public bool IsActive { get; init; }
-
-        public string UserType {  get; init; }
-
-
+        CompanyOwner,
+        Manager,
+        Worker
     }
+
+    public class UserDtoForCreate
+    {
+
+            public string FirstName { get; init; }
+            public string LastName { get; init; }
+            public string Email { get; init; }
+            public string Password { get; init; }
+            public string? PhoneNumber { get; init; }
+            public string? Department { get; init; }
+            
+            public string? Role { get; init; }
+            public string? UserDescription { get; init; }
+        }
+
+
+
+    
 }

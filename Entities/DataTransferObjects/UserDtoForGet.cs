@@ -9,19 +9,13 @@ namespace Entities.DataTransferObjects
     public class UserDtoForGet
     {
         public string Id { get; init; }
-
         public string FirstName { get; init; }
-
         public string LastName { get; init; }
-
         public string Email { get; init; }
-
-        public string PhoneNumber { get; init; }
-
-        public bool IsActive { get; init; }
-
-        public string UserType { get; init; }
-
-        public DateTime CreatedAt { get; set; }
+        public string? PhoneNumber { get; init; }
+        public string? Department { get; init; }
+        public string? UserDescription { get; init; }
+        public Guid? CompanyId { get; init; }
+        public DateTime CreatedAt { get; init; }
     }
 }
