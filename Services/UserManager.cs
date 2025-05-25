@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Entities.DataTransferObjects;
 using Entities.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.JsonPatch;
 using Repositories.Contracts;
 using Repositories.EFCore;
 using Services.Contracts;
@@ -11,129 +13,116 @@ namespace Services
 {
     public class UserManager : IUserService
     {
-        private readonly IRepositoryManager _userManager;
+        private readonly IRepositoryManager _repoManager;
+        private readonly UserManager<User> _userManager;
         private readonly ILoggerService _logger;
         private readonly IMapper _mapper;
-        public UserManager(IRepositoryManager userManager, ILoggerService logger, IMapper mapper)
+        public UserManager(IRepositoryManager repoManager, ILoggerService logger, IMapper mapper, UserManager<User> userManager)
         {
-            _userManager = userManager;
+            _repoManager = repoManager;
             _logger = logger;
             _mapper = mapper;
+            _userManager = userManager;
         }
 
-        
-
-        public async Task<bool> EmailExistsAsync(string email)
+        public async Task<UserDtoForGet> CreateAsync(UserDtoForCreate dto)
         {
-            await _logger.LogInfo($"{email} maili için kontrol sağlama işlemi başlatıldı.");
-            return await _userManager.User.EmailExistsAsync(email);
-        }
+            var allowedRoles = new[] { "worker", "manager" };
 
-        
-
-        
-
-        
-
-        public async Task<List<UserDtoForGet>> GetActiveUsersAsync()
-        {
-            await _logger.LogInfo($"GetActiveUsersAsync işlemi başlatıldı");
-
-            var activeuser = await _userManager.User.GetActiveUsersAsync();
-            var entity = _mapper.Map<List<UserDtoForGet>>(activeuser);
-            if (entity is null)
+            if (!allowedRoles.Contains(dto.Role?.ToLower()))
             {
-                string message = $"Aktif kullanıcı yok.";
-                await _logger.LogInfo(message);
-                throw new Exception(message);
+                throw new ArgumentException("Invalid role");
             }
-            return entity;
-
-        }
-
-       
-
-
-        public async Task<List<UserDtoForGet>> SearchUsersAsync(string searchTerm)
-        {
-            await _logger.LogInfo($"SearchUsersAsync işlemi başlatıldı");
-
-            var users= await _userManager.User.SearchUsersAsync(searchTerm);
-            var entity = _mapper.Map<List<UserDtoForGet>>(users);
-            return entity;
-        }
-
-        public async Task DeactivateUserAsync(string userId)
-        {
-            await _logger.LogInfo($"DeactivateUserAsync işlemi başlatıldı");
-            try
-            {
-                await _userManager.User.DeactivateUserAsync(userId);
+                var user = _mapper.Map<User>(dto);
+                var result = await _userManager.CreateAsync(user, dto.Password);
+                await _userManager.AddToRoleAsync(user, dto.Role);
+                if (!result.Succeeded)
+                {
+                await _logger.LogError($"{dto.Email} kullanıcısı veri tabanına eklenirken hata meydana geldi.");
+                throw new Exception(string.Join(", ", result.Errors.Select(e => e.Description)));
+                }
                 
-                await _userManager.SaveAsync();
-            }
-            catch (Exception ex)
-            {
+                    
 
-                throw new Exception(ex.Message);
-            }
-           
+                return _mapper.Map<UserDtoForGet>(user);
+
             
-        }
-        public async Task ActivateUserAsync(string userId)
-        {
-            await _logger.LogInfo($"ActivateUserAsync işlemi başlatıldı");
-            try
-            {
-                await _userManager.User.ActivateUserAsync(userId);
-
-                await _userManager.SaveAsync();
-            }
-            catch (Exception ex)
-            {
-
-                throw new Exception(ex.Message);
-            }
-
-
+           
         }
 
-        public async Task<User> RegisterUserAsync(UserDtoForCreate userDto)
+        public async Task DeleteAsync(string userId)
         {
-            await _logger.LogInfo($"RegisterUserAsync işlemi başlatıldı");
 
-            if (await _userManager.User.EmailExistsAsync(userDto.Email))
-                throw new Exception("Bu email zaten kayıtlı.");
-
-            var entity=_mapper.Map<User>(userDto);
-
-            await _userManager.User.CreateAsync(entity);
-            await _userManager.SaveAsync();
-
-            await _logger.LogInfo($"{userDto} kullanıcısı veri tabanına eklenildi.");
-
-
-            return entity;
+            var user = await _userManager.FindByIdAsync(userId)
+                ?? throw new KeyNotFoundException("User not found");
+            await _logger.LogWarning($"{userId} veri tabanından silindi");
+            await _userManager.DeleteAsync(user);
         }
 
-        
-
-        public async Task<List<UserDtoForGet>> GetAllUser()
+        public async Task<IEnumerable<UserDtoForGet>> GetAllAsync()
         {
-            await _logger.LogInfo($"GetAllUser işlemi başladı");
-            var users=await _userManager.User.FindAllAsync(false);
-            var entity = _mapper.Map<List<UserDtoForGet>>(users);
-            return entity;
+            var users = await _repoManager.User.FindAllAsync(false);
+            await _logger.LogWarning($"Kullanıcılar listelendi");
+
+            return users.Select(u => _mapper.Map<UserDtoForGet>(u));
         }
 
-        public async Task<bool> CheckUser(string userId)
+        public async Task<IEnumerable<UserDtoForGet>> GetByCompanyIdAsync(Guid companyId)
         {
-            return await _userManager.User.CheckUserId(userId);
+            var users = await _repoManager.User.GetUsersByCompanyIdAsync(companyId, false);
+            await _logger.LogWarning($"Kullanıcılar listelendi");
+
+            return users.Select(u => _mapper.Map<UserDtoForGet>(u));
         }
 
-        public async Task DeleteUserProfileAsync(string userId)
+        public async Task<UserDtoForGet> GetByIdAsync(string userId)
         {
-            await _userManager.User.DeleteUserAsync(userId);
+            var user = await _userManager.FindByIdAsync(userId)
+
+                ?? throw new KeyNotFoundException("User not found");
+            await _logger.LogWarning($"Kullanıcı listelendi.");
+
+            return _mapper.Map<UserDtoForGet>(user);
+        }
+
+        public async Task PatchAsync(string userId, JsonPatchDocument<UserDtoForUpdate> patchDoc)
+        {
+            var user = await _userManager.FindByIdAsync(userId)
+                ?? throw new KeyNotFoundException("User not found");
+
+            var userDto = _mapper.Map<UserDtoForUpdate>(user);
+            patchDoc.ApplyTo(userDto);
+            _mapper.Map(userDto, user);
+            await _logger.LogWarning($"Kullanıcı güncellendi.");
+
+            await _userManager.UpdateAsync(user);
+        }
+
+        public async Task<IEnumerable<UserDtoForGet>> SearchByNameAsync(string name)
+        {
+            var users = await _repoManager.User.SearchByNameAsync(name, false);
+            return users.Select(u => _mapper.Map<UserDtoForGet>(u));
+        }
+
+        public async Task UpdateAsync(string userId, UserDtoForUpdate dto)
+        {
+            var user = await _userManager.FindByIdAsync(userId)
+                ?? throw new KeyNotFoundException("User not found");
+
+            _mapper.Map(dto, user);
+            await _logger.LogWarning($"Kullanıcı güncellendi.");
+
+            await _userManager.UpdateAsync(user);
+        }
+
+        public async Task<IdentityResult> UpdatePasswordAsync(string userId, UserPasswordUpdateDto dto)
+        {
+            var user = await _userManager.FindByIdAsync(userId)
+                ?? throw new KeyNotFoundException("User not found");
+            await _logger.LogWarning($"{userId} kullanıcısının şifresi güncellendi.");
+
+            var result = await _userManager.ChangePasswordAsync(user, dto.CurrentPassword, dto.NewPassword);
+            return result;
         }
     }
 }

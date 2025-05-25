@@ -24,7 +24,9 @@ namespace Entities.Models
         public override string PhoneNumber { get; set; }
 
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-        public bool IsActive { get; set; } = true;
+        public string? UserDescription { get; set; }
+
+        public string? Department { get; set; }
 
         public string? RefreshToken { get; set; }
         public DateTime? RefreshTokenExpiryTime { get; set; }

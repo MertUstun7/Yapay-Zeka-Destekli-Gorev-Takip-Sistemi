@@ -10,32 +10,15 @@ namespace Repositories.Contracts
 {
     public interface IUserRepository : IGTSBase<User>
     {
-        
-        Task<bool> EmailExistsAsync(string email);
+        // Şirkete göre kullanıcıları getir
+        Task<IEnumerable<User>> GetUsersByCompanyIdAsync(Guid companyId, bool trackChanges);
 
-        // Kullanıcı türüne göre filtreleme fonksiyonlarının tanımı yapılmıştır.
+        // İsme göre arama (ad veya soyad)
+        Task<IEnumerable<User>> SearchByNameAsync(string name, bool trackChanges);
 
-        Task<bool> CheckUserId(string userId);
+        // Kullanıcıyı şirket bilgisiyle birlikte getir
+        Task<User> GetUserWithCompanyAsync(string userId, bool trackChanges);
 
-        // İlişkili verilerle kullanıcı çekme fonksiyonunun tanımı 
-        
-
-        // Durum bazlı sorgular fonksiyonunun tanımı yapılmıştır.
-        Task<List<User>> GetActiveUsersAsync();
-
-        // Görev ve raporlarla ilgili sorgulama fonksiyonlarının tanımı yapılmıştır.
-        
-    
-
-        // Arama ve filtreleme fonksiyonunun tanımı yapılmıştır.
-        Task<List<User>> SearchUsersAsync(string searchTerm);
-
-        // Soft delete ve durum güncelleme fonksiyonlarının tanımı yapılmıştır.
-        Task DeactivateUserAsync(string userId);
-        Task ActivateUserAsync(string userId);
-
-        Task DeleteUserAsync(string userId);
-        IQueryable<User> GetAllQuery(bool trackChanges); 
 
     }
 }

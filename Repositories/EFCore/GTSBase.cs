@@ -27,18 +27,21 @@ namespace Repositories.EFCore
                 .ToListAsync();
         }
 
-
         public async Task<List<T>> FindByConditionAsync(Expression<Func<T, bool>> expression, bool trackChanges)
         {
-            
             IQueryable<T> query = _context.Set<T>().Where(expression);
-
-            
             if (!trackChanges)
                 query = query.AsNoTracking();
-
-            
             return await query.ToListAsync();
+        }
+
+        public async Task<T> GetByIdAsync(Guid id, bool trackChanges)
+        {
+            IQueryable<T> query = _context.Set<T>();
+            if (!trackChanges)
+                query = query.AsNoTracking();
+            return await query.SingleOrDefaultAsync(e => EF.Property<Guid>(e, "Id") == id)
+                ?? throw new ArgumentException($"Entity with ID {id} not found.");
         }
 
         public async Task CreateAsync(T entity)
@@ -46,8 +49,7 @@ namespace Repositories.EFCore
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
 
-            _context.Set<T>().Add(entity);
-           
+            await _context.Set<T>().AddAsync(entity);
         }
 
         public async Task UpdateAsync(T entity)
@@ -56,7 +58,6 @@ namespace Repositories.EFCore
                 throw new ArgumentNullException(nameof(entity));
 
             _context.Set<T>().Update(entity);
-            
         }
 
         public async Task DeleteAsync(T entity)
@@ -65,7 +66,6 @@ namespace Repositories.EFCore
                 throw new ArgumentNullException(nameof(entity));
 
             _context.Set<T>().Remove(entity);
-            
         }
     }
 }
