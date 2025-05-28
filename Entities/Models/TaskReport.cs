@@ -8,18 +8,19 @@ namespace Entities.Models
 {
     public class TaskReport
     {
-        public Guid Id { get; set; }
-
+        public Guid Id { get; set; } = Guid.NewGuid();
         public Guid TaskItemId { get; set; }
         public TaskItem TaskItem { get; set; }
-
         public string CreatedById { get; set; }
         public User CreatedBy { get; set; }
-
         public string Content { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public string? StatusAtReportTime { get; set; }
+        public string? PdfFileName { get; set; }
+        public string? PdfContentType { get; set; }
+        public byte[]? PdfFileData { get; set; }
 
-        public TaskStatus StatusAtReportTime { get; set; }
+      
     }
 
 
