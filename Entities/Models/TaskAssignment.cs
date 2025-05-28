@@ -8,7 +8,7 @@ namespace Entities.Models
 {
     public class TaskAssignment
     {
-        public Guid Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
 
         public Guid TaskItemId { get; set; }
         public TaskItem TaskItem { get; set; }
