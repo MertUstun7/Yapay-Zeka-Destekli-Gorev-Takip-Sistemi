@@ -36,6 +36,7 @@ namespace Services
             _companyManager = companyManager;
         }
 
+        // JWT ve Refresh token oluşturur.
         public async Task<TokenDto> CreateToken(bool populateExp)
         {
             var signinCredentials = GetSinginCredentials();
@@ -62,7 +63,7 @@ namespace Services
         }
 
 
-
+        // Siteye üye olan kişinin veri tabanına şirket sahibi olarak kayıt olmasını sağlar.
         public async Task<IdentityResult> RegisterCompanyOwner(CompanyOwnerRegistrationDto companyOwnerRegistrationDto)
         {
             try
@@ -115,6 +116,7 @@ namespace Services
 
         }
 
+        // Giriş yapan kişinin mail ve şifre kontrolü yapılır.
         public async Task<bool> ValidateUser(UserForAuthenticationDto userFourAuthDto)
         {
             _user = await _userManager.FindByEmailAsync(userFourAuthDto.Mail);
@@ -126,6 +128,7 @@ namespace Services
             }
             return result;
         }
+        // JWT imzası için güvenli bir anahtar oluşturur.
         private SigningCredentials GetSinginCredentials()
         {
             var jwtSettings = _configuration.GetSection("JwtSettings");
@@ -135,6 +138,7 @@ namespace Services
 
         }
 
+        // Token içerisinde yer alacak tüm claim'leri toplar.
         private async Task<List<Claim>> GetClaims()
         {
 
@@ -160,6 +164,7 @@ namespace Services
 
         }
 
+        // JWT token yapılandırılır.
         private JwtSecurityToken GenerateTokenOptions(SigningCredentials signinCredentials, List<Claim> claims)
         {
             var jwtSettings = _configuration.GetSection("JwtSettings");
@@ -173,6 +178,7 @@ namespace Services
             return tokenOptions;
         }
 
+        // Refresh token üretimini sağlar.
         private string GenerateRefreshToken()
         {
             var randomNumber = new byte[32];
@@ -183,6 +189,7 @@ namespace Services
             }
         }
 
+        // Süresi dolan token'dan ClaimsPrincipal nesnesi üretir.
         private ClaimsPrincipal GetPrincipalFromExpiredToken(string token)
         {
             var jwtSettings = _configuration.GetSection("JwtSettings");
@@ -211,6 +218,7 @@ namespace Services
             return principal;
         }
 
+        // Refresh token ile yeni bir JWT üretir.
         public async Task<TokenDto> RefreshToken(TokenDto tokenDto)
         {
             var principal=GetPrincipalFromExpiredToken(tokenDto.AccessToken);

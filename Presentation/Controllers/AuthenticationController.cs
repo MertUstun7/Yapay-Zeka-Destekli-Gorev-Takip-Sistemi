@@ -23,6 +23,7 @@ namespace Presentation.Controllers
         [HttpPost]
         public async Task<IActionResult> RegisterCompanyOwner([FromBody] CompanyOwnerRegistrationDto companyOwnerRegistrationDto)
         {
+            //Frontend tarafında siteye üye olmamızı sağlar ve default olarak companyowner rolü atar.
             var result=await _service.
                 AuthenticationService.
                 RegisterCompanyOwner(companyOwnerRegistrationDto);
@@ -44,6 +45,7 @@ namespace Presentation.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Authenticate([FromBody] UserForAuthenticationDto user)
         {
+            //Sisteme giriş yapmamızı sağlar.
             if (!await _service.AuthenticationService.ValidateUser(user))
                 return Unauthorized();
 
@@ -56,6 +58,7 @@ namespace Presentation.Controllers
         
         public async Task<IActionResult> Refresh([FromBody]TokenDto tokenDto)
         {
+            //Token refreshlemimizi sağlar.
             if (string.IsNullOrWhiteSpace(tokenDto.AccessToken) || string.IsNullOrWhiteSpace(tokenDto.RefreshToken))
                 return BadRequest("accessToken ve refreshToken zorunludur.");
 
