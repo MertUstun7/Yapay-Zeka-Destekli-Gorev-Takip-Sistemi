@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personel Ekle - Görev Takip Sistemi</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4a90e2;
+            --secondary-color: #f5f6fa;
+            --text-color: #2c3e50;
+            --success-color: #2ecc71;
+            --error-color: #e74c3c;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .form-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .form-title {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .form-label {
+            font-weight: 500;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-control {
+            border-radius: 8px;
+            border: 1px solid #e1e1e1;
+            padding: 0.75rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(74, 144, 226, 0.25);
+        }
+
+        .form-select {
+            border-radius: 8px;
+            border: 1px solid #e1e1e1;
+            padding: 0.75rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(74, 144, 226, 0.25);
+        }
+
+        .btn-submit {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            background-color: #357abd;
+            transform: translateY(-2px);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .required-field::after {
+            content: "*";
+            color: var(--error-color);
+            margin-left: 4px;
+        }
+
+        .alert {
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .department-select {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 8px;
+            border: 1px solid #e1e1e1;
+            transition: all 0.3s ease;
+        }
+
+        .department-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(74, 144, 226, 0.25);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-tasks me-2"></i>
+                Görev Takip Sistemi
+            </a>
+            <div class="d-flex align-items-center">
+                <button class="btn btn-outline-primary" onclick="goBack()">
+                    <i class="fas fa-arrow-left me-2"></i>Geri
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="form-container">
+                    <h2 class="form-title text-center mb-4">
+                        <i class="fas fa-user-plus me-2"></i>Yeni Personel Ekle
+                    </h2>
+                    
+                    <div id="alertContainer"></div>
+
+                    <form id="personnelForm" onsubmit="handleSubmit(event)">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label required-field" for="firstName">Ad</label>
+                                    <input type="text" class="form-control" id="firstName" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label required-field" for="lastName">Soyad</label>
+                                    <input type="text" class="form-control" id="lastName" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label required-field" for="email">E-posta</label>
+                                    <input type="email" class="form-control" id="email" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label required-field" for="phoneNumber">Telefon</label>
+                                    <input type="tel" class="form-control" id="phoneNumber" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label required-field" for="password">Şifre</label>
+                                    <input type="password" class="form-control" id="password" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label required-field" for="department">Departman</label>
+                                    <input type="text" class="form-control" id="department" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label required-field" for="role">Rol</label>
+                                    <select class="form-select" id="role" required>
+                                        <option value="">Rol Seçin</option>
+                                        <option value="worker">Çalışan</option>
+                                        <option value="manager">Yönetici</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="userDescription">Açıklama</label>
+                            <textarea class="form-control" id="userDescription" rows="3"></textarea>
+                        </div>
+
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-submit">
+                                <i class="fas fa-save me-2"></i>Personel Ekle
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Token kontrolü
+        const token = localStorage.getItem('accessToken');
+        if (!token) {
+            window.location.href = 'home.html';
+        } else {
+            try {
+                const payloadBase64 = token.split('.')[1];
+                const decodedPayload = atob(payloadBase64);
+                const payload = JSON.parse(decodedPayload);
+                
+                const role = payload["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+                if (role !== "CompanyOwner") {
+                    window.location.href = 'unauthorized.html';
+                }
+            } catch (error) {
+                console.error("Token çözümlenemedi:", error);
+                localStorage.removeItem('accessToken');
+                window.location.href = 'home.html';
+            }
+        }
+
+        function showAlert(message, type) {
+            const alertContainer = document.getElementById('alertContainer');
+            const alert = document.createElement('div');
+            alert.className = `alert alert-${type} alert-dismissible fade show`;
+            alert.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            `;
+            alertContainer.appendChild(alert);
+        }
+
+        async function handleSubmit(event) {
+    event.preventDefault();
+
+    const password = document.getElementById('password').value;
+
+    // Şifre güvenlik kontrolü
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{5,}$/;
+    if (!passwordRegex.test(password)) {
+        showAlert(
+            'Şifre en az 8 karakter olmalı ve en az bir büyük harf, bir küçük harf, bir sayı ve bir özel karakter içermelidir.',
+            'danger'
+        );
+        return;
+    }
+
+    const formData = {
+        firstName: document.getElementById('firstName').value,
+        lastName: document.getElementById('lastName').value,
+        email: document.getElementById('email').value,
+        password: password,
+        phoneNumber: document.getElementById('phoneNumber').value,
+        department: document.getElementById('department').value,
+        role: document.getElementById('role').value,
+        userDescription: document.getElementById('userDescription').value
+    };
+
+    try {
+        const response = await fetch('http://localhost:5093/api/user', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(formData)
+        });
+
+        if (response.ok) {
+            showAlert('Personel başarıyla eklendi!', 'success');
+            document.getElementById('personnelForm').reset();
+        } else {
+            const error = await response.json();
+            showAlert(error.message || 'Personel eklenirken bir hata oluştu.', 'danger');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        showAlert('Bir hata oluştu. Lütfen tekrar deneyin.', 'danger');
+    }
+}
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html> 

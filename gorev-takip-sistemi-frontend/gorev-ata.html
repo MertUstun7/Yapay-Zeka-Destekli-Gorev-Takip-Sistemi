@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Görev Atama - Görev Takip Sistemi</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #6b7280, #a5b4fc, #60a5fa);
+            background-size: 200% 200%;
+            animation: gradientShift 15s ease infinite;
+        }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .priority-option {
+            transition: all 0.3s ease-in-out;
+        }
+        .priority-option:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        .priority-option.selected {
+            background-color: rgba(99, 102, 241, 0.15);
+            border-color: #6366f1;
+            transform: scale(1.05);
+        }
+        .priority-option.low.selected {
+            border-color: #10b981;
+            background-color: rgba(16, 185, 129, 0.15);
+        }
+        .priority-option.medium.selected {
+            border-color: #f59e0b;
+            background-color: rgba(245, 158, 11, 0.15);
+        }
+        .priority-option.high.selected {
+            border-color: #ef4444;
+            background-color: rgba(239, 68, 68, 0.15);
+        }
+        .form-control:focus {
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.25);
+            border-color: #6366f1;
+        }
+        .btn-blue:hover {
+            background-color: #4f46e5;
+            transform: translateY(-2px);
+        }
+        .btn-back:hover {
+            background-color: #d1d5db;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 flex-grow">
+        <!-- Header -->
+        <header class="py-6 bg-white/90 backdrop-blur-md shadow-lg rounded-b-xl">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+                <h1 class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-blue-500">Görev Atama</h1>
+                <div class="flex items-center space-x-3">
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="py-10">
+            <div class="bg-white/95 backdrop-blur-md p-8 rounded-3xl shadow-xl max-w-2xl mx-auto" data-aos="zoom-in">
+                <form id="taskForm" class="space-y-6">
+                    <div>
+                        <label for="taskTitle" class="block text-sm font-semibold text-gray-800">Görev Başlığı</label>
+                        <input type="text" id="taskTitle" class="mt-2 block w-full p-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 form-control transition duration-300" required>
+                    </div>
+
+                    <div>
+                        <label for="taskDescription" class="block text-sm font-semibold text-gray-800">Görev Açıklaması</label>
+                        <textarea id="taskDescription" class="mt-2 block w-full p-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 form-control min-h-[140px] resize-y transition duration-300" required></textarea>
+                    </div>
+
+                    <div>
+                        <label for="assignedTo" class="block text-sm font-semibold text-gray-800">Atanacak Çalışan</label>
+                        <select id="assignedTo" class="mt-2 block w-full p-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 form-control transition duration-300" required>
+                            <option value="">Çalışan Seçin</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-800">Öncelik</label>
+                        <div class="mt-3 flex space-x-4">
+                            <div class="priority-option low flex-1 p-4 border-2 border-gray-200 rounded-xl text-center cursor-pointer bg-gradient-to-br from-green-50 to-green-100" data-priority="low">
+                                <i class="fas fa-arrow-down text-green-600"></i>
+                                <span class="ml-2 font-medium text-gray-800">Düşük</span>
+                            </div>
+                            <div class="priority-option medium flex-1 p-4 border-2 border-gray-200 rounded-xl text-center cursor-pointer bg-gradient-to-br from-yellow-50 to-yellow-100" data-priority="medium">
+                                <i class="fas fa-minus text-yellow-600"></i>
+                                <span class="ml-2 font-medium text-gray-800">Orta</span>
+                            </div>
+                            <div class="priority-option high flex-1 p-4 border-2 border-gray-200 rounded-xl text-center cursor-pointer bg-gradient-to-br from-red-50 to-red-100" data-priority="high">
+                                <i class="fas fa-arrow-up text-red-600"></i>
+                                <span class="ml-2 font-medium text-gray-800">Yüksek</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="dueDate" class="block text-sm font-semibold text-gray-800">Bitiş Tarihi</label>
+                        <input type="date" id="dueDate" class="mt-2 block w-full p-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 form-control transition duration-300" required>
+                    </div>
+
+                    <div class="flex space-x-4">
+                        <button type="button" class="btn-back flex-1 py-3 bg-gray-200 text-gray-800 rounded-xl hover:bg-gray-300 transition duration-300 flex items-center justify-center shadow-md" onclick="history.back()">
+                            <i class="fas fa-arrow-left mr-2"></i>
+                            Geri Dön
+                        </button>                      
+                       
+                        <button type="submit" class="btn-blue flex-1 py-3 bg-gradient-to-r from-indigo-600 to-blue-500 text-white rounded-xl hover:bg-indigo-700 transition duration-300 flex items-center justify-center shadow-md">
+                            Görevi Oluştur
+                            <i class="fas fa-check ml-2"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Token kontrolü
+        const token = localStorage.getItem('accessToken');
+        if (!token) {
+            window.location.href = 'home.html';
+        } else {
+            try {
+                // Token'ı decode et
+                const payloadBase64 = token.split('.')[1];
+                const decodedPayload = atob(payloadBase64);
+                const payload = JSON.parse(decodedPayload);
+                
+                // Role kontrolü
+                const role = payload["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+                if (role !== "CompanyOwner" && role !== "Manager") {
+                    window.location.href = 'unauthorized.html';
+                }
+            } catch (error) {
+                console.error("Token çözümlenemedi:", error);
+                localStorage.removeItem('accessToken');
+                window.location.href = 'home.html';
+            }
+        }
+
+        // Şirket çalışanlarını getir
+        async function getCompanyUsers() {
+            try {
+                const response = await fetch('http://localhost:5093/api/user/company', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Çalışanlar getirilemedi');
+                }
+
+                const users = await response.json();
+                const userSelect = document.getElementById('assignedTo');
+                
+                // Mevcut seçenekleri temizle
+                userSelect.innerHTML = '<option value="">Çalışan Seçin</option>';
+                
+                // Şirket sahiplerini filtrele ve yeni seçenekleri ekle
+                users
+                    .filter(user => user.department !== "Şirket Sahibi")
+                    .forEach(user => {
+                        const option = document.createElement('option');
+                        option.value = user.id;
+                        option.textContent = `${user.firstName} ${user.lastName} - ${user.department}`;
+                        userSelect.appendChild(option);
+                    });
+            } catch (error) {
+                console.error('Çalışanlar yüklenirken hata:', error);
+                alert('Çalışanlar yüklenirken bir hata oluştu: ' + error.message);
+            }
+        }
+
+        // Sayfa yüklendiğinde çalışanları getir
+        document.addEventListener('DOMContentLoaded', getCompanyUsers);
+
+        // Görev atama işlemi
+        async function handleTaskAssignment(event) {
+            event.preventDefault();
+            
+            // Seçili önceliği al
+            const selectedPriority = document.querySelector('.priority-option.selected');
+            if (!selectedPriority) {
+                alert('Lütfen bir öncelik seviyesi seçin.');
+                return;
+            }
+
+            const formData = {
+                title: document.getElementById('taskTitle').value,
+                description: document.getElementById('taskDescription').value,
+                deadline: document.getElementById('dueDate').value,
+                priority: selectedPriority.dataset.priority,
+                assignedToId: document.getElementById('assignedTo').value
+            };
+
+            try {
+                const response = await fetch('http://localhost:5093/api/task', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                if (!response.ok) {
+                    throw new Error('Görev atama başarısız');
+                }
+
+                alert('Görev başarıyla atandı!');
+                window.location.href = 'admin-page.html';
+            } catch (error) {
+                console.error('Görev atama hatası:', error);
+                alert('Görev atama sırasında bir hata oluştu: ' + error.message);
+            }
+        }
+
+        // Initialize AOS with smoother animation
+        AOS.init({
+            duration: 1000,
+            easing: 'ease-in-out',
+            once: true
+        });
+
+        // Priority selection
+        const priorityOptions = document.querySelectorAll('.priority-option');
+        priorityOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                priorityOptions.forEach(opt => opt.classList.remove('selected'));
+                option.classList.add('selected');
+            });
+        });
+
+        // Form submission
+        document.getElementById('taskForm').addEventListener('submit', handleTaskAssignment);
+    </script>
+</body>
+</html>
