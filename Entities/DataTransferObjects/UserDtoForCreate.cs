@@ -6,14 +6,9 @@ using System.Threading.Tasks;
 
 namespace Entities.DataTransferObjects
 {
-    public enum UserRole
-    {
-        CompanyOwner,
-        Manager,
-        Worker
-    }
+    
 
-    public class UserDtoForCreate
+    public record UserDtoForCreate
     {
 
             public string FirstName { get; init; }
@@ -22,7 +17,6 @@ namespace Entities.DataTransferObjects
             public string Password { get; init; }
             public string? PhoneNumber { get; init; }
             public string? Department { get; init; }
-            
             public string? Role { get; init; }
             public string? UserDescription { get; init; }
         }

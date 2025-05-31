@@ -18,7 +18,7 @@ namespace Services.Contracts
         // READ
         Task<UserDtoForGet> GetByIdAsync(string userId);
         Task<IEnumerable<UserDtoForGet>> GetAllAsync();
-        Task<IEnumerable<UserDtoForGet>> GetByCompanyIdAsync(Guid companyId);
+        Task<IEnumerable<UserDtoForGet>> GetByCompanyIdAsync();
         Task<IEnumerable<UserDtoForGet>> SearchByNameAsync(string name);
 
         // UPDATE (PUT)
