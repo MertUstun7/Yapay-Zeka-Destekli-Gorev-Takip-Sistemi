@@ -10,15 +10,9 @@ namespace Repositories.Contracts
 {
     public interface IUserRepository : IGTSBase<User>
     {
-        // Şirkete göre kullanıcıları getir
         Task<IEnumerable<User>> GetUsersByCompanyIdAsync(Guid companyId, bool trackChanges);
-
-        // İsme göre arama (ad veya soyad)
         Task<IEnumerable<User>> SearchByNameAsync(string name, bool trackChanges);
-
-        // Kullanıcıyı şirket bilgisiyle birlikte getir
         Task<User> GetUserWithCompanyAsync(string userId, bool trackChanges);
-
 
     }
 }
