@@ -13,7 +13,7 @@ namespace Entities.Models
         public Guid TaskItemId { get; set; }
         public TaskItem TaskItem { get; set; }
 
-        public string AssignedToId { get; set; }
+        public string? AssignedToId { get; set; }
         public User AssignedTo { get; set; }
 
         public string AssignedById { get; set; }
