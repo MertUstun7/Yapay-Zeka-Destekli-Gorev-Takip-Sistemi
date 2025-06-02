@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raporlar - Görev Takip Sistemi</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #6b7280, #a5b4fc, #60a5fa);
+            background-size: 200% 200%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh;
+        }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .report-card {
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        .report-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        .status-badge.pending {
+            background-color: rgba(234, 179, 8, 0.1);
+            color: #b45309;
+        }
+        .status-badge.in-progress {
+            background-color: rgba(59, 130, 246, 0.1);
+            color: #1d4ed8;
+        }
+        .status-badge.completed {
+            background-color: rgba(34, 197, 94, 0.1);
+            color: #15803d;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+        .content-preview {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    </style>
+</head>
+<body class="min-h-screen py-8">
+    <div class="container mx-auto px-4">
+        <header class="mb-8">
+            <div class="flex justify-between items-center">
+                <h1 class="text-3xl font-bold text-white">Raporlar</h1>
+                <button onclick="window.history.back()" class="px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition duration-300 flex items-center gap-2">
+                    <i class="fas fa-arrow-left"></i>
+                    Geri Dön
+                </button>
+            </div>
+        </header>
+
+        <div class="glass-effect rounded-2xl p-6 mb-8">
+            <div class="flex flex-wrap gap-4">
+                <div class="flex-1 min-w-[200px]">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Durum Filtresi</label>
+                    <select id="statusFilter" class="w-full p-2 rounded-lg border border-gray-300">
+                        <option value="">Tümü</option>
+                        <option value="started">Başlandı</option>
+                        <option value="in_progress">Devam Ediyor</option>
+                        <option value="completed">Tamamlandı</option>
+                        <option value="pending">Beklemede</option>
+                        <option value="cancelled">İptal Edildi</option>
+                    </select>
+                </div>
+                <div class="flex-1 min-w-[200px]">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Sıralama</label>
+                    <select id="sortFilter" class="w-full p-2 rounded-lg border border-gray-300">
+                        <option value="newest">En Yeni</option>
+                        <option value="oldest">En Eski</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div id="reportsList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </div>
+
+    <script>
+        const token = localStorage.getItem('accessToken');
+        if (!token) window.location.href = 'home.html';
+
+        document.getElementById('statusFilter').addEventListener('change', loadReports);
+        document.getElementById('sortFilter').addEventListener('change', loadReports);
+
+        async function loadReports() {
+            try {
+                const response = await fetch('http://localhost:5093/api/reports/company', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (!response.ok) throw new Error('Raporlar yüklenemedi');
+
+                const reports = await response.json();
+                const reportsList = document.getElementById('reportsList');
+                reportsList.innerHTML = '';
+
+                if (reports.length === 0) {
+                    reportsList.innerHTML = `
+                        <div class="col-span-full text-center py-12">
+                            <i class="fas fa-file-alt text-4xl text-gray-400 mb-4"></i>
+                            <p class="text-gray-500 text-lg">Henüz rapor bulunmuyor.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                const statusFilter = document.getElementById('statusFilter').value;
+                const sortFilter = document.getElementById('sortFilter').value;
+
+                let filteredReports = reports;
+
+                if (statusFilter) {
+                    filteredReports = filteredReports.filter(r => r.statusAtReportTime === statusFilter);
+                }
+
+                // Sıralama
+                filteredReports.sort((a, b) => {
+                    const dateA = new Date(a.createdAt);
+                    const dateB = new Date(b.createdAt);
+                    return sortFilter === 'newest' ? dateB - dateA : dateA - dateB;
+                });
+
+                filteredReports.forEach(report => {
+                    const el = document.createElement('div');
+                    el.className = 'report-card glass-effect rounded-2xl p-6';
+                    el.innerHTML = `
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-800 mb-2">${report.createdByFullName || 'İsimsiz Kullanıcı'}</h3>
+                                <p class="text-sm text-gray-600 mb-2">${report.taskTitle || 'Başlıksız Görev'}</p>
+                                <span class="status-badge ${getStatusClass(report.statusAtReportTime)}">
+                                    ${getStatusText(report.statusAtReportTime)}
+                                </span>
+                            </div>
+                            <div class="flex flex-col items-end gap-2">
+                                <button class="delete-report-btn text-red-500 hover:text-red-700 transition-colors" data-report-id="${report.id}">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                                <span class="text-sm text-gray-500">${formatDate(report.createdAt)}</span>
+                            </div>
+                        </div>
+                        <div class="content-preview text-gray-600 mb-4">${report.content || report.result || 'İçerik bulunamadı'}</div>
+                        ${report.pdfFileName ? `
+                            <div class="flex justify-end">
+                                <a href="http://localhost:5093/api/reports/download/${report.id}" 
+                                   class="inline-flex items-center gap-2 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition duration-300"
+                                   target="_blank">
+                                    <i class="fas fa-file-pdf"></i>
+                                    PDF İndir
+                                </a>
+                            </div>
+                        ` : ''}
+                    `;
+                    reportsList.appendChild(el);
+                });
+
+                // Silme butonlarına event listener ekle
+                document.querySelectorAll('.delete-report-btn').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const reportId = this.getAttribute('data-report-id');
+                        deleteReport(reportId);
+                    });
+                });
+
+            } catch (error) {
+                console.error('Raporlar yüklenirken hata:', error);
+                alert('Raporlar yüklenirken bir hata oluştu: ' + error.message);
+            }
+        }
+
+        function getStatusClass(status) {
+            switch (status) {
+                case 'started': return 'in-progress';
+                case 'in_progress': return 'in-progress';
+                case 'completed': return 'completed';
+                case 'pending': return 'pending';
+                case 'cancelled': return 'pending';
+                default: return 'pending';
+            }
+        }
+
+        function getStatusText(status) {
+            switch (status) {
+                case 'started': return 'Başlandı';
+                case 'in_progress': return 'Devam Ediyor';
+                case 'completed': return 'Tamamlandı';
+                case 'pending': return 'Beklemede';
+                case 'cancelled': return 'İptal Edildi';
+                default: return 'Beklemede';
+            }
+        }
+
+        function formatDate(dateString) {
+            try {
+                // Tarih string'ini kontrol et
+                if (!dateString) {
+                    return 'Tarih Yok';
+                }
+
+                // ISO formatındaki tarihi parse et
+                const date = new Date(dateString);
+                
+                // Tarih geçerli mi kontrol et
+                if (isNaN(date.getTime())) {
+                    console.error('Geçersiz tarih:', dateString);
+                    return 'Geçersiz Tarih';
+                }
+
+                // Türkçe tarih formatı
+                const formattedDate = date.toLocaleDateString('tr-TR', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+
+                return formattedDate;
+            } catch (error) {
+                console.error('Tarih formatı hatası:', error, 'Tarih:', dateString);
+                return 'Geçersiz Tarih';
+            }
+        }
+
+        // Sayfa yüklendiğinde raporları yükle
+        document.addEventListener('DOMContentLoaded', loadReports);
+
+        async function deleteReport(reportId) {
+            if (!confirm('Bu raporu silmek istediğinizden emin misiniz?')) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`http://localhost:5093/api/reports/${reportId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Rapor silinemedi');
+                }
+
+                alert('Rapor başarıyla silindi');
+                loadReports(); // Raporları yeniden yükle
+            } catch (error) {
+                console.error('Rapor silinirken hata:', error);
+                alert('Rapor silinirken bir hata oluştu: ' + error.message);
+            }
+        }
+    </script>
+</body>
+</html> 
