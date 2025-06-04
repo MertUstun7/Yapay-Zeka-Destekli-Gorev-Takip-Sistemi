@@ -8,6 +8,7 @@ namespace Entities.DataTransferObjects
 {
     public class TaskItemForPatchDto
     {
+        // Görev durumunu güncellemek için string türünden almak için tanımlanmıştır.
         public string Status { get; set; }
     }
 }

@@ -9,6 +9,8 @@ namespace Entities.DataTransferObjects
 {
     public class UserPasswordUpdateDto
     {
+        // Kullanıcı şifresi ve güncellenecek şifrenin alınmasını sağlayan DTO modelidir.
+
         [Required(ErrorMessage = "Mevcut şifre zorunludur.")]
         public string CurrentPassword { get; init; }
 

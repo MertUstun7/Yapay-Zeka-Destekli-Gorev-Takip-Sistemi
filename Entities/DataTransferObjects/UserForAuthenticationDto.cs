@@ -9,6 +9,8 @@ namespace Entities.DataTransferObjects
 {
     public record UserForAuthenticationDto
     {
+        // Kullanıcının sisteme giriş yapması için tasarlanmış DTO'dur.
+
         [Required(ErrorMessage ="Mail girilmesi zorunludur.")]
         public string? Mail { get; init; }
 

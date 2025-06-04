@@ -6,22 +6,30 @@ using System.Threading.Tasks;
 
 namespace Entities.DataTransferObjects
 {
-    
-
     public record UserDtoForCreate
     {
+        // Kullanıcı oluşturmak için adını string türünden temsil eden parametredir.
+        public string FirstName { get; init; }
+        // Kullanıcı oluşturmak için soyadını string türünden temsil eden parametredir.
+        public string LastName { get; init; }
 
-            public string FirstName { get; init; }
-            public string LastName { get; init; }
-            public string Email { get; init; }
-            public string Password { get; init; }
-            public string? PhoneNumber { get; init; }
-            public string? Department { get; init; }
-            public string? Role { get; init; }
-            public string? UserDescription { get; init; }
-        }
+        // Kullanıcı oluşturmak için e-mailini string türünden temsil eden parametredir.
+        public string Email { get; init; }
 
+        // Kullanıcı oluşturmak için şifresini string türünden temsil eden parametredir.
+        public string Password { get; init; }
 
+        // Kullanıcı oluşturmak için telefon numarasını string türünden temsil eden parametredir.
+        public string? PhoneNumber { get; init; }
 
+        // Kullanıcı oluşturmak için departmanını string türünden temsil eden parametredir.
+        public string? Department { get; init; }
+
+        // Kullanıcı oluşturmak için rolünü string türünden temsil eden parametredir.
+        public string? Role { get; init; }
+
+        // Kullanıcı oluşturmak için kullanıcı açıklamasını string türünden temsil eden parametredir.
+        public string? UserDescription { get; init; }
+    }
     
 }
