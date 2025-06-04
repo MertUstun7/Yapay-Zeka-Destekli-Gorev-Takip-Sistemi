@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Görev Takip Sistemi - Çalışan Paneli</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary-color: #f8fafc;
+            --text-color: #1e293b;
+            --text-secondary: #64748b;
+            --success-color: #22c55e;
+            --error-color: #ef4444;
+            --warning-color: #f59e0b;
+            --border-radius: 16px;
+            --box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(180deg, var(--secondary-color), #e2e8f0);
+            color: var(--text-color);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+            padding: 1rem 5%;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            box-shadow: var(--box-shadow);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .welcome-text {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .user-name {
+            font-weight: 600;
+            color: white;
+        }
+
+        .logout-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .logout-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .logout-btn i {
+            font-size: 1rem;
+        }
+
+        .main-content {
+            margin-top: 5rem;
+            padding: 2rem 5%;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .tasks-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .task-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .task-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+        }
+
+        .task-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .task-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-right: 1rem;
+        }
+
+        .task-status {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .status-pending {
+            background: var(--warning-color);
+            color: white;
+        }
+
+        .status-in-progress {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .status-completed {
+            background: var(--success-color);
+            color: white;
+        }
+
+        .task-description {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .task-details {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .task-detail {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .task-detail i {
+            width: 16px;
+            color: var(--primary-color);
+        }
+
+        .priority-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin-top: 1rem;
+        }
+
+        .priority-high {
+            background: var(--error-color);
+            color: white;
+        }
+
+        .priority-medium {
+            background: var(--warning-color);
+            color: white;
+        }
+
+        .priority-low {
+            background: var(--success-color);
+            color: white;
+        }
+
+        .status-dropdown {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 0.5rem;
+            display: none;
+            z-index: 10;
+        }
+
+        .status-dropdown.active {
+            display: block;
+        }
+
+        .status-option {
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border-radius: 0.5rem;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .status-option:hover {
+            background: var(--secondary-color);
+        }
+
+        .status-option i {
+            width: 16px;
+        }
+
+        .update-status-btn {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .update-status-btn:hover {
+            background: var(--secondary-color);
+            color: var(--primary-color);
+        }
+
+        .no-tasks {
+            text-align: center;
+            padding: 3rem;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            color: var(--text-secondary);
+        }
+
+        .no-tasks i {
+            font-size: 3rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 0.8rem 5%;
+            }
+
+            .header h1 {
+                font-size: 1.2rem;
+            }
+
+            .user-info {
+                font-size: 0.9rem;
+            }
+
+            .main-content {
+                padding: 1rem 5%;
+            }
+
+            .tasks-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .close-modal:hover {
+            color: var(--error-color);
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .modal-btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: var(--border-radius);
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .update-status-btn {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .update-status-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .upload-report-btn {
+            background: var(--success-color);
+            color: white;
+        }
+
+        .upload-report-btn:hover {
+            background: #16a34a;
+        }
+
+        .status-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .status-option {
+            padding: 1rem;
+            border: 2px solid var(--primary-color);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .status-option:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .status-option.active {
+            background: var(--primary-color);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <h1>Görev Takip Sistemi</h1>
+            <div class="user-info">
+                <span class="welcome-text">Hoş Geldiniz,</span>
+                <span class="user-name">Kullanıcı</span>
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Çıkış Yap
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="tasks-container" id="tasksContainer">
+            
+        </div>
+    </main>
+
+    <div class="modal" id="taskModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Görev Detayları</h2>
+                <button class="close-modal" onclick="closeModal()">&times;</button>
+            </div>
+            <div id="modalContent">
+                
+            </div>
+            <div class="modal-actions">
+                <button class="modal-btn update-status-btn" onclick="showStatusOptions()">
+                    <i class="fas fa-edit"></i>
+                    Durum Güncelle
+                </button>
+                <button class="modal-btn upload-report-btn" onclick="uploadReport()">
+                    <i class="fas fa-upload"></i>
+                    Rapor Yükle
+                </button>
+            </div>
+            <div class="status-options" id="statusOptions" style="display: none;">
+                <div class="status-option" onclick="updateTaskStatus(currentTaskId, 'started')">
+                    <i class="fas fa-play"></i>
+                    Başlandı
+                </div>
+                <div class="status-option" onclick="updateTaskStatus(currentTaskId, 'pending')">
+                    <i class="fas fa-pause"></i>
+                    Beklemede
+                </div>
+                <div class="status-option" onclick="updateTaskStatus(currentTaskId, 'in_progress')">
+                    <i class="fas fa-spinner"></i>
+                    Devam Ediyor
+                </div>
+                <div class="status-option" onclick="updateTaskStatus(currentTaskId, 'cancelled')">
+                    <i class="fas fa-times"></i>
+                    İptal Edildi
+                </div>
+                <div class="status-option" onclick="updateTaskStatus(currentTaskId, 'completed')">
+                    <i class="fas fa-check"></i>
+                    Tamamlandı
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+    // Token kontrolü
+    const token = localStorage.getItem('accessToken');
+
+    function decodeBase64Utf8(base64) {
+        const binary = atob(base64);
+        const bytes = new Uint8Array([...binary].map(char => char.charCodeAt(0)));
+        const decoder = new TextDecoder('utf-8');
+        return decoder.decode(bytes);
+    }
+
+    if (!token) {
+        window.location.href = 'home.html';
+    } else {
+        try {
+            const payloadBase64 = token.split('.')[1];
+            const decodedPayload = decodeBase64Utf8(payloadBase64);
+            const payload = JSON.parse(decodedPayload);
+
+            const role = payload["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+            if (role !== "Worker") {
+                window.location.href = 'unauthorized.html';
+            }
+
+            // Kullanıcı adını ayarla
+            const firstName = payload["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname"];
+            const lastName = payload["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname"];
+            if (firstName && lastName) {
+                document.querySelector('.user-name').textContent = `${firstName} ${lastName}`;
+            }
+        } catch (error) {
+            console.error("Token çözümlenemedi:", error);
+            localStorage.removeItem('accessToken');
+            window.location.href = 'home.html';
+        }
+    }
+
+    let currentTaskId = null;
+
+    function getStatusClass(status) {
+        switch (status) {
+            case 'started': return 'status-in-progress';
+            case 'in_progress': return 'status-in-progress';
+            case 'completed': return 'status-completed';
+            case 'pending': return 'status-pending';
+            case 'cancelled': return 'status-pending';
+            default: return 'status-pending';
+        }
+    }
+
+    function getStatusText(status) {
+        switch (status) {
+            case 'started': return 'Başlandı';
+            case 'in_progress': return 'Devam Ediyor';
+            case 'completed': return 'Tamamlandı';
+            case 'pending': return 'Beklemede';
+            case 'cancelled': return 'İptal Edildi';
+            default: return 'Beklemede';
+        }
+    }
+
+    function getPriorityClass(priority) {
+        switch (priority.toLowerCase()) {
+            case 'high': return 'priority-high';
+            case 'medium': return 'priority-medium';
+            case 'low': return 'priority-low';
+            default: return 'priority-low';
+        }
+    }
+
+    function getPriorityText(priority) {
+        switch (priority.toLowerCase()) {
+            case 'high': return 'Yüksek Öncelik';
+            case 'medium': return 'Orta Öncelik';
+            case 'low': return 'Düşük Öncelik';
+            default: return 'Düşük Öncelik';
+        }
+    }
+
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        return date.toLocaleDateString('tr-TR', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+    }
+
+    function showTaskDetails(task) {
+        currentTaskId = task.id;
+        const modal = document.getElementById('taskModal');
+        const modalContent = document.getElementById('modalContent');
+        
+        modalContent.innerHTML = `
+            <div class="task-details">
+                <h3 class="task-title">${task.title}</h3>
+                <p class="task-description">${task.description}</p>
+                <div class="task-detail">
+                    <i class="fas fa-calendar"></i>
+                    <span>Oluşturulma: ${formatDate(task.createdAt)}</span>
+                </div>
+                <div class="task-detail">
+                    <i class="fas fa-clock"></i>
+                    <span>Bitiş: ${formatDate(task.deadline)}</span>
+                </div>
+                <div class="task-detail">
+                    <i class="fas fa-user"></i>
+                    <span>Oluşturan: ${task.createdByFullName}</span>
+                </div>
+                <span class="priority-badge ${getPriorityClass(task.priority)}">
+                    ${getPriorityText(task.priority)}
+                </span>
+            </div>
+        `;
+        
+        modal.classList.add('active');
+    }
+
+    function closeModal() {
+        const modal = document.getElementById('taskModal');
+        modal.classList.remove('active');
+        document.getElementById('statusOptions').style.display = 'none';
+    }
+
+    function showStatusOptions() {
+        const statusOptions = document.getElementById('statusOptions');
+        statusOptions.style.display = statusOptions.style.display === 'none' ? 'grid' : 'none';
+    }
+
+    async function updateTaskStatus(taskId, newStatus) {
+        try {
+            const patchDoc = [
+                {
+                    op: "replace",
+                    path: "/Status",
+                    value: newStatus
+                }
+            ];
+
+            const response = await fetch(`http://localhost:5093/api/task/${taskId}`, {
+                method: 'PATCH',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json-patch+json'
+                },
+                body: JSON.stringify(patchDoc)
+            });
+
+            if (!response.ok) {
+                throw new Error('Durum güncellenemedi');
+            }
+
+            alert('Görev durumu başarıyla güncellendi');
+            closeModal();
+            loadTasks();
+        } catch (error) {
+            console.error('Error updating task status:', error);
+            alert('Durum güncellenirken bir hata oluştu');
+        }
+    }
+
+    function uploadReport() {
+        if (currentTaskId) {
+            window.location.href = `rapor.html?taskId=${currentTaskId}`;
+        } else {
+            alert('Lütfen önce bir görev seçin');
+        }
+    }
+
+    async function loadTasks() {
+        try {
+            const response = await fetch('http://localhost:5093/api/task/user-asigned', {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Görevler yüklenemedi');
+            }
+
+            const tasks = await response.json();
+            const tasksContainer = document.getElementById('tasksContainer');
+
+            if (tasks.length === 0) {
+                tasksContainer.innerHTML = `
+                    <div class="no-tasks">
+                        <i class="fas fa-clipboard-list"></i>
+                        <h2>Henüz atanmış görev bulunmuyor</h2>
+                        <p>Size atanmış görevler burada görüntülenecek</p>
+                    </div>
+                `;
+                return;
+            }
+
+            tasksContainer.innerHTML = tasks.map(task => `
+                <div class="task-card" onclick='showTaskDetails(${JSON.stringify(task).replace(/'/g, "&#39;")})'>
+                    <div class="task-header">
+                        <h3 class="task-title">${task.title}</h3>
+                    </div>
+                    <div class="task-status ${getStatusClass(task.status)}">
+                        ${getStatusText(task.status)}
+                    </div>
+                    <p class="task-description">${task.description}</p>
+                    <div class="task-details">
+                        <div class="task-detail">
+                            <i class="fas fa-calendar"></i>
+                            <span>Oluşturulma: ${formatDate(task.createdAt)}</span>
+                        </div>
+                        <div class="task-detail">
+                            <i class="fas fa-clock"></i>
+                            <span>Bitiş: ${formatDate(task.deadline)}</span>
+                        </div>
+                        <div class="task-detail">
+                            <i class="fas fa-user"></i>
+                            <span>Oluşturan: ${task.createdByFullName}</span>
+                        </div>
+                    </div>
+                    <span class="priority-badge ${getPriorityClass(task.priority)}">
+                        ${getPriorityText(task.priority)}
+                    </span>
+                </div>
+            `).join('');
+        } catch (error) {
+            console.error('Error loading tasks:', error);
+            alert('Görevler yüklenirken bir hata oluştu');
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadTasks);
+
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.update-status-btn')) {
+            document.querySelectorAll('.status-dropdown').forEach(dropdown => {
+                dropdown.classList.remove('active');
+            });
+        }
+    });
+
+    document.getElementById('taskModal').addEventListener('click', (e) => {
+        if (e.target === e.currentTarget) {
+            closeModal();
+        }
+    });
+
+    function logout() {
+        localStorage.removeItem('accessToken');
+        window.location.href = 'home.html';
+    }
+</script>
+
+</body>
+</html> 
