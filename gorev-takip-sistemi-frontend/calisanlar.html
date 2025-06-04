@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Çalışanlar - Görev Takip Sistemi</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4a90e2;
+            --secondary-color: #f5f6fa;
+            --text-color: #2c3e50;
+            --success-color: #2ecc71;
+            --error-color: #e74c3c;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .employee-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .employee-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .employee-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 1rem;
+        }
+
+        .employee-info {
+            flex: 1;
+        }
+
+        .employee-name {
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 0.25rem;
+        }
+
+        .employee-department {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .action-buttons {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            display: none;
+        }
+
+        .employee-card:hover .action-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-action {
+            padding: 0.5rem;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .btn-delete {
+            background-color: var(--error-color);
+            color: white;
+        }
+
+        .btn-assign {
+            background-color: var(--success-color);
+            color: white;
+        }
+
+        .modal-content {
+            border-radius: 15px;
+        }
+
+        .modal-header {
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .detail-item {
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .detail-value {
+            color: #666;
+        }
+
+        .loading-spinner {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+    </style>
+</head>
+<body>
+   
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-users me-2"></i>
+                Çalışanlar
+            </a>
+            <div class="d-flex align-items-center">
+                <button class="btn btn-outline-primary" onclick="goBack()">
+                    <i class="fas fa-arrow-left me-2"></i>Geri
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div id="loadingSpinner" class="loading-spinner">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Yükleniyor...</span>
+            </div>
+        </div>
+        <div id="employeeList"></div>
+    </div>
+
+
+    <div class="modal fade" id="employeeModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Çalışan Detayları</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center mb-4">
+                        <img src="https://ui-avatars.com/api/?background=4a90e2&color=fff" 
+                             class="employee-avatar" 
+                             id="modalAvatar" 
+                             alt="Employee Avatar">
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Ad Soyad</div>
+                        <div class="detail-value" id="modalName"></div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">E-posta</div>
+                        <div class="detail-value" id="modalEmail"></div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Telefon</div>
+                        <div class="detail-value" id="modalPhone"></div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Departman</div>
+                        <div class="detail-value" id="modalDepartment"></div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Açıklama</div>
+                        <div class="detail-value" id="modalDescription"></div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Kayıt Tarihi</div>
+                        <div class="detail-value" id="modalCreatedAt"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const token = localStorage.getItem('accessToken');
+        if (!token) {
+            window.location.href = 'home.html';
+        }
+
+        let employees = [];
+        const employeeModal = new bootstrap.Modal(document.getElementById('employeeModal'));
+
+        async function loadEmployees() {
+            try {
+                const token = localStorage.getItem('accessToken');
+                if (!token) {
+                    window.location.href = 'home.html';
+                    return;
+                }
+
+                const payloadBase64 = token.split('.')[1];
+                const decodedPayload = atob(payloadBase64);
+                const payload = JSON.parse(decodedPayload);
+                const currentUserId = payload["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"];
+                const currentUserRole = payload["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+
+                const userResponse = await fetch(`http://localhost:5093/api/user/${currentUserId}`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (!userResponse.ok) {
+                    throw new Error('Kullanıcı bilgileri alınamadı');
+                }
+
+                const userData = await userResponse.json();
+                const companyId = userData.companyId;
+
+                if (!companyId) {
+                    throw new Error('Şirket bilgisi bulunamadı');
+                }
+
+                const response = await fetch(`http://localhost:5093/api/user/company`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Çalışanlar yüklenirken bir hata oluştu');
+                }
+
+                const allEmployees = await response.json();
+
+                employees = allEmployees.filter(employee => {
+                    return employee.role !== "CompanyOwner" && employee.id !== currentUserId;
+                });
+
+                displayEmployees(employees, currentUserRole);
+            } catch (error) {
+                console.error('Çalışan yükleme hatası:', error);
+                alert('Çalışanlar yüklenirken bir hata oluştu');
+            }
+        }
+
+        function displayEmployees(employeeListData, currentUserRole) {
+            const employeeList = document.getElementById('employeeList');
+
+            if (employeeListData.length === 0) {
+                employeeList.innerHTML = `
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i>
+                        Henüz çalışan bulunmamaktadır.
+                    </div>
+                `;
+                return;
+            }
+
+            employeeList.innerHTML = employeeListData.map(employee => `
+                <div class="employee-card d-flex align-items-center" onclick="showEmployeeDetails('${employee.id}')">
+                    <img src="https://ui-avatars.com/api/?name=${employee.firstName}+${employee.lastName}&background=4a90e2&color=fff" 
+                         class="employee-avatar" 
+                         alt="${employee.firstName} ${employee.lastName}">
+                    <div class="employee-info">
+                        <div class="employee-name">${employee.firstName} ${employee.lastName}</div>
+                        <div class="employee-department">${employee.department || 'Departman belirtilmemiş'}</div>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn btn-action btn-assign" onclick="assignTask('${employee.id}'); event.stopPropagation();">
+                            <i class="fas fa-tasks"></i>
+                        </button>
+                        ${currentUserRole === "CompanyOwner" ? `
+                            <button class="btn btn-action btn-delete" onclick="deleteEmployee('${employee.id}', '${employee.role}'); event.stopPropagation();">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        ` : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function showEmployeeDetails(employeeId) {
+            const employee = employees.find(emp => emp.id === employeeId);
+            if (!employee) return;
+
+            document.getElementById('modalAvatar').src = `https://ui-avatars.com/api/?name=${employee.firstName}+${employee.lastName}&background=4a90e2&color=fff`;
+            document.getElementById('modalName').textContent = `${employee.firstName} ${employee.lastName}`;
+            document.getElementById('modalEmail').textContent = employee.email;
+            document.getElementById('modalPhone').textContent = employee.phoneNumber;
+            document.getElementById('modalDepartment').textContent = employee.department;
+            document.getElementById('modalDescription').textContent = employee.userDescription || 'Açıklama bulunmuyor';
+            document.getElementById('modalCreatedAt').textContent = new Date(employee.createdAt).toLocaleDateString('tr-TR');
+
+            employeeModal.show();
+        }
+
+        async function deleteEmployee(employeeId, employeeRole) {
+            if (employeeRole === "Manager") {
+                window.location.href = 'unauthorized.html';
+                return;
+            }
+
+            if (!confirm('Bu çalışanı silmek istediğinizden emin misiniz?')) return;
+
+            try {
+                const response = await fetch(`http://localhost:5093/api/user/${employeeId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (response.ok) {
+                    employees = employees.filter(emp => emp.id !== employeeId);
+                    displayEmployees(employees);
+                    alert('Çalışan başarıyla silindi');
+                } else {
+                    throw new Error('Çalışan silinirken bir hata oluştu');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Çalışan silinirken bir hata oluştu');
+            }
+        }
+
+        function assignTask(employeeId) {
+            window.location.href = `gorev-ata.html?employeeId=${employeeId}`;
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+
+        loadEmployees();
+    </script>
+</body>
+</html>
