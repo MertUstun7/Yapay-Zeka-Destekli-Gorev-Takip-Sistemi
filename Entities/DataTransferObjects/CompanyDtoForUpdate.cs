@@ -8,8 +8,13 @@ namespace Entities.DataTransferObjects
 {
     public record CompanyDtoForUpdate
     {
+        // Kullanıcı arayüzünden şirket ismini string türünden almak için tanımlanmıştır.
         public string? Name { get; init; }
+
+        // Kullanıcı arayüzünde şirket vergi numarasını string türünden almak için tanımlanmıştır.
         public string? TaxNumber { get; init; }
+
+        // Kullanıcı arayüzünden şirket sahibinin ID'sini string türünden almak için tanımlanmıştır.
         public Guid? OwnerId { get; init; }
     }
 }
