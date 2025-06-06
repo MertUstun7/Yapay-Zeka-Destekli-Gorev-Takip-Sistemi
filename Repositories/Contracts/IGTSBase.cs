@@ -15,5 +15,7 @@ namespace Repositories.Contracts
         Task CreateAsync(T entity);
         Task UpdateAsync(T entity);
         Task DeleteAsync(T entity);
+        Task<T> GetByIdAsync(Guid id, bool trackChanges);
+
     }
 }
