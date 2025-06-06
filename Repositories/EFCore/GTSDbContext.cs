@@ -65,7 +65,7 @@ namespace Entities
             .HasOne(t => t.CreatedBy)
             .WithMany(u => u.CreatedTasks)
             .HasForeignKey(t => t.CreatedById)
-            .OnDelete(DeleteBehavior.Restrict);
+            .OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<TaskAssignment>()
             .HasOne(a => a.TaskItem)
             .WithMany(t => t.Assignments)
