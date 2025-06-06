@@ -28,6 +28,11 @@ namespace Repositories.EFCore.Config
                 {
                     Name = "Worker",
                     NormalizedName = "WORKER"
+                },
+                new IdentityRole
+                {
+                    Name="Admin",
+                    NormalizedName="ADMIN"
                 }
 
                 );
