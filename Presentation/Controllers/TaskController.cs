@@ -60,7 +60,7 @@ namespace Presentation.Controllers
         public async Task<IActionResult> DeleteTask(Guid taskId)
         {
             //Görevleri silmek için hazırlanmış bir DELETE isteğidir.
-            await _logger.LogInfo($"[PUT] UpdateTask isteği {taskId} geldi.");
+            await _logger.LogInfo($"[DELETE] UpdateTask isteği {taskId} geldi.");
             await _serviceManager.TaskItemService.DeleteTaskAsync(taskId);
             return NoContent();
         }
