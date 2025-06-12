@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kişisel Görevlerim - Görev Takip Sistemi</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary-color: #f8fafc;
+            --text-color: #1e293b;
+            --text-secondary: #64748b;
+            --success-color: #22c55e;
+            --error-color: #ef4444;
+            --border-radius: 16px;
+            --box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            background: linear-gradient(180deg, var(--secondary-color), #e2e8f0);
+            color: var(--text-color);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+            padding: 1rem 5%;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            box-shadow: var(--box-shadow);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .task-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .task-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+        }
+
+        .priority-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .priority-high {
+            background: var(--error-color);
+            color: white;
+        }
+
+        .priority-medium {
+            background: #f59e0b;
+            color: white;
+        }
+
+        .priority-low {
+            background: var(--success-color);
+            color: white;
+        }
+
+        .back-button {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <h1 class="text-2xl font-semibold">Kişisel Görevlerim</h1>
+            <button class="back-button" onclick="goBack()">
+                <i class="fas fa-arrow-left"></i>
+                Geri Dön
+            </button>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 pt-24 pb-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="tasksContainer">
+            
+        </div>
+    </main>
+
+    
+    <div class="modal" id="taskModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 1000; justify-content: center; align-items: center;">
+        <div class="modal-content bg-white rounded-xl p-8 w-11/12 max-w-2xl max-h-[90vh] overflow-y-auto relative">
+            <div class="modal-header flex justify-between items-center mb-6">
+                <h2 class="modal-title text-2xl font-semibold text-gray-800">Görev Detayları</h2>
+                <button class="close-modal text-2xl text-gray-500 hover:text-red-500 transition-colors" onclick="closeModal()">&times;</button>
+            </div>
+            <div id="modalContent">
+               
+            </div>
+            <div class="modal-actions flex gap-4 mt-8">
+                <button class="modal-btn update-status-btn bg-indigo-600 text-white px-6 py-3 rounded-xl hover:bg-indigo-700 transition-colors flex items-center gap-2" onclick="showStatusOptions()">
+                    <i class="fas fa-edit"></i>
+                    Durum Güncelle
+                </button>
+                <button class="modal-btn upload-report-btn bg-green-600 text-white px-6 py-3 rounded-xl hover:bg-green-700 transition-colors flex items-center gap-2" onclick="uploadReport()">
+                    <i class="fas fa-upload"></i>
+                    Rapor Yükle
+                </button>
+            </div>
+            <div class="status-options grid grid-cols-2 gap-4 mt-4" id="statusOptions" style="display: none;">
+                <div class="status-option p-4 border-2 border-indigo-600 rounded-xl cursor-pointer transition-colors text-center font-medium hover:bg-indigo-600 hover:text-white" onclick="updateTaskStatus(currentTaskId, 'started')">
+                    <i class="fas fa-play"></i>
+                    Başlandı
+                </div>
+                <div class="status-option p-4 border-2 border-indigo-600 rounded-xl cursor-pointer transition-colors text-center font-medium hover:bg-indigo-600 hover:text-white" onclick="updateTaskStatus(currentTaskId, 'pending')">
+                    <i class="fas fa-pause"></i>
+                    Beklemede
+                </div>
+                <div class="status-option p-4 border-2 border-indigo-600 rounded-xl cursor-pointer transition-colors text-center font-medium hover:bg-indigo-600 hover:text-white" onclick="updateTaskStatus(currentTaskId, 'in_progress')">
+                    <i class="fas fa-spinner"></i>
+                    Devam Ediyor
+                </div>
+                <div class="status-option p-4 border-2 border-indigo-600 rounded-xl cursor-pointer transition-colors text-center font-medium hover:bg-indigo-600 hover:text-white" onclick="updateTaskStatus(currentTaskId, 'cancelled')">
+                    <i class="fas fa-times"></i>
+                    İptal Edildi
+                </div>
+                <div class="status-option p-4 border-2 border-indigo-600 rounded-xl cursor-pointer transition-colors text-center font-medium hover:bg-indigo-600 hover:text-white" onclick="updateTaskStatus(currentTaskId, 'completed')">
+                    <i class="fas fa-check"></i>
+                    Tamamlandı
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Token kontrolü
+        const token = localStorage.getItem('accessToken');
+        if (!token) {
+            window.location.href = 'home.html';
+        }
+
+        let currentTaskId = null;
+
+        function getStatusClass(status) {
+            switch (status) {
+                case 'started': return 'bg-indigo-600';
+                case 'in_progress': return 'bg-indigo-600';
+                case 'completed': return 'bg-green-600';
+                case 'pending': return 'bg-yellow-500';
+                case 'cancelled': return 'bg-red-500';
+                default: return 'bg-yellow-500';
+            }
+        }
+
+        function getStatusText(status) {
+            switch (status) {
+                case 'started': return 'Başlandı';
+                case 'in_progress': return 'Devam Ediyor';
+                case 'completed': return 'Tamamlandı';
+                case 'pending': return 'Beklemede';
+                case 'cancelled': return 'İptal Edildi';
+                default: return 'Beklemede';
+            }
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('tr-TR', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+
+        function getPriorityClass(priority) {
+            switch (priority.toLowerCase()) {
+                case 'high': return 'priority-high';
+                case 'medium': return 'priority-medium';
+                case 'low': return 'priority-low';
+                default: return 'priority-low';
+            }
+        }
+
+        function getPriorityText(priority) {
+            switch (priority.toLowerCase()) {
+                case 'high': return 'Yüksek Öncelik';
+                case 'medium': return 'Orta Öncelik';
+                case 'low': return 'Düşük Öncelik';
+                default: return 'Düşük Öncelik';
+            }
+        }
+
+        function showTaskDetails(task) {
+            currentTaskId = task.id;
+            const modal = document.getElementById('taskModal');
+            const modalContent = document.getElementById('modalContent');
+            
+            modalContent.innerHTML = `
+                <div class="task-details">
+                    <h3 class="text-xl font-semibold mb-3">${task.title}</h3>
+                    <p class="text-gray-600 mb-4">${task.description}</p>
+                    <div class="space-y-2 text-sm text-gray-500">
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-calendar"></i>
+                            <span>Oluşturulma: ${formatDate(task.createdAt)}</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-clock"></i>
+                            <span>Bitiş: ${formatDate(task.deadline)}</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-user"></i>
+                            <span>Oluşturan: ${task.createdByFullName}</span>
+                        </div>
+                    </div>
+                    <span class="priority-badge ${getPriorityClass(task.priority)} mt-4 inline-block">
+                        ${getPriorityText(task.priority)}
+                    </span>
+                </div>
+            `;
+            
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('taskModal');
+            modal.style.display = 'none';
+            document.getElementById('statusOptions').style.display = 'none';
+        }
+
+        function showStatusOptions() {
+            const statusOptions = document.getElementById('statusOptions');
+            statusOptions.style.display = statusOptions.style.display === 'none' ? 'grid' : 'none';
+        }
+
+        async function updateTaskStatus(taskId, newStatus) {
+            try {
+                const patchDoc = [
+                    {
+                        op: "replace",
+                        path: "/Status",
+                        value: newStatus
+                    }
+                ];
+
+                const response = await fetch(`http://localhost:5093/api/task/${taskId}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json-patch+json'
+                    },
+                    body: JSON.stringify(patchDoc)
+                });
+
+                if (!response.ok) {
+                    throw new Error('Durum güncellenemedi');
+                }
+
+                alert('Görev durumu başarıyla güncellendi');
+                closeModal();
+                loadTasks();
+            } catch (error) {
+                console.error('Error updating task status:', error);
+                alert('Durum güncellenirken bir hata oluştu');
+            }
+        }
+
+        function uploadReport() {
+            if (currentTaskId) {
+                window.location.href = `rapor.html?taskId=${currentTaskId}`;
+            } else {
+                alert('Lütfen önce bir görev seçin');
+            }
+        }
+
+        async function loadTasks() {
+            try {
+                const response = await fetch('http://localhost:5093/api/task/user-asigned', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Görevler yüklenemedi');
+                }
+
+                const tasks = await response.json();
+                const tasksContainer = document.getElementById('tasksContainer');
+
+                if (tasks.length === 0) {
+                    tasksContainer.innerHTML = `
+                        <div class="col-span-full text-center py-12 bg-white rounded-xl shadow-lg">
+                            <i class="fas fa-clipboard-list text-4xl text-gray-400 mb-4"></i>
+                            <h2 class="text-xl font-semibold text-gray-600 mb-2">Henüz atanmış görev bulunmuyor</h2>
+                            <p class="text-gray-500">Size atanmış görevler burada görüntülenecek</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                tasksContainer.innerHTML = tasks.map(task => `
+                    <div class="task-card" data-aos="fade-up" onclick='showTaskDetails(${JSON.stringify(task).replace(/'/g, "&#39;")})'>
+                        <h3 class="text-xl font-semibold mb-3">${task.title}</h3>
+                        <p class="text-gray-600 mb-4">${task.description}</p>
+                        <div class="space-y-2 text-sm text-gray-500">
+                            <div class="flex items-center gap-2">
+                                <i class="fas fa-calendar"></i>
+                                <span>Oluşturulma: ${formatDate(task.createdAt)}</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i class="fas fa-clock"></i>
+                                <span>Bitiş: ${formatDate(task.deadline)}</span>
+                            </div>
+                        </div>
+                        <span class="priority-badge ${getPriorityClass(task.priority)} mt-4 inline-block">
+                            ${getPriorityText(task.priority)}
+                        </span>
+                    </div>
+                `).join('');
+
+                // AOS'u başlat
+                AOS.init({
+                    duration: 800,
+                    once: true
+                });
+            } catch (error) {
+                console.error('Error loading tasks:', error);
+                alert('Görevler yüklenirken bir hata oluştu');
+            }
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+
+        // Sayfa yüklendiğinde görevleri yükle
+        document.addEventListener('DOMContentLoaded', loadTasks);
+
+        // Modal dışına tıklandığında kapatma
+        document.getElementById('taskModal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html> 
