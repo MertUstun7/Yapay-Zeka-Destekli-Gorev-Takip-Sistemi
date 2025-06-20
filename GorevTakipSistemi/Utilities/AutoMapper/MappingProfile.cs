@@ -29,19 +29,6 @@ namespace GorevTakipSistemi.Utilities.AutoMapper
                     .ForMember(dest => dest.OwnerId, opt => opt.MapFrom(src => src.OwnerId)) 
                     .ForMember(dest => dest.Id, opt => opt.Ignore());
 
-
-                CreateMap<CompanyDtoForUpdate, Company>()
-                    .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
-                    .ForMember(dest => dest.TaxNumber, opt => opt.MapFrom(src => src.TaxNumber))
-                    .ForAllMembers(opt => opt.Ignore());
-
-                CreateMap<CompanyOwnerRegistrationDto, Company>()
-                    .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.CompanyName))
-                    .ForMember(dest => dest.TaxNumber, opt => opt.MapFrom(src => src.TaxNumber))
-                    .ForMember(dest => dest.OwnerId, opt => opt.Ignore())
-                    .ForMember(dest => dest.Id, opt => opt.Ignore())
-                    .ForAllMembers(opt => opt.Ignore());
-
                 CreateMap<Company, CompanyDto>()
                     .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
                     .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
@@ -64,31 +51,29 @@ namespace GorevTakipSistemi.Utilities.AutoMapper
                     .ForMember(dest => dest.Roles, opt => opt.Ignore())
                     .ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(src => src.CreatedAt));
 
-            CreateMap<TaskItem, TaskItemForGetDto>()
-                .ForMember(dest => dest.Priority, opt => opt.MapFrom(src => src.Priority.ToString()))
-                .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString()))
-                .ForMember(dest => dest.Assigned,opt => opt.MapFrom(src =>src.Assignments.FirstOrDefault() != null? 
-                src.Assignments.First().AssignedTo.FirstName + " " + src.Assignments.First().AssignedTo.LastName: null))
-                .ForMember(dest => dest.CreatedByFullName, opt => opt.MapFrom(src => src.CreatedByFullName.ToString()));
+                CreateMap<TaskItem, TaskItemForGetDto>()
+                    .ForMember(dest => dest.Priority, opt => opt.MapFrom(src => src.Priority.ToString()))
+                    .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString()))
+                    .ForMember(dest => dest.Assigned,opt => opt.MapFrom(src =>src.Assignments.FirstOrDefault() != null? 
+                    src.Assignments.First().AssignedTo.FirstName + " " + src.Assignments.First().AssignedTo.LastName: null))
+                    .ForMember(dest => dest.CreatedByFullName, opt => opt.MapFrom(src => src.CreatedByFullName.ToString()));
 
-            CreateMap<TaskReport, ReportDtoForGet>()
-                .ForMember(dest => dest.CreatedByFullName,
-                opt => opt.MapFrom(src => src.CreatedBy.FirstName + " " + src.CreatedBy.LastName));
+                CreateMap<TaskReport, ReportDtoForGet>()
+                    .ForMember(dest => dest.CreatedByFullName,
+                    opt => opt.MapFrom(src => src.CreatedBy.FirstName + " " + src.CreatedBy.LastName));
 
-            CreateMap<ReportDtoForCreate, TaskReport>()
-                .ForMember(dest => dest.PdfFileData, opt => opt.Ignore())
-                .ForMember(dest => dest.PdfContentType, opt => opt.Ignore())
-                .ForMember(dest => dest.PdfFileName, opt => opt.Ignore());
+                CreateMap<ReportDtoForCreate, TaskReport>()
+                    .ForMember(dest => dest.PdfFileData, opt => opt.Ignore())
+                    .ForMember(dest => dest.PdfContentType, opt => opt.Ignore())
+                    .ForMember(dest => dest.PdfFileName, opt => opt.Ignore());
 
-            CreateMap<TaskItemForUpdateDto, TaskItem>();
+                CreateMap<TaskItemForUpdateDto, TaskItem>();
+
+                CreateMap<CompanyDtoForUpdate, Company>()
+                    .ForMember(dest => dest.OwnerId, opt => opt.Ignore());
 
 
         }
     }
-
-
-
-    }
-        
-    
+ }
 

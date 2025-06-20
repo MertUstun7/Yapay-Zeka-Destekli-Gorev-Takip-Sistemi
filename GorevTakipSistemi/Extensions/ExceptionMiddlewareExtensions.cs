@@ -50,9 +50,6 @@ namespace GorevTakipSistemi.Extensions
                     }      
                 });
             });
-        }
-        
-
-        
+        }       
     }
 }

@@ -3,6 +3,8 @@ using Entities.DataTransferObjects;
 using Entities.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.JsonPatch;
+using Microsoft.AspNetCore.Mvc;
 using Repositories.Contracts;
 using Services.Contracts;
 using System;
@@ -139,5 +141,23 @@ namespace Services
             await _repoManager.TaskItem.UpdateAsync(task);
             await _repoManager.SaveAsync();
         }
+
+        public async Task UpdateStatus(Guid taskId, JsonPatchDocument<TaskItem> taskDto)
+        {
+            
+            if (taskDto is null)
+                throw new KeyNotFoundException("Task dto boş gönderildi");
+            var taskitem = await _repoManager.TaskItem.GetByIdAsync(taskId, trackChanges: true);
+            if (taskitem is null)
+                throw new KeyNotFoundException("İlgili task item bulunamadı");
+            taskDto.ApplyTo(taskitem);
+            await _repoManager.SaveAsync();
+
+           
+        }
+
     }
 }
+
+
+

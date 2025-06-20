@@ -116,7 +116,7 @@ namespace Presentation.Controllers
         public async Task<IActionResult> UpdatePassword(string userId, [FromBody] UserPasswordUpdateDto dto)
         {
             // Girilen ID'deki kullanıcı şifresini güncellememizi sağlar.
-            await _logger.LogInfo("[POST] api/user/{userId}/update-password isteği gönderildi.");
+            await _logger.LogInfo("[PUT] api/user/{userId}/update-password isteği gönderildi.");
             var result = await _serviceManager.UserService.UpdatePasswordAsync(userId, dto);
             if (!result.Succeeded)
                 return BadRequest(result.Errors);

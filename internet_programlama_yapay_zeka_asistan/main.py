@@ -1,7 +1,8 @@
 import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from services.gemma_chat_bot.presentation.routing import gemma_chat_bot_router
+
+from services.personal_assistant.presentation.routing import gemma_chat_bot_router
 
 app=FastAPI()
 
@@ -18,3 +19,4 @@ app.include_router(gemma_chat_bot_router,tags=["gemma-chat-bot"])
 
 if __name__=="__main__":
     uvicorn.run(app,host="127.0.0.1",port=8012)
+

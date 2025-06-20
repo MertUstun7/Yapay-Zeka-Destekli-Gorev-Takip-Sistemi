@@ -20,17 +20,14 @@ namespace Presentation.Controllers
     {
         private readonly IServiceManager _serviceManager;
         private readonly ILoggerService _logger;
-        private readonly IRepositoryManager _repoManager;
-
-
-        public TaskController(IServiceManager serviceManager, ILoggerService logger, IRepositoryManager repoManager)
+       
+        public TaskController(IServiceManager serviceManager, ILoggerService logger)
         {
             _serviceManager = serviceManager;
             _logger = logger;
-            _repoManager = repoManager;
+            
         }
-
-        
+   
         [HttpPost]
         [Authorize(Roles = "Admin,CompanyOwner,Manager")]
 
@@ -42,7 +39,6 @@ namespace Presentation.Controllers
             return Ok();
         }
         
-
         [HttpPut("{taskId}")]
         [Authorize(Roles = "Admin,CompanyOwner,Manager")]
 
@@ -72,13 +68,8 @@ namespace Presentation.Controllers
         {
             //Şirket bilgilerinden spesifik olarak bir alanı güncellememizi sağlar.
             await _logger.LogInfo("[PATCH] api/task/{taskId}/status isteği geldi.");
-            if (taskDto is null)
-                return BadRequest();
-            var taskitem = await _repoManager.TaskItem.GetByIdAsync(taskId, trackChanges: true);
-            if (taskitem is null)
-                return NotFound();
-            taskDto.ApplyTo(taskitem);
-            await _repoManager.SaveAsync();
+           
+            await _serviceManager.TaskItemService.UpdateStatus(taskId,taskDto);
 
             return NoContent();
         }
@@ -116,7 +107,8 @@ namespace Presentation.Controllers
             var tasks = await _serviceManager.TaskItemService.GetByCreatorAsync();
             return Ok(tasks);
         }
-        [HttpGet("user-asigned")]
+
+        [HttpGet("user-assigned")]
         [Authorize(Roles = "Admin,CompanyOwner,Manager,Worker")]
         public async Task<IActionResult> GetAssignedTaskByMe()
         {

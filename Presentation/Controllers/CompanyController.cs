@@ -18,13 +18,13 @@ namespace Presentation.Controllers
     {
         private readonly ICompanyService _companyService;
         private readonly ILoggerService _logger;
-        private readonly IRepositoryManager _repoManager;
+       
 
-        public CompanyController(ICompanyService companyService, ILoggerService logger, IRepositoryManager repoManager)
+        public CompanyController(ICompanyService companyService, ILoggerService logger)
         {
             _companyService = companyService;
             _logger = logger;
-            _repoManager = repoManager;
+           
         }
 
         [HttpGet]
@@ -94,12 +94,12 @@ namespace Presentation.Controllers
             return NoContent();
         }
 
-        [HttpPost("{companyId:guid}/remove-user")]
+        [HttpDelete("{companyId:guid}/remove-user")]
         [Authorize(Roles = "Admin,CompanyOwner")]
         public async Task<IActionResult> RemoveUser(Guid companyId, [FromQuery] string userId)
         {
             // Şirket içerisinden eleman çıkarmamızı sağlar.
-            await _logger.LogInfo("[POST] api/company/{companyId:guid}/remove-user isteği geldi.");
+            await _logger.LogInfo("[DELETE] api/company/{companyId:guid}/remove-user isteği geldi.");
             await _companyService.RemoveUserAsync(companyId, userId);
             return NoContent();
         }
@@ -140,16 +140,8 @@ namespace Presentation.Controllers
         {
             //Şirket bilgilerinden spesifik olarak bir alanı güncellememizi sağlar.
             await _logger.LogInfo("[PATCH] api/company/{id} isteği geldi.");
-            if (patchDoc is null)
-                return BadRequest();
-
-            var company = await _repoManager.Company.GetByIdAsync(id, trackChanges: true);
-            if (company is null)
-                return NotFound();
-
-            patchDoc.ApplyTo(company);
-
-            await _repoManager.SaveAsync();
+            
+            await _companyService.PatchCompanyAsync(id, patchDoc);
 
             return NoContent();
         }

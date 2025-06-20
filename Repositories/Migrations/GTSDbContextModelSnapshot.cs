@@ -290,25 +290,25 @@ namespace Repositories.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "241d532d-c7a5-4285-9049-fc3c48c246b6",
+                            Id = "b303f90f-a758-4d30-a7f1-cb7bd2b5daa3",
                             Name = "CompanyOwner",
                             NormalizedName = "COMPANYOWNER"
                         },
                         new
                         {
-                            Id = "09f74a45-9f8f-4332-b5c5-32f95d875daf",
+                            Id = "81647185-16a4-4541-a541-8c28c57b3d4e",
                             Name = "Manager",
                             NormalizedName = "MANAGER"
                         },
                         new
                         {
-                            Id = "fcb74908-0ce1-4605-b7d2-5cec6dbfba5a",
+                            Id = "2608a966-134b-466f-9c8c-50873bc59ce4",
                             Name = "Worker",
                             NormalizedName = "WORKER"
                         },
                         new
                         {
-                            Id = "9480852c-dfbe-4d18-8dc3-5ac2caa98449",
+                            Id = "b4e44f7e-7df1-44c4-9a1e-89787dcdc37d",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });

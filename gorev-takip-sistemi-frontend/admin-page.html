@@ -1,300 +1,347 @@
 <!DOCTYPE html>
+<!-- HTML5 doküman tipi tanımlaması -->
 <html lang="tr">
+<!-- Türkçe dil desteği ile HTML başlangıcı -->
 <head>
+    <!-- Sayfa başlık ve meta bilgileri bölümü -->
     <meta charset="UTF-8">
+    <!-- UTF-8 karakter kodlaması tanımlaması -->
     <meta http-equiv="Cache-Control" content="no-store" />
+    <!-- Sayfa önbelleğe alınmasını engelleyen meta etiketi -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Mobil cihaz uyumluluğu için viewport ayarı -->
     <title>Admin Paneli</title>
+    <!-- Sayfa başlığı -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap CSS framework'ü bağlantısı -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Font Awesome ikon kütüphanesi bağlantısı -->
     <style>
+        /* CSS değişkenleri tanımlaması */
         :root {
-            --primary-color: #4e73df;
-            --secondary-color: #1cc88a;
-            --accent-color: #36b9cc;
-            --warning-color: #f6c23e;
-            --danger-color: #e74a3b;
-            --info-color: #858796;
+            --primary-color: #4e73df;    /* Ana renk - mavi ton */
+            --secondary-color: #1cc88a;  /* İkincil renk - yeşil ton */
+            --accent-color: #36b9cc;     /* Vurgu rengi - açık mavi */
+            --warning-color: #f6c23e;    /* Uyarı rengi - sarı ton */
+            --danger-color: #e74a3b;     /* Tehlike rengi - kırmızı ton */
+            --info-color: #858796;       /* Bilgi rengi - gri ton */
         }
 
+        /* Sayfa arka plan ve genel stil ayarları */
         body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            min-height: 100vh;
-            padding: 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); /* Gradient arka plan */
+            min-height: 100vh; /* Minimum sayfa yüksekliği */
+            padding: 20px; /* Sayfa kenar boşluğu */
         }
 
+        /* Üst başlık çubuğu stilleri */
         .header {
-            background: white;
-            padding: 15px 30px;
-            border-radius: 15px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin-bottom: 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            background: white; /* Beyaz arka plan */
+            padding: 15px 30px; /* İç boşluk */
+            border-radius: 15px; /* Köşe yuvarlaklığı */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Gölge efekti */
+            margin-bottom: 30px; /* Alt boşluk */
+            display: flex; /* Esnek kutu düzeni */
+            justify-content: space-between; /* Yatayda öğeleri ayırma */
+            align-items: center; /* Dikeyde öğeleri ortala */
         }
 
+        /* Başlık metni stilleri */
         .header h1 {
-            color: var(--primary-color);
-            margin: 0;
-            font-size: 1.8rem;
-            font-weight: 700;
+            color: var(--primary-color); /* Ana renk kullanımı */
+            margin: 0; /* Kenar boşluğu sıfırlama */
+            font-size: 1.8rem; /* Yazı boyutu */
+            font-weight: 700; /* Kalın yazı tipi */
         }
 
+        /* Kullanıcı kontrol butonları için stil */
         .user-controls {
-            display: flex;
-            gap: 15px;
+            display: flex; /* Esnek kutu düzeni */
+            gap: 15px; /* Öğeler arası boşluk */
         }
 
+        /* Özel buton stilleri */
         .btn-custom {
-            padding: 8px 20px;
-            border-radius: 8px;
-            border: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
+            padding: 8px 20px; /* İç boşluk */
+            border-radius: 8px; /* Köşe yuvarlaklığı */
+            border: none; /* Kenarlık kaldırma */
+            font-weight: 600; /* Yarı kalın yazı tipi */
+            transition: all 0.3s ease; /* Geçiş efekti */
         }
 
+        /* Ayarlar butonu stilleri */
         .btn-settings {
-            background-color: var(--info-color);
-            color: white;
+            background-color: var(--info-color); /* Bilgi rengi arka plan */
+            color: white; /* Beyaz yazı rengi */
         }
 
+        /* Çıkış butonu stilleri */
         .btn-logout {
-            background-color: var(--danger-color);
-            color: white;
+            background-color: var(--danger-color); /* Tehlike rengi arka plan */
+            color: white; /* Beyaz yazı rengi */
         }
 
+        /* Buton hover efekti */
         .btn-custom:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transform: translateY(-2px); /* Yukarı kayma efekti */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Gölge efekti */
         }
 
+        /* Karşılama bölümü stilleri */
         .welcome-section {
-            text-align: center;
-            margin-bottom: 30px;
-            color: #2d3748;
+            text-align: center; /* Metin ortalaması */
+            margin-bottom: 30px; /* Alt boşluk */
+            color: #2d3748; /* Metin rengi */
         }
 
+        /* Karşılama başlığı stilleri */
         .welcome-section h2 {
-            font-size: 2rem;
-            margin-bottom: 10px;
+            font-size: 2rem; /* Yazı boyutu */
+            margin-bottom: 10px; /* Alt boşluk */
         }
 
+        /* Karşılama paragraf stilleri */
         .welcome-section p {
-            font-size: 1.2rem;
-            color: #4a5568;
+            font-size: 1.2rem; /* Yazı boyutu */
+            color: #4a5568; /* Metin rengi */
         }
 
+        /* Ana konteyner stilleri */
         .admin-container {
-            max-width: 1200px;
-            width: 100%;
-            margin: 0 auto;
+            max-width: 1200px; /* Maksimum genişlik */
+            width: 100%; /* Tam genişlik */
+            margin: 0 auto; /* Yatayda ortalaması */
         }
 
+        /* Kart bileşeni stilleri */
         .card {
-            border: none;
-            border-radius: 15px;
-            transition: all 0.3s ease;
-            background: white;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            height: 200px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
+            border: none; /* Kenarlık kaldırma */
+            border-radius: 15px; /* Köşe yuvarlaklığı */
+            transition: all 0.3s ease; /* Geçiş efekti */
+            background: white; /* Beyaz arka plan */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Gölge efekti */
+            height: 200px; /* Sabit yükseklik */
+            display: flex; /* Esnek kutu düzeni */
+            flex-direction: column; /* Dikey düzen */
+            justify-content: center; /* Dikeyde ortalaması */
+            align-items: center; /* Yatayda ortalaması */
+            cursor: pointer; /* El işaretçisi */
+            position: relative; /* Göreceli konumlandırma */
+            overflow: hidden; /* Taşan içeriği gizle */
         }
 
+        /* Kart üst çizgi efekti */
         .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: var(--primary-color);
+            content: ''; /* Boş içerik */
+            position: absolute; /* Mutlak konumlandırma */
+            top: 0; /* Üstten sıfır */
+            left: 0; /* Soldan sıfır */
+            width: 100%; /* Tam genişlik */
+            height: 5px; /* Çizgi yüksekliği */
+            background: var(--primary-color); /* Ana renk arka plan */
         }
 
-        .card:nth-child(2)::before { background: var(--secondary-color); }
-        .card:nth-child(3)::before { background: var(--accent-color); }
-        .card:nth-child(4)::before { background: var(--warning-color); }
-        .card:nth-child(5)::before { background: var(--danger-color); }
-        .card:nth-child(6)::before { background: var(--info-color); }
+        /* Her kart için farklı üst çizgi renkleri */
+        .card:nth-child(2)::before { background: var(--secondary-color); } /* İkinci kart için yeşil çizgi */
+        .card:nth-child(3)::before { background: var(--accent-color); } /* Üçüncü kart için açık mavi çizgi */
+        .card:nth-child(4)::before { background: var(--warning-color); } /* Dördüncü kart için sarı çizgi */
+        .card:nth-child(5)::before { background: var(--danger-color); } /* Beşinci kart için kırmızı çizgi */
+        .card:nth-child(6)::before { background: var(--info-color); } /* Altıncı kart için gri çizgi */
 
+        /* Kart hover efekti */
         .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            transform: translateY(-10px); /* Yukarı kayma efekti */
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Gölge efekti */
         }
 
+        /* Kart ikon stilleri */
         .card i {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            transition: all 0.3s ease;
+            font-size: 2.5rem; /* İkon boyutu */
+            margin-bottom: 15px; /* Alt boşluk */
+            transition: all 0.3s ease; /* Geçiş efekti */
         }
 
-        .card:nth-child(1) i { color: var(--primary-color); }
-        .card:nth-child(2) i { color: var(--secondary-color); }
-        .card:nth-child(3) i { color: var(--accent-color); }
-        .card:nth-child(4) i { color: var(--warning-color); }
-        .card:nth-child(5) i { color: var(--danger-color); }
-        .card:nth-child(6) i { color: var(--info-color); }
+        /* Her kart için farklı ikon renkleri */
+        .card:nth-child(1) i { color: var(--primary-color); } /* İlk kart için mavi ikon */
+        .card:nth-child(2) i { color: var(--secondary-color); } /* İkinci kart için yeşil ikon */
+        .card:nth-child(3) i { color: var(--accent-color); } /* Üçüncü kart için açık mavi ikon */
+        .card:nth-child(4) i { color: var(--warning-color); } /* Dördüncü kart için sarı ikon */
+        .card:nth-child(5) i { color: var(--danger-color); } /* Beşinci kart için kırmızı ikon */
+        .card:nth-child(6) i { color: var(--info-color); } /* Altıncı kart için gri ikon */
 
+        /* İkon hover efekti */
         .card:hover i {
-            transform: scale(1.2);
+            transform: scale(1.2); /* Büyütme efekti */
         }
 
+        /* Kart başlık stilleri */
         .card-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #333;
-            margin: 0;
+            font-size: 1.2rem; /* Yazı boyutu */
+            font-weight: 600; /* Yarı kalın yazı tipi */
+            color: #333; /* Metin rengi */
+            margin: 0; /* Kenar boşluğu sıfırlama */
         }
 
+        /* Kart metin stilleri */
         .card-text {
-            color: #666;
-            font-size: 0.9rem;
-            text-align: center;
-            margin-top: 10px;
+            color: #666; /* Metin rengi */
+            font-size: 0.9rem; /* Yazı boyutu */
+            text-align: center; /* Metin ortalaması */
+            margin-top: 10px; /* Üst boşluk */
         }
 
+        /* Satır stilleri */
         .row {
-            margin: 0;
+            margin: 0; /* Kenar boşluğu sıfırlama */
         }
 
+        /* Sütun stilleri */
         .col-md-4 {
-            padding: 15px;
+            padding: 15px; /* İç boşluk */
         }
     </style>
 </head>
 <body>
+    <!-- Ana konteyner başlangıcı -->
     <div class="admin-container">
+        <!-- Üst başlık çubuğu -->
         <div class="header">
-            <h1><i class="fas fa-tasks me-2"></i>Görev Takip Sistemi</h1>
-            <div class="d-flex align-items-center">
+            <h1><i class="fas fa-tasks me-2"></i>Görev Takip Sistemi</h1> <!-- Başlık ve görev ikonu -->
+            <div class="d-flex align-items-center"> <!-- Butonlar için konteyner -->
+                <!-- Ayarlar butonu -->
                 <button class="btn btn-outline-primary me-2" onclick="window.location.href='settings.html'">
-                    <i class="fas fa-cog me-2"></i>Ayarlar
+                    <i class="fas fa-cog me-2"></i>Ayarlar <!-- Ayarlar ikonu ve metni -->
                 </button>
+                <!-- Çıkış butonu -->
                 <button class="btn btn-outline-danger" onclick="logout()">
-                    <i class="fas fa-sign-out-alt me-2"></i>Çıkış Yap
+                    <i class="fas fa-sign-out-alt me-2"></i>Çıkış Yap <!-- Çıkış ikonu ve metni -->
                 </button>
             </div>
         </div>
 
+        <!-- Karşılama bölümü -->
         <div class="welcome-section">
-            <h2>Hoş Geldiniz!</h2>
-            <p>Merhaba, <span id="userName" class="fw-bold">Yükleniyor...</span></p>
+            <h2>Hoş Geldiniz!</h2> <!-- Karşılama başlığı -->
+            <p>Merhaba, <span id="userName" class="fw-bold">Yükleniyor...</span></p> <!-- Kullanıcı adı alanı -->
         </div>
 
+        <!-- Kartlar bölümü -->
         <div class="row">
+            <!-- Görev Atama kartı -->
             <div class="col-md-4">
-            
                 <div class="card" onclick="window.location.href='gorev-ata.html'">
-                    <i class="fas fa-tasks"></i>
-                    <h5 class="card-title">Görev Atama</h5>
-                    <p class="card-text">Yeni görevler oluşturun ve personellere atayın</p>
+                    <i class="fas fa-tasks"></i> <!-- Görev ikonu -->
+                    <h5 class="card-title">Görev Atama</h5> <!-- Kart başlığı -->
+                    <p class="card-text">Yeni görevler oluşturun ve personellere atayın</p> <!-- Kart açıklaması -->
                 </div>
             </div>
+            <!-- Personel Ekleme kartı -->
             <div class="col-md-4">
                 <div class="card" onclick="window.location.href='personel-ekle.html'">
-                    <i class="fas fa-user-plus"></i>
-                    <h5 class="card-title">Personel Ekleme</h5>
-                    <p class="card-text">Sisteme yeni personel ekleyin ve yönetin</p>
+                    <i class="fas fa-user-plus"></i> <!-- Personel ekleme ikonu -->
+                    <h5 class="card-title">Personel Ekleme</h5> <!-- Kart başlığı -->
+                    <p class="card-text">Sisteme yeni personel ekleyin ve yönetin</p> <!-- Kart açıklaması -->
                 </div>
             </div>
+            <!-- AI Asistan kartı -->
             <div class="col-md-4">
                 <div class="card" onclick="window.location.href='ai-personal-asistant.html'">
-                    <i class="fas fa-robot"></i>
-                    <h5 class="card-title">AI Asistanım</h5>
-                    <p class="card-text">Yapay zeka destekli asistan ile çalışın</p>
+                    <i class="fas fa-robot"></i> <!-- Robot ikonu -->
+                    <h5 class="card-title">AI Asistanım</h5> <!-- Kart başlığı -->
+                    <p class="card-text">Yapay zeka destekli asistan ile çalışın</p> <!-- Kart açıklaması -->
                 </div>
             </div>
+            <!-- Raporlar kartı -->
             <div class="col-md-4">
                 <div class="card" onclick="window.location.href='rapor-goruntule.html'">
-                    <i class="fas fa-chart-bar"></i>
-                    <h5 class="card-title">Raporlar</h5>
-                    <p class="card-text">Detaylı raporlar ve analizler görüntüleyin</p>
+                    <i class="fas fa-chart-bar"></i> <!-- Grafik ikonu -->
+                    <h5 class="card-title">Raporlar</h5> <!-- Kart başlığı -->
+                    <p class="card-text">Detaylı raporlar ve analizler görüntüleyin</p> <!-- Kart açıklaması -->
                 </div>
             </div>
+            <!-- Çalışanlar kartı -->
             <div class="col-md-4">
                 <div class="card" onclick="window.location.href='calisanlar.html'">
-                    <i class="fas fa-users"></i>
-                    <h5 class="card-title">Çalışanlar</h5>
-                    <p class="card-text">Çalışan listesi ve detaylı bilgiler</p>
+                    <i class="fas fa-users"></i> <!-- Kullanıcılar ikonu -->
+                    <h5 class="card-title">Çalışanlar</h5> <!-- Kart başlığı -->
+                    <p class="card-text">Çalışan listesi ve detaylı bilgiler</p> <!-- Kart açıklaması -->
                 </div>
             </div>
+            <!-- Görev Durumları kartı -->
             <div class="col-md-4">
                 <div class="card" onclick="window.location.href='durumu-goruntule.html'">
-                    <i class="fas fa-clipboard-check"></i>
-                    <h5 class="card-title">Görev Durumları</h5>
-                    <p class="card-text">Aktif görevlerin durumlarını takip edin</p>
+                    <i class="fas fa-clipboard-check"></i> <!-- Kontrol listesi ikonu -->
+                    <h5 class="card-title">Görev Durumları</h5> <!-- Kart başlığı -->
+                    <p class="card-text">Aktif görevlerin durumlarını takip edin</p> <!-- Kart açıklaması -->
                 </div>
             </div>
         </div>
     </div>
 
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
+    <!-- JavaScript kütüphaneleri -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script> <!-- JWT çözümleme kütüphanesi -->
 
     <script>
+        // Token kontrolü ve kullanıcı adı görüntüleme fonksiyonu
         function checkTokenAndDisplayName() {
-            const token = localStorage.getItem('accessToken');
-            console.log('Token yerel depodan alındı:', token);
+            const token = localStorage.getItem('accessToken'); // Yerel depodan token al
+            console.log('Token yerel depodan alındı:', token); // Token alındı logu
 
-            const userNameElement = document.getElementById('userName');
+            const userNameElement = document.getElementById('userName'); // Kullanıcı adı elementi
             if (!userNameElement) {
-                console.error("Hata: 'userName' ID'li öğe bulunamadı!");
+                console.error("Hata: 'userName' ID'li öğe bulunamadı!"); // Element bulunamadı hatası
                 return;
             }
 
             if (!token) {
-                console.warn('accessToken bulunamadı.');
-                userNameElement.textContent = 'Misafir Kullanıcı';
+                console.warn('accessToken bulunamadı.'); // Token bulunamadı uyarısı
+                userNameElement.textContent = 'Misafir Kullanıcı'; // Misafir kullanıcı göster
                 return;
             }
 
             try {
-                const decodedToken = jwt_decode(token); 
-                console.log('Token başarıyla çözüldü:', decodedToken);
+                const decodedToken = jwt_decode(token); // Token'ı çözümle
+                console.log('Token başarıyla çözüldü:', decodedToken); // Token çözümlendi logu
 
-                const currentTime = Math.floor(Date.now() / 1000);
+                const currentTime = Math.floor(Date.now() / 1000); // Şu anki zaman
                 if (decodedToken.exp < currentTime) {
-                    console.warn('Token süresi dolmuş.');
-                    localStorage.removeItem('accessToken');
-                    userNameElement.textContent = 'Misafir Kullanıcı';
+                    console.warn('Token süresi dolmuş.'); // Token süresi dolmuş uyarısı
+                    localStorage.removeItem('accessToken'); // Token'ı sil
+                    userNameElement.textContent = 'Misafir Kullanıcı'; // Misafir kullanıcı göster
                     return;
                 }
 
-                const role = decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"] || '';
-                const firstName = decodedToken["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname"] || '';
-                const lastName = decodedToken["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname"] || '';
+                const role = decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"] || ''; // Kullanıcı rolü
+                const firstName = decodedToken["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname"] || ''; // Ad
+                const lastName = decodedToken["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname"] || ''; // Soyad
 
                 if (role.toLowerCase() !== 'companyowner') {
-                    console.warn("Kullanıcının rolü 'CompanyOwner' değil.");
-                    userNameElement.textContent = 'Misafir Kullanıcı';
+                    console.warn("Kullanıcının rolü 'CompanyOwner' değil."); // Rol uyarısı
+                    userNameElement.textContent = 'Misafir Kullanıcı'; // Misafir kullanıcı göster
                     return;
                 }
 
-                const fullName = `${firstName} ${lastName}`.trim();
+                const fullName = `${firstName} ${lastName}`.trim(); // Tam ad oluştur
                 if (!fullName) {
-                    userNameElement.textContent = 'Misafir Kullanıcı';
+                    userNameElement.textContent = 'Misafir Kullanıcı'; // İsim yoksa misafir göster
                     return;
                 }
 
-                userNameElement.textContent = fullName;
+                userNameElement.textContent = fullName; // Kullanıcı adını göster
             } catch (e) {
-                console.error("Token çözümleme hatası:", e);
-                userNameElement.textContent = 'Misafir Kullanıcı';
+                console.error("Token çözümleme hatası:", e); // Hata logu
+                userNameElement.textContent = 'Misafir Kullanıcı'; // Hata durumunda misafir göster
             }
         }
 
+        // Sayfa yüklendiğinde token kontrolü yap
         document.addEventListener('DOMContentLoaded', checkTokenAndDisplayName);
 
+        // Çıkış yapma fonksiyonu
         function logout() {
-            localStorage.removeItem('accessToken');
-            window.location.href = 'home.html';
+            localStorage.removeItem('accessToken'); // Token'ı sil
+            window.location.href = 'home.html'; // Ana sayfaya yönlendir
         }
     </script>
 </body>

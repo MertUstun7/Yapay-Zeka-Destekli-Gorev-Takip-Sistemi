@@ -40,20 +40,6 @@ namespace Repositories.EFCore
             ?? throw new UserNotFoundException($"{name} ilgili bir sonuç bulunamadı.");
         }
 
-        public async Task<User> GetUserWithCompanyAsync(string userId, bool trackChanges)
-        {
-            // userId'de yer alan kişinin verileri ve kayıtlı olduğu şirket verilerini birlikte gösterilmesini sağlar.
-            IQueryable<User> query = _context.Users
-                .Include(u => u.Company)
-                .Where(u => u.Id == userId);
-
-            if (!trackChanges)
-                query = query.AsNoTracking();
-
-            return await query.SingleOrDefaultAsync()
-                ?? throw new UserNotFoundException($"{userId} kullanıcısı bulunamadı");
-        }
-
     }
     
 }

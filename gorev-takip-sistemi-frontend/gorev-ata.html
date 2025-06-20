@@ -1,94 +1,94 @@
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Görev Atama - Görev Takip Sistemi</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <style>
-        body {
+<!DOCTYPE html> <!-- HTML5 belge tipi tanımı -->
+<html lang="tr"> <!-- Türkçe dil ayarlı HTML başlangıcı -->
+<head> <!-- Sayfa başlık ve meta bilgileri bölümü -->
+    <meta charset="UTF-8"> <!-- UTF-8 karakter kodlaması tanımı -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Mobil uyumluluk için viewport ayarı -->
+    <title>Görev Atama - Görev Takip Sistemi</title> <!-- Sayfa başlığı -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"> <!-- Tailwind CSS kütüphanesi -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"> <!-- Font Awesome ikon kütüphanesi -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"> <!-- AOS animasyon kütüphanesi -->
+    <style> 
+        body { /* Sayfa arka plan gradyanı ve animasyonu */
             background: linear-gradient(135deg, #6b7280, #a5b4fc, #60a5fa);
             background-size: 200% 200%;
             animation: gradientShift 15s ease infinite;
         }
-        @keyframes gradientShift {
+        @keyframes gradientShift { /* Arka plan gradyan animasyonu tanımı */
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
-        .priority-option {
+        .priority-option { /* Öncelik seçenekleri için geçiş efekti */
             transition: all 0.3s ease-in-out;
         }
-        .priority-option:hover {
+        .priority-option:hover { /* Öncelik seçenekleri hover efekti */
             transform: translateY(-4px);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
-        .priority-option.selected {
+        .priority-option.selected { /* Seçili öncelik seçeneği stili */
             background-color: rgba(99, 102, 241, 0.15);
             border-color: #6366f1;
             transform: scale(1.05);
         }
-        .priority-option.low.selected {
+        .priority-option.low.selected { /* Düşük öncelik seçili durumu */
             border-color: #10b981;
             background-color: rgba(16, 185, 129, 0.15);
         }
-        .priority-option.medium.selected {
+        .priority-option.medium.selected { /* Orta öncelik seçili durumu */
             border-color: #f59e0b;
             background-color: rgba(245, 158, 11, 0.15);
         }
-        .priority-option.high.selected {
+        .priority-option.high.selected { /* Yüksek öncelik seçili durumu */
             border-color: #ef4444;
             background-color: rgba(239, 68, 68, 0.15);
         }
-        .form-control:focus {
+        .form-control:focus { /* Form elemanları odaklanma stili */
             box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.25);
             border-color: #6366f1;
         }
-        .btn-blue:hover {
+        .btn-blue:hover { /* Mavi buton hover efekti */
             background-color: #4f46e5;
             transform: translateY(-2px);
         }
-        .btn-back:hover {
+        .btn-back:hover { /* Geri butonu hover efekti */
             background-color: #d1d5db;
             transform: translateY(-2px);
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 flex-grow">
+<body class="min-h-screen flex flex-col"> <!-- Minimum ekran yüksekliği ve flex yapısı -->
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 flex-grow"> <!-- Ana konteyner yapısı -->
        
-        <header class="py-6 bg-white/90 backdrop-blur-md shadow-lg rounded-b-xl">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
-                <h1 class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-blue-500">Görev Atama</h1>
-                <div class="flex items-center space-x-3">
+        <header class="py-6 bg-white/90 backdrop-blur-md shadow-lg rounded-b-xl"> <!-- Başlık bölümü -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center"> <!-- Başlık içerik alanı -->
+                <h1 class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-blue-500">Görev Atama</h1> <!-- Başlık metni -->
+                <div class="flex items-center space-x-3"> <!-- Sağ üst köşe alanı -->
                 </div>
             </div>
         </header>
 
         
-        <main class="py-10">
-            <div class="bg-white/95 backdrop-blur-md p-8 rounded-3xl shadow-xl max-w-2xl mx-auto" data-aos="zoom-in">
-                <form id="taskForm" class="space-y-6">
-                    <div>
+        <main class="py-10"> <!-- Ana içerik bölümü -->
+            <div class="bg-white/95 backdrop-blur-md p-8 rounded-3xl shadow-xl max-w-2xl mx-auto" data-aos="zoom-in"> <!-- Form konteyneri -->
+                <form id="taskForm" class="space-y-6"> <!-- Görev formu -->
+                    <div> <!-- Görev başlığı alanı -->
                         <label for="taskTitle" class="block text-sm font-semibold text-gray-800">Görev Başlığı</label>
                         <input type="text" id="taskTitle" class="mt-2 block w-full p-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 form-control transition duration-300" required>
                     </div>
 
-                    <div>
+                    <div> <!-- Görev açıklaması alanı -->
                         <label for="taskDescription" class="block text-sm font-semibold text-gray-800">Görev Açıklaması</label>
                         <textarea id="taskDescription" class="mt-2 block w-full p-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 form-control min-h-[140px] resize-y transition duration-300" required></textarea>
                     </div>
 
-                    <div>
+                    <div> <!-- Çalışan seçim alanı -->
                         <label for="assignedTo" class="block text-sm font-semibold text-gray-800">Atanacak Çalışan</label>
                         <select id="assignedTo" class="mt-2 block w-full p-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 form-control transition duration-300" required>
                             <option value="">Çalışan Seçin</option>
                         </select>
                     </div>
 
-                    <div>
+                    <div> <!-- Öncelik seçim alanı -->
                         <label class="block text-sm font-semibold text-gray-800">Öncelik</label>
                         <div class="mt-3 flex space-x-4">
                             <div class="priority-option low flex-1 p-4 border-2 border-gray-200 rounded-xl text-center cursor-pointer bg-gradient-to-br from-green-50 to-green-100" data-priority="low">
@@ -106,12 +106,12 @@
                         </div>
                     </div>
 
-                    <div>
+                    <div> <!-- Bitiş tarihi alanı -->
                         <label for="dueDate" class="block text-sm font-semibold text-gray-800">Bitiş Tarihi</label>
                         <input type="date" id="dueDate" class="mt-2 block w-full p-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 form-control transition duration-300" required>
                     </div>
 
-                    <div class="flex space-x-4">
+                    <div class="flex space-x-4"> <!-- Buton alanı -->
                         <button type="button" class="btn-back flex-1 py-3 bg-gray-200 text-gray-800 rounded-xl hover:bg-gray-300 transition duration-300 flex items-center justify-center shadow-md" onclick="history.back()">
                             <i class="fas fa-arrow-left mr-2"></i>
                             Geri Dön
@@ -127,62 +127,62 @@
         </main>
     </div>
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> <!-- AOS animasyon kütüphanesi -->
+    <script> <!-- JavaScript kodları başlangıcı -->
         // Token kontrolü
-        const token = localStorage.getItem('accessToken');
-        if (!token) {
-            window.location.href = 'home.html';
+        const token = localStorage.getItem('accessToken'); // Local storage'dan token al
+        if (!token) { // Token yoksa
+            window.location.href = 'home.html'; // Ana sayfaya yönlendir
         } else {
             try {
                 // Token'ı decode et
-                const payloadBase64 = token.split('.')[1];
-                const decodedPayload = atob(payloadBase64);
-                const payload = JSON.parse(decodedPayload);
+                const payloadBase64 = token.split('.')[1]; // Token'ın payload kısmını al
+                const decodedPayload = atob(payloadBase64); // Base64 decode
+                const payload = JSON.parse(decodedPayload); // JSON parse
                 
                 // Role kontrolü
-                const role = payload["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
-                if (role !== "CompanyOwner" && role !== "Manager") {
-                    window.location.href = 'unauthorized.html';
+                const role = payload["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]; // Kullanıcı rolünü al
+                if (role !== "CompanyOwner" && role !== "Manager") { // Yetki kontrolü
+                    window.location.href = 'unauthorized.html'; // Yetkisiz erişim sayfasına yönlendir
                 }
             } catch (error) {
-                console.error("Token çözümlenemedi:", error);
-                localStorage.removeItem('accessToken');
-                window.location.href = 'home.html';
+                console.error("Token çözümlenemedi:", error); // Hata logla
+                localStorage.removeItem('accessToken'); // Token'ı sil
+                window.location.href = 'home.html'; // Ana sayfaya yönlendir
             }
         }
 
         // Şirket çalışanlarını getir
         async function getCompanyUsers() {
             try {
-                const response = await fetch('http://localhost:5093/api/user/company', {
+                const response = await fetch('https://localhost:7201/api/user/company', { // API çağrısı
                     headers: {
-                        'Authorization': `Bearer ${token}`
+                        'Authorization': `Bearer ${token}` // Token ile yetkilendirme
                     }
                 });
 
-                if (!response.ok) {
+                if (!response.ok) { // Başarısız yanıt kontrolü
                     throw new Error('Çalışanlar getirilemedi');
                 }
 
-                const users = await response.json();
-                const userSelect = document.getElementById('assignedTo');
+                const users = await response.json(); // JSON yanıtı al
+                const userSelect = document.getElementById('assignedTo'); // Select elementi
                 
                 // Mevcut seçenekleri temizle
                 userSelect.innerHTML = '<option value="">Çalışan Seçin</option>';
                 
                 // Şirket sahiplerini filtrele ve yeni seçenekleri ekle
                 users
-                    .filter(user => user.department !== "Şirket Sahibi")
-                    .forEach(user => {
-                        const option = document.createElement('option');
-                        option.value = user.id;
-                        option.textContent = `${user.firstName} ${user.lastName} - ${user.department}`;
-                        userSelect.appendChild(option);
+                    .filter(user => user.department !== "Şirket Sahibi") // Şirket sahiplerini filtrele
+                    .forEach(user => { // Her çalışan için
+                        const option = document.createElement('option'); // Yeni option elementi
+                        option.value = user.id; // ID değeri ata
+                        option.textContent = `${user.firstName} ${user.lastName} - ${user.department}`; // Görünen metin
+                        userSelect.appendChild(option); // Select'e ekle
                     });
             } catch (error) {
-                console.error('Çalışanlar yüklenirken hata:', error);
-                alert('Çalışanlar yüklenirken bir hata oluştu: ' + error.message);
+                console.error('Çalışanlar yüklenirken hata:', error); // Hata logla
+                alert('Çalışanlar yüklenirken bir hata oluştu: ' + error.message); // Hata mesajı göster
             }
         }
 
@@ -191,16 +191,16 @@
 
         // Görev atama işlemi
         async function handleTaskAssignment(event) {
-            event.preventDefault();
+            event.preventDefault(); // Form submit'i engelle
             
             // Seçili önceliği al
             const selectedPriority = document.querySelector('.priority-option.selected');
-            if (!selectedPriority) {
+            if (!selectedPriority) { // Öncelik seçilmemişse
                 alert('Lütfen bir öncelik seviyesi seçin.');
                 return;
             }
 
-            const formData = {
+            const formData = { // Form verilerini hazırla
                 title: document.getElementById('taskTitle').value,
                 description: document.getElementById('taskDescription').value,
                 deadline: document.getElementById('dueDate').value,
@@ -209,7 +209,7 @@
             };
 
             try {
-                const response = await fetch('http://localhost:5093/api/task', {
+                const response = await fetch('https://localhost:7201/api/task', { // API çağrısı
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -218,36 +218,36 @@
                     body: JSON.stringify(formData)
                 });
 
-                if (!response.ok) {
+                if (!response.ok) { // Başarısız yanıt kontrolü
                     throw new Error('Görev atama başarısız');
                 }
 
-                alert('Görev başarıyla atandı!');
-                window.location.href = 'admin-page.html';
+                alert('Görev başarıyla atandı!'); // Başarı mesajı
+                window.history.back(); // Geri dön
             } catch (error) {
-                console.error('Görev atama hatası:', error);
-                alert('Görev atama sırasında bir hata oluştu: ' + error.message);
+                console.error('Görev atama hatası:', error); // Hata logla
+                alert('Görev atama sırasında bir hata oluştu: ' + error.message); // Hata mesajı göster
             }
         }
 
-        // Initialize AOS with smoother animation
-        AOS.init({
+   
+        AOS.init({ // AOS animasyon ayarları
             duration: 1000,
             easing: 'ease-in-out',
             once: true
         });
 
-        // Priority selection
-        const priorityOptions = document.querySelectorAll('.priority-option');
-        priorityOptions.forEach(option => {
-            option.addEventListener('click', () => {
-                priorityOptions.forEach(opt => opt.classList.remove('selected'));
-                option.classList.add('selected');
+       
+        const priorityOptions = document.querySelectorAll('.priority-option'); // Öncelik seçeneklerini seç
+        priorityOptions.forEach(option => { // Her seçenek için
+            option.addEventListener('click', () => { // Tıklama olayı
+                priorityOptions.forEach(opt => opt.classList.remove('selected')); // Tüm seçimleri kaldır
+                option.classList.add('selected'); // Seçili olanı işaretle
             });
         });
 
-        // Form submission
-        document.getElementById('taskForm').addEventListener('submit', handleTaskAssignment);
+        
+        document.getElementById('taskForm').addEventListener('submit', handleTaskAssignment); // Form gönderim olayı
     </script>
 </body>
 </html>

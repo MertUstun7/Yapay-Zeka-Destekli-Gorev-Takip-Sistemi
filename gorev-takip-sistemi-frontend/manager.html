@@ -8,6 +8,9 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
+        /*
+            Renk değişkenleri ve temel stiller: Tema renkleri, yazı tipi ve kutu gölgesi gibi genel ayarlar burada tanımlanır.
+        */
         :root {
             --primary-color: #6366f1;
             --primary-dark: #4f46e5;
@@ -21,6 +24,9 @@
             --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
+        /*
+            Tüm elementler için sıfırlama ve temel yazı tipi ayarı
+        */
         * {
             margin: 0;
             padding: 0;
@@ -28,6 +34,9 @@
             font-family: 'Inter', system-ui, -apple-system, sans-serif;
         }
 
+        /*
+            Sayfa arka planı ve genel metin rengi
+        */
         body {
             background: linear-gradient(180deg, var(--secondary-color), #e2e8f0);
             color: var(--text-color);
@@ -35,6 +44,9 @@
             overflow-x: hidden;
         }
 
+        /*
+            Üstte sabit kalan başlık (header) alanı
+        */
         .header {
             background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
             color: white;
@@ -47,6 +59,9 @@
             box-shadow: var(--box-shadow);
         }
 
+        /*
+            Header içeriği: başlık, kullanıcı bilgisi ve menü
+        */
         .header-content {
             display: flex;
             justify-content: space-between;
@@ -62,6 +77,9 @@
             font-weight: 600;
         }
 
+        /*
+            Kullanıcı bilgi kutusu: Hoş geldiniz ve kullanıcı adı
+        */
         .user-info {
             position: absolute;
             left: 50%;
@@ -84,6 +102,9 @@
             color: white;
         }
 
+        /*
+            Sağ üstteki menü çubuğu (Ayarlar ve Çıkış)
+        */
         .navbar {
             position: absolute;
             top: 50%;
@@ -95,6 +116,9 @@
             padding-right: 1rem;
         }
 
+        /*
+            Ayarlar ve Çıkış butonları stilleri
+        */
         .settings-btn, .logout-btn {
             padding: 0.6rem 1.2rem;
             border-radius: var(--border-radius);
@@ -125,6 +149,9 @@
             background: rgba(239, 68, 68, 1);
         }
 
+        /*
+            Ana içerik alanı: Kartların bulunduğu bölüm
+        */
         .main-content {
             margin-top: 5rem;
             padding: 2rem 5%;
@@ -133,6 +160,9 @@
             margin-right: auto;
         }
 
+        /*
+            Kartların kapsayıcısı: Grid düzeni
+        */
         .cards-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -140,6 +170,9 @@
             margin-top: 2rem;
         }
 
+        /*
+            Her bir kartın genel stili
+        */
         .card {
             background: white;
             border-radius: var(--border-radius);
@@ -155,6 +188,9 @@
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
         }
 
+        /*
+            Kart ikonları: Farklı renkler ve yuvarlak arka plan
+        */
         .card-icon {
             width: 60px;
             height: 60px;
@@ -187,6 +223,9 @@
             background: linear-gradient(135deg, #6366f1, #4f46e5);
         }
 
+        /*
+            Kart içeriği başlık ve açıklama
+        */
         .card-content {
             margin-bottom: 1.5rem;
         }
@@ -203,6 +242,9 @@
             font-size: 0.9rem;
         }
 
+        /*
+            Kartlardaki butonlar
+        */
         .btn {
             width: 100%;
             padding: 0.8rem;
@@ -243,6 +285,9 @@
             background: linear-gradient(135deg, #6366f1, #4f46e5);
         }
 
+        /*
+            Mobil uyumluluk için medya sorguları
+        */
         @media (max-width: 768px) {
             .header {
                 padding: 0.8rem 5%;
@@ -274,24 +319,31 @@
     </style>
 </head>
 <body>
+    <!--
+        Bu dosya, Görev Takip Sistemi için Yönetici Paneli ana sayfasıdır.
+        Kullanıcı doğrulama, rol kontrolü ve ana panel kartları içerir.
+    -->
     <script>
-        // Token kontrolü
+        // Token kontrolü: Kullanıcı giriş yapmış mı kontrol edilir, yoksa ana sayfaya yönlendirilir
         const token = localStorage.getItem('accessToken');
         if (!token) {
+            // Eğer token yoksa, kullanıcı giriş yapmamış demektir. Ana sayfaya yönlendirilir.
             window.location.href = 'home.html';
         } else {
             try {
-                // Token'ı decode et
+                // Token'ı decode et: JWT token'ın payload kısmı çözülür
                 const payloadBase64 = token.split('.')[1];
                 const decodedPayload = atob(payloadBase64);
                 const payload = JSON.parse(decodedPayload);
                 
-                // Role kontrolü
+                // Role kontrolü: Kullanıcının rolü Yönetici veya Şirket Sahibi mi kontrol edilir
                 const role = payload["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
                 if (role !== "Manager" && role !== "CompanyOwner") {
+                    // Eğer rol uygun değilse, yetkisiz sayfasına yönlendirilir.
                     window.location.href = 'unauthorized.html';
                 }
             } catch (error) {
+                // Hatalı token durumunda token silinir ve ana sayfaya yönlendirilir
                 console.error("Token çözümlenemedi:", error);
                 localStorage.removeItem('accessToken');
                 window.location.href = 'home.html';
@@ -299,13 +351,13 @@
         }
     </script>
 
-    <!-- Header -->
+    <!-- Header: Sayfanın üst kısmı, başlık ve kullanıcı bilgisi içerir -->
     <header class="header">
         <div class="header-content">
             <h1>Yönetici Paneli</h1>
             <div class="user-info">
                 <span class="welcome-text">Hoş Geldiniz,</span>
-                <span class="user-name">Admin</span>
+                <span class="user-name">Admin</span> <!-- Kullanıcı adı JS ile güncellenir -->
             </div>
             <div class="navbar">
                 <button class="settings-btn" onclick="showSettingsModal()">
@@ -320,10 +372,10 @@
         </div>
     </header>
 
-    <!-- Main Content -->
+    <!-- Main Content: Kartlar ile ana panel -->
     <main class="main-content">
         <div class="cards-container">
-            <!-- Kartlar -->
+            <!-- Kartlar: Her biri farklı bir yönetici fonksiyonuna yönlendirir -->
             <div class="card" data-aos="fade-up" data-aos-delay="100">
                 <div class="card-icon blue">
                     <i class="fas fa-plus-circle"></i>
@@ -332,6 +384,7 @@
                     <h2>Görev Atama</h2>
                     <p>Yeni görevler oluştur ve çalışanlara ata</p>
                 </div>
+                <!-- Görev atama sayfasına yönlendiren buton -->
                 <button class="btn btn-blue" onclick="window.location.href='gorev-ata.html'">
                     <span>Görev Ata</span>
                     <i class="fas fa-arrow-right"></i>
@@ -346,6 +399,7 @@
                     <h2>Çalışanlar</h2>
                     <p>Tüm çalışanları görüntüle ve yönet</p>
                 </div>
+                <!-- Çalışanlar sayfasına yönlendiren buton -->
                 <button class="btn btn-green" onclick="window.location.href='calisanlar.html'">
                     <span>Çalışanları Görüntüle</span>
                     <i class="fas fa-arrow-right"></i>
@@ -360,6 +414,7 @@
                     <h2>Raporlar</h2>
                     <p>Performans ve görev raporlarını incele</p>
                 </div>
+                <!-- Raporlar sayfasına yönlendiren buton -->
                 <button class="btn btn-purple" onclick="window.location.href='rapor-goruntule.html'">
                     <span>Raporları Görüntüle</span>
                     <i class="fas fa-arrow-right"></i>
@@ -374,6 +429,7 @@
                     <h2>Kişisel Görevlerim</h2>
                     <p>Size atanan görevleri görüntüleyin</p>
                 </div>
+                <!-- Kişisel görevler sayfasına yönlendiren buton (fonksiyon ile) -->
                 <button class="btn btn-indigo" onclick="loadPersonalTasks()">
                     <span>Görevlerimi Görüntüle</span>
                     <i class="fas fa-arrow-right"></i>
@@ -388,6 +444,7 @@
                     <h2>Görev Durumu</h2>
                     <p>Aktif görevlerin durumunu takip et</p>
                 </div>
+                <!-- Görev durumu sayfasına yönlendiren buton -->
                 <button class="btn btn-red" onclick="window.location.href='durumu-goruntule.html'">
                     <span>Durumu Görüntüle</span>
                     <i class="fas fa-arrow-right"></i>
@@ -402,6 +459,7 @@
                     <h2>AI Personal Asistant</h2>
                     <p>AI asistanınız ile işlerinizi kolaylaştırın</p>
                 </div>
+                <!-- AI asistan sayfasına yönlendiren buton -->
                 <button class="btn btn-indigo" onclick="window.location.href='ai-personal-asistant.html'">
                     <span>AI Asistanını Görüntüle</span>
                     <i class="fas fa-arrow-right"></i>
@@ -410,12 +468,13 @@
         </div>
     </main>
 
-    <!-- AOS ve Kullanıcı Bilgisi Script -->
+    <!-- AOS ve Kullanıcı Bilgisi Script: Animasyon ve kullanıcı adı işlemleri -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
+        // AOS (Animasyon) kütüphanesini başlatır
         AOS.init();
 
-        // Türkçe karakter destekli base64 decode
+        // Türkçe karakter destekli base64 decode fonksiyonu
         function base64DecodeUtf8(base64) {
             const binary = atob(base64);
             const bytes = Uint8Array.from(binary, char => char.charCodeAt(0));
@@ -423,11 +482,12 @@
             return decoder.decode(bytes);
         }
 
-        
+        // Sayfa yüklendiğinde kullanıcı adını ekrana yazdırır
         window.addEventListener("DOMContentLoaded", () => {
             const token = localStorage.getItem("accessToken");
             if (token) {
                 try {
+                    // Token'ın payload'ını çözüp ad ve soyadı alır
                     const payloadBase64 = token.split('.')[1];
                     const decodedPayload = base64DecodeUtf8(payloadBase64);
                     const payload = JSON.parse(decodedPayload);
@@ -436,6 +496,7 @@
                     const lastName = payload["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname"];
 
                     if (firstName && lastName) {
+                        // Kullanıcı adı ve soyadı birleştirilip ekrana yazılır
                         const fullName = `${firstName} ${lastName}`;
                         const userNameElement = document.querySelector(".user-name");
                         if (userNameElement) {
@@ -443,20 +504,24 @@
                         }
                     }
                 } catch (error) {
+                    // Kullanıcı adı çözümlenemediğinde hata verir
                     console.error("Kullanıcı adı çözümlenemedi:", error);
                 }
             }
         });
 
+        // Çıkış yapma fonksiyonu: Token'ı siler ve ana sayfaya yönlendirir
         function handleLogout() {
             localStorage.removeItem('accessToken');
             window.location.href = 'home.html';
         }
 
+        // Kişisel görevler sayfasına yönlendiren fonksiyon
         function loadPersonalTasks() {
             window.location.href = 'kisisel-gorev.html';
         }
 
+        // Ayarlar (şifre güncelleme) sayfasına yönlendiren fonksiyon
         function showSettingsModal() {
             window.location.href = 'sifre-guncelle.html';
         }
