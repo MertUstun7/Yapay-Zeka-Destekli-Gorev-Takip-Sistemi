@@ -76,13 +76,9 @@ Görev Takip Sistemi, ekiplerin ve bireylerin görevlerini etkili şekilde yöne
 4. Branch'inizi gönderin (`git push origin ozellik/yeniozellik`).
 5. Bir pull request açın.
 
-## Lisans
-Bu proje için henüz bir lisans belirtilmemiştir.
 
 ## Daha Fazla Bilgi
 Daha fazla dosya ve detay için lütfen 
 - [Depo ana dizinini görüntüleyin](https://github.com/MertUstun7/GorevTakipSistemi/blob/master/)
 - [Backend klasörünü görüntüleyin](https://github.com/MertUstun7/GorevTakipSistemi/tree/master/GorevTakipSistemi)
 - [Frontend klasörünü görüntüleyin](https://github.com/MertUstun7/GorevTakipSistemi/tree/master/gorev-takip-sistemi-frontend)
-
-Eklemek veya değiştirmek istediğiniz bölümler varsa belirtin!
