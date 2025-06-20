@@ -156,9 +156,12 @@ namespace Services
         {
             var user = await _userManager.FindByIdAsync(userId)
                 ?? throw new KeyNotFoundException("User not found");
-            await _logger.LogWarning($"{userId} kullanıcısının şifresi güncellendi.");
+           
 
             var result = await _userManager.ChangePasswordAsync(user, dto.CurrentPassword, dto.NewPassword);
+
+            await _logger.LogWarning($"{userId} kullanıcısının şifresi güncellendi.");
+
             return result;
         }
     }

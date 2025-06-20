@@ -1,144 +1,144 @@
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Görev Durumu - Görev Takip Sistemi</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <style>
-        body {
+<!DOCTYPE html> <!-- HTML5 belge tipi tanımı -->
+<html lang="tr"> <!-- Türkçe dil desteği ile HTML başlangıcı -->
+<head> <!-- Sayfa başlık ve meta bilgileri bölümü -->
+    <meta charset="UTF-8"> <!-- UTF-8 karakter kodlaması tanımı -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Mobil uyumluluk için viewport ayarı -->
+    <title>Görev Durumu - Görev Takip Sistemi</title> <!-- Sayfa başlığı -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"> <!-- Tailwind CSS kütüphanesi -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"> <!-- Font Awesome ikon kütüphanesi -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"> <!-- AOS animasyon kütüphanesi -->
+    <style> 
+        body { /* Sayfa arka plan gradyan animasyonu */
             background: linear-gradient(135deg, #6b7280, #a5b4fc, #60a5fa);
             background-size: 200% 200%;
             animation: gradientShift 15s ease infinite;
         }
-        @keyframes gradientShift {
+        @keyframes gradientShift { /* Arka plan gradyan animasyonu tanımı */
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
-        .task-card {
+        .task-card { /* Görev kartı stil tanımları */
             transition: all 0.3s ease;
             border: 1px solid rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
         }
-        .task-card:hover {
+        .task-card:hover { /* Görev kartı hover efekti */
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
-        .status-badge {
+        .status-badge { /* Durum rozeti temel stilleri */
             padding: 0.25rem 0.75rem;
             border-radius: 9999px;
             font-size: 0.875rem;
             font-weight: 500;
         }
-        .status-badge.pending {
+        .status-badge.pending { /* Bekleyen görev durumu stili */
             background-color: rgba(234, 179, 8, 0.1);
             color: #b45309;
         }
-        .status-badge.in-progress {
+        .status-badge.in-progress { /* Devam eden görev durumu stili */
             background-color: rgba(59, 130, 246, 0.1);
             color: #1d4ed8;
         }
-        .status-badge.completed {
+        .status-badge.completed { /* Tamamlanan görev durumu stili */
             background-color: rgba(34, 197, 94, 0.1);
             color: #15803d;
         }
-        .priority-badge {
+        .priority-badge { /* Öncelik rozeti temel stilleri */
             padding: 0.25rem 0.75rem;
             border-radius: 9999px;
             font-size: 0.875rem;
             font-weight: 500;
         }
-        .priority-badge.low {
+        .priority-badge.low { /* Düşük öncelik stili */
             background-color: rgba(34, 197, 94, 0.1);
             color: #15803d;
         }
-        .priority-badge.medium {
+        .priority-badge.medium { /* Orta öncelik stili */
             background-color: rgba(234, 179, 8, 0.1);
             color: #b45309;
         }
-        .priority-badge.high {
+        .priority-badge.high { /* Yüksek öncelik stili */
             background-color: rgba(239, 68, 68, 0.1);
             color: #b91c1c;
         }
-        .glass-effect {
+        .glass-effect { /* Cam efekti stili */
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
     </style>
 </head>
-<body class="min-h-screen">
-    <div class="container mx-auto px-4 py-8">
-        <header class="mb-8">
-            <div class="flex justify-between items-center">
-                <h1 class="text-3xl font-bold text-white">Görev Durumu</h1>
-                <button onclick="window.history.back()" class="px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition duration-300 flex items-center gap-2">
-                    <i class="fas fa-arrow-left"></i>
-                    Geri Dön
+<body class="min-h-screen"> <!-- Minimum ekran yüksekliği ile sayfa gövdesi -->
+    <div class="container mx-auto px-4 py-8"> <!-- Ana konteyner -->
+        <header class="mb-8"> <!-- Sayfa başlık bölümü -->
+            <div class="flex justify-between items-center"> <!-- Başlık ve geri dönüş butonu konteyneri -->
+                <h1 class="text-3xl font-bold text-white">Görev Durumu</h1> <!-- Sayfa başlığı -->
+                <button onclick="window.history.back()" class="px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition duration-300 flex items-center gap-2"> <!-- Geri dönüş butonu -->
+                    <i class="fas fa-arrow-left"></i> <!-- Geri dönüş ikonu -->
+                    Geri Dön <!-- Geri dönüş butonu metni -->
                 </button>
             </div>
         </header>
 
-        <div class="glass-effect rounded-2xl p-6 mb-8">
-            <div class="flex flex-wrap gap-4">
-                <div class="flex-1 min-w-[200px]">
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Durum Filtresi</label>
-                    <select id="statusFilter" class="w-full p-2 rounded-lg border border-gray-300">
-                        <option value="">Tümü</option>
-                        <option value="Beklemede">Beklemede</option>
-                        <option value="Devam Ediyor">Devam Ediyor</option>
-                        <option value="Tamamlandı">Tamamlandı</option>
+        <div class="glass-effect rounded-2xl p-6 mb-8"> <!-- Filtre bölümü -->
+            <div class="flex flex-wrap gap-4"> <!-- Filtre seçenekleri konteyneri -->
+                <div class="flex-1 min-w-[200px]"> <!-- Durum filtresi konteyneri -->
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Durum Filtresi</label> <!-- Durum filtresi etiketi -->
+                    <select id="statusFilter" class="w-full p-2 rounded-lg border border-gray-300"> <!-- Durum filtresi seçim kutusu -->
+                        <option value="">Tümü</option> <!-- Tüm durumlar seçeneği -->
+                        <option value="pending">Beklemede</option> <!-- Bekleyen durum seçeneği -->
+                        <option value="in-progress">Devam Ediyor</option> <!-- Devam eden durum seçeneği -->
+                        <option value="completed">Tamamlandı</option> <!-- Tamamlanan durum seçeneği -->
                     </select>
                 </div>
-                <div class="flex-1 min-w-[200px]">
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Öncelik Filtresi</label>
-                    <select id="priorityFilter" class="w-full p-2 rounded-lg border border-gray-300">
-                        <option value="">Tümü</option>
-                        <option value="düşük">Düşük</option>
-                        <option value="orta">Orta</option>
-                        <option value="yüksek">Yüksek</option>
+                <div class="flex-1 min-w-[200px]"> <!-- Öncelik filtresi konteyneri -->
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Öncelik Filtresi</label> <!-- Öncelik filtresi etiketi -->
+                    <select id="priorityFilter" class="w-full p-2 rounded-lg border border-gray-300"> <!-- Öncelik filtresi seçim kutusu -->
+                        <option value="">Tümü</option> <!-- Tüm öncelikler seçeneği -->
+                        <option value="low">Düşük</option> <!-- Düşük öncelik seçeneği -->
+                        <option value="medium">Orta</option> <!-- Orta öncelik seçeneği -->
+                        <option value="high">Yüksek</option> <!-- Yüksek öncelik seçeneği -->
                     </select>
                 </div>
-                <div class="flex-1 min-w-[200px]">
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Sıralama</label>
-                    <select id="sortFilter" class="w-full p-2 rounded-lg border border-gray-300">
-                        <option value="deadline">Bitiş Tarihi</option>
-                        <option value="priority">Öncelik</option>
-                        <option value="status">Durum</option>
+                <div class="flex-1 min-w-[200px]"> <!-- Sıralama filtresi konteyneri -->
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Sıralama</label> <!-- Sıralama filtresi etiketi -->
+                    <select id="sortFilter" class="w-full p-2 rounded-lg border border-gray-300"> <!-- Sıralama filtresi seçim kutusu -->
+                        <option value="deadline">Bitiş Tarihi</option> <!-- Bitiş tarihine göre sıralama -->
+                        <option value="priority">Öncelik</option> <!-- Önceliğe göre sıralama -->
+                        <option value="status">Durum</option> <!-- Duruma göre sıralama -->
                     </select>
                 </div>
             </div>
         </div>
 
-        <div id="taskList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        <div id="taskList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div> <!-- Görev listesi konteyneri -->
     </div>
 
-    <script>
-        const token = localStorage.getItem('accessToken');
-        if (!token) window.location.href = 'home.html';
+    <script> <!-- JavaScript kodları başlangıcı -->
+        const token = localStorage.getItem('accessToken'); // Yerel depolamadan token alınması
+        if (!token) window.location.href = 'home.html'; // Token yoksa ana sayfaya yönlendirme
 
-        document.getElementById('statusFilter').addEventListener('change', getTasks);
-        document.getElementById('priorityFilter').addEventListener('change', getTasks);
-        document.getElementById('sortFilter').addEventListener('change', getTasks);
+        document.getElementById('statusFilter').addEventListener('change', getTasks); // Durum filtresi değişiklik dinleyicisi
+        document.getElementById('priorityFilter').addEventListener('change', getTasks); // Öncelik filtresi değişiklik dinleyicisi
+        document.getElementById('sortFilter').addEventListener('change', getTasks); // Sıralama filtresi değişiklik dinleyicisi
 
-        async function getTasks() {
+        async function getTasks() { // Görevleri getiren ana fonksiyon
             try {
-                const response = await fetch('http://localhost:5093/api/task/company-tasks', {
+                const response = await fetch('https://localhost:7201/api/task/company-tasks', { // API'den görevleri getirme isteği
                     headers: {
-                        'Authorization': `Bearer ${token}`
+                        'Authorization': `Bearer ${token}` // Token ile yetkilendirme
                     }
                 });
 
-                if (!response.ok) throw new Error('Görevler getirilemedi');
+                if (!response.ok) throw new Error('Görevler getirilemedi'); // Hata kontrolü
 
-                const tasks = await response.json();
-                const taskList = document.getElementById('taskList');
-                taskList.innerHTML = '';
+                const tasks = await response.json(); // JSON yanıtını işleme
+                const taskList = document.getElementById('taskList'); // Görev listesi elementini seçme
+                taskList.innerHTML = ''; // Listeyi temizleme
 
-                if (tasks.length === 0) {
+                if (tasks.length === 0) { // Görev yoksa mesaj gösterme
                     taskList.innerHTML = `
                         <div class="col-span-full text-center py-12">
                             <i class="fas fa-clipboard-list text-4xl text-gray-400 mb-4"></i>
@@ -148,30 +148,30 @@
                     return;
                 }
 
-                const statusFilter = document.getElementById('statusFilter').value;
-                const priorityFilter = document.getElementById('priorityFilter').value;
-                const sortFilter = document.getElementById('sortFilter').value;
+                const statusFilter = document.getElementById('statusFilter').value; // Durum filtresi değeri
+                const priorityFilter = document.getElementById('priorityFilter').value; // Öncelik filtresi değeri
+                const sortFilter = document.getElementById('sortFilter').value; // Sıralama filtresi değeri
 
-                let filteredTasks = tasks;
+                let filteredTasks = tasks; // Filtrelenmiş görevler listesi
 
-                if (statusFilter) filteredTasks = filteredTasks.filter(t => t.status === statusFilter);
-                if (priorityFilter) filteredTasks = filteredTasks.filter(t => t.priority === priorityFilter);
+                if (statusFilter) filteredTasks = filteredTasks.filter(t => t.status === statusFilter); // Durum filtresi uygulama
+                if (priorityFilter) filteredTasks = filteredTasks.filter(t => t.priority === priorityFilter); // Öncelik filtresi uygulama
 
-                switch (sortFilter) {
-                    case 'deadline':
+                switch (sortFilter) { // Sıralama seçeneğine göre sıralama
+                    case 'deadline': // Bitiş tarihine göre sıralama
                         filteredTasks.sort((a, b) => new Date(a.deadline) - new Date(b.deadline));
                         break;
-                    case 'priority':
+                    case 'priority': // Önceliğe göre sıralama
                         const p = { 'yüksek': 1, 'orta': 2, 'düşük': 3 };
                         filteredTasks.sort((a, b) => p[a.priority] - p[b.priority]);
                         break;
-                    case 'status':
+                    case 'status': // Duruma göre sıralama
                         const s = { 'Beklemede': 1, 'Devam Ediyor': 2, 'Tamamlandı': 3 };
                         filteredTasks.sort((a, b) => s[a.status] - s[b.status]);
                         break;
                 }
 
-                filteredTasks.forEach(task => {
+                filteredTasks.forEach(task => { // Her görev için kart oluşturma
                     const el = document.createElement('div');
                     el.className = 'task-card glass-effect rounded-2xl p-6';
                     el.innerHTML = `
@@ -194,13 +194,13 @@
                     taskList.appendChild(el);
                 });
 
-            } catch (error) {
+            } catch (error) { // Hata yakalama
                 console.error('Görevler yüklenirken hata:', error);
                 alert('Görevler yüklenirken bir hata oluştu: ' + error.message);
             }
         }
 
-        function getStatusClass(status) {
+        function getStatusClass(status) { // Durum sınıfını belirleyen yardımcı fonksiyon
             switch (status) {
                 case 'Beklemede': return 'pending';
                 case 'Devam Ediyor': return 'in-progress';
@@ -209,7 +209,7 @@
             }
         }
 
-        function getPriorityClass(priority) {
+        function getPriorityClass(priority) { // Öncelik sınıfını belirleyen yardımcı fonksiyon
             switch (priority) {
                 case 'düşük': return 'low';
                 case 'orta': return 'medium';
@@ -218,20 +218,20 @@
             }
         }
 
-        function formatDate(dateString) {
+        function formatDate(dateString) { // Tarih formatını düzenleyen yardımcı fonksiyon
             const date = new Date(dateString);
             return date.toLocaleDateString('tr-TR', {
                 year: 'numeric', month: 'long', day: 'numeric'
             });
         }
 
-        async function deleteTask(taskId) {
+        async function deleteTask(taskId) { // Görev silme fonksiyonu
             if (!confirm('Bu görevi silmek istediğinizden emin misiniz?')) {
                 return;
             }
 
             try {
-                const response = await fetch(`http://localhost:5093/api/task/${taskId}`, {
+                const response = await fetch(`https://localhost:7201/api/task/${taskId}`, { // Silme API isteği
                     method: 'DELETE',
                     headers: {
                         'Authorization': `Bearer ${token}`
@@ -243,14 +243,14 @@
                 }
 
                 alert('Görev başarıyla silindi');
-                getTasks(); // Görev listesini yenile
+                getTasks(); // Görev listesini yenileme
             } catch (error) {
                 console.error('Görev silinirken hata:', error);
                 alert('Görev silinirken bir hata oluştu: ' + error.message);
             }
         }
 
-        document.addEventListener('DOMContentLoaded', getTasks);
+        document.addEventListener('DOMContentLoaded', getTasks); // Sayfa yüklendiğinde görevleri getirme
     </script>
 </body>
 </html>

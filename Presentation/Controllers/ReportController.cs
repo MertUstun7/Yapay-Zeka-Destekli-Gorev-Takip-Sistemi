@@ -33,6 +33,8 @@ namespace Presentation.Controllers
             var result = await _serviceManager.ReportService.CreateReportAsync(reportDto);
             return Ok();
         }
+
+
         [HttpGet("task/{taskId}")]
         [Authorize(Roles = "Admin,CompanyOwner,Manager")]
 
@@ -44,6 +46,7 @@ namespace Presentation.Controllers
             var reports = await _serviceManager.ReportService.GetReportsByTaskIdAsync(taskId);
             return Ok(reports);
         }
+
         [HttpGet("my-reports")]
         [Authorize(Roles = "Admin,CompanyOwner,Manager,Worker")]
         public async Task<IActionResult> GetMyReports()
@@ -76,6 +79,7 @@ namespace Presentation.Controllers
 
             return File(report.PdfFileData, "application/pdf", report.PdfFileName);
         }
+
         [HttpDelete("{reportId}")]
         [Authorize(Roles = "Admin,CompanyOwner")]
         public async Task<IActionResult> DeleteReport(Guid reportId)

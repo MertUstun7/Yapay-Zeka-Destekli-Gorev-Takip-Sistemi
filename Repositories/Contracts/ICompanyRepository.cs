@@ -10,10 +10,13 @@ namespace Repositories.Contracts
 {
     public interface ICompanyRepository:IGTSBase<Company>
     {
+        // Belirtilen şirket ID'sine sahip şirketi ve şirket bünyesindeki çalışanları getiren asenkron metodun interface tanımlamasıdır.
         Task<Company> GetWithUsersAsync(Guid companyId, bool trackChanges);
 
-        Task<Company> GetWithTasksAsync(Guid companyId, bool trackChanges);
-
-        public Task<Company> GetByIdAsync(Guid id, bool trackChanges);
+        // Belirtilen ID'ye sahip şirket ile ilgili tüm bilgileri getiren asenkron metodun interface tanımlamasıdır.
+        Task<Company> GetByIdAsync(Guid id, bool trackChanges);
     }
 }
+
+
+

@@ -17,6 +17,7 @@ class GemmaChatBot:
             for page in doc:
                 text += page.get_text()
             return text
+
     @staticmethod
     async def gemma_bot(file,text,user_id):
 
@@ -52,3 +53,5 @@ class GemmaChatBot:
 
 
         return response.text
+
+

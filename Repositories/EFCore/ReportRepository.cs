@@ -1,4 +1,5 @@
 ﻿using Entities;
+using Entities.Exceptions;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using Repositories.Contracts;
@@ -26,7 +27,7 @@ namespace Repositories.EFCore
             if (!trackChanges)
                 query=query.AsNoTracking();
 
-            return await query.ToListAsync();
+            return await query.ToListAsync() ?? throw new ReportNotFoundException("Rapor bulunamadı");
 
         }
 
@@ -42,7 +43,7 @@ namespace Repositories.EFCore
                 query=query.AsNoTracking();
             }
 
-            return await query.ToListAsync();
+            return await query.ToListAsync() ?? throw new ReportNotFoundException("Rapor bulunamadı");
         }
         // Belirtilen şirket ID'sine ait görevlerin tüm raporlarını getirir, isteğe bağlı olarak değişiklik takibini açıp katabilir.
         public async Task<List<TaskReport>> GetReportsByCompanyIdAsync(Guid companyId, bool trackChanges)
@@ -55,7 +56,7 @@ namespace Repositories.EFCore
             if (!trackChanges)
                 query = query.AsNoTracking();
 
-            return await query.ToListAsync();
+            return await query.ToListAsync() ?? throw new ReportNotFoundException("Rapor bulunamadı");
         }
     }
 }

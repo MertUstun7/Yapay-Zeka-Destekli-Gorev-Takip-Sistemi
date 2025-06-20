@@ -77,7 +77,7 @@ namespace Services
         {
             var userEmail = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Name)?.Value;
             var user = await _userManager.FindByEmailAsync(userEmail)
-                ?? throw new Exception("Kullanıcı bulunamadı");
+                ?? throw new UserNotFoundException("Kullanıcı bulunamadı");
 
             var reports = await _repoManager.Report.GetReportsByCompanyIdAsync(user.CompanyId.Value, false);
             

@@ -12,14 +12,12 @@ using System.Threading.Tasks;
 
 namespace Presentation.Controllers
 {
-    [Route("api/ai")]
+    [Route("api/personal-asistant")]
     [ApiController]
     [Consumes("multipart/form-data")]
     public class PersonalAsistantController:ControllerBase
-    {
-       
+    {  
         private readonly ILoggerService _logger;
-
 
         public PersonalAsistantController (ILoggerService logger)
         {
@@ -44,8 +42,7 @@ namespace Presentation.Controllers
                 var fileContent = new StreamContent(stream);
                 fileContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue(aiDto.File.ContentType);
                 request.Add(fileContent, "file", aiDto.File.FileName);
-            }
-            
+            }        
 
             var response = await client.PostAsync("http://127.0.0.1:8012/gemma-chat-bot",request);
 

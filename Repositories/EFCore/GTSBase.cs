@@ -42,11 +42,12 @@ namespace Repositories.EFCore
             IQueryable<T> query = _context.Set<T>();
             if (!trackChanges)
                 query = query.AsNoTracking();
+          
             return await query.SingleOrDefaultAsync(e => EF.Property<Guid>(e, "Id") == id)
-                ?? throw new ArgumentException($"Entity with ID {id} not found.");
+                ?? throw new ArgumentException($"İlgili ID:{id} için entity bulunamadı.");
         }
 
-        // Veri tabanına gönderilen entity'i ilgili tabloya (T) veriyi ekler
+        // Veri tabanına gönderilen entity'i ilgili tabloya (T) eklemek için işaretler.
         public async Task CreateAsync(T entity)
         {
             if (entity == null)
@@ -55,7 +56,7 @@ namespace Repositories.EFCore
             await _context.Set<T>().AddAsync(entity);
         }
 
-        // GÖnderilen entity nesnesini ilgili tabloda (T) günceller
+        // GÖnderilen entity nesnesini ilgili tabloda (T) güncellemek için işaretler.
         public async Task UpdateAsync(T entity)
         {
             if (entity == null)
@@ -63,7 +64,7 @@ namespace Repositories.EFCore
 
             _context.Set<T>().Update(entity);
         }
-        // İlgili tabloda yer alan (T) entity nesnesini siler.
+        // İlgili tabloda yer alan (T) entity nesnesini silmek için işaretler.
         public async Task DeleteAsync(T entity)
         {
             if (entity == null)

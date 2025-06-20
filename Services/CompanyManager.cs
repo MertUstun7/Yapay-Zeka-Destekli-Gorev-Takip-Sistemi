@@ -3,6 +3,7 @@ using Entities.DataTransferObjects;
 using Entities.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.JsonPatch;
+using Microsoft.AspNetCore.Mvc;
 using Repositories.Contracts;
 using Services.Contracts;
 using System;
@@ -59,6 +60,7 @@ namespace Services
         public async Task UpdateAsync(Guid id, CompanyDtoForUpdate request)
         {
             var entity = await _repoManager.Company.GetByIdAsync(id, trackChanges: true);
+           
             _mapper.Map(request, entity);
             await _repoManager.Company.UpdateAsync(entity);
             await _repoManager.SaveAsync();
@@ -76,7 +78,7 @@ namespace Services
         public async Task AssignUserAsync(Guid companyId, string userId, string roleName)
         {
             var user = await _userManager.FindByIdAsync(userId)
-                ?? throw new KeyNotFoundException($"User '{userId}' not found.");
+                ?? throw new KeyNotFoundException($"{userId} bulunamadı.");
 
             user.CompanyId = companyId;
             await _userManager.UpdateAsync(user);
@@ -90,10 +92,10 @@ namespace Services
         public async Task RemoveUserAsync(Guid companyId, string userId)
         {
             var user = await _userManager.FindByIdAsync(userId)
-                ?? throw new KeyNotFoundException($"User '{userId}' not found.");
+                ?? throw new KeyNotFoundException($"{userId} bulunamadı.");
 
             if (user.CompanyId != companyId)
-                throw new InvalidOperationException("User is not part of the specified company.");
+                throw new InvalidOperationException("İlglili ID ye sahip kullanıcı şirkette bulunamadı.");
 
             user.CompanyId = null;
 
@@ -134,7 +136,19 @@ namespace Services
             var allUsers = await GetUsersByCompanyAsync(companyId);
             return allUsers.Where(u => u.Roles.Contains("Worker"));
         }
+
+        public async Task PatchCompanyAsync(Guid id, JsonPatchDocument<Company> patchDoc)
+        {
+            //Şirket bilgilerinden spesifik olarak bir alanı güncellememizi sağlar.
+            var company = await _repoManager.Company.GetByIdAsync(id, trackChanges: true);
+            if (company is null)
+                throw new KeyNotFoundException("Şirket bulunamadı");
+            patchDoc.ApplyTo(company);
+
+            await _repoManager.SaveAsync();
+
+            
+        }
     }
 }
-    
 

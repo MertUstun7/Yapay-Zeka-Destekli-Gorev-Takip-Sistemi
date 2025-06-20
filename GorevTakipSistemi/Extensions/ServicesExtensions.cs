@@ -10,9 +10,10 @@ using Services.Contracts;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.Security.Claims;
-using AspNetCoreRateLimit;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
+
+
 namespace GorevTakipSistemi.Extensions
 {
     public static class ServicesExtensions

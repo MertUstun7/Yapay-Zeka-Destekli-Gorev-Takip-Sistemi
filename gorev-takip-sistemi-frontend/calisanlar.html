@@ -1,197 +1,197 @@
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Çalışanlar - Görev Takip Sistemi</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        :root {
-            --primary-color: #4a90e2;
-            --secondary-color: #f5f6fa;
-            --text-color: #2c3e50;
-            --success-color: #2ecc71;
-            --error-color: #e74c3c;
+<!DOCTYPE html> <!-- HTML5 belge tipi tanımı -->
+<html lang="tr"> <!-- Türkçe dil desteği ile HTML başlangıcı -->
+<head> <!-- Sayfa başlık ve meta bilgileri bölümü -->
+    <meta charset="UTF-8"> <!-- UTF-8 karakter kodlaması tanımı -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Mobil uyumluluk için viewport ayarı -->
+    <title>Çalışanlar - Görev Takip Sistemi</title> <!-- Sayfa başlığı -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"> <!-- Bootstrap CSS kütüphanesi -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!-- Font Awesome ikon kütüphanesi -->
+    <style> 
+        :root { /* CSS değişkenlerinin tanımlandığı kök seçici */
+            --primary-color: #4a90e2; /* Ana renk değişkeni */
+            --secondary-color: #f5f6fa; /* İkincil renk değişkeni */
+            --text-color: #2c3e50; /* Metin rengi değişkeni */
+            --success-color: #2ecc71; /* Başarı rengi değişkeni */
+            --error-color: #e74c3c; /* Hata rengi değişkeni */
         }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--secondary-color);
-            color: var(--text-color);
-            min-height: 100vh;
+        body { /* Sayfa gövdesi için stil tanımları */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Yazı tipi ailesi */
+            background-color: var(--secondary-color); /* Arka plan rengi */
+            color: var(--text-color); /* Metin rengi */
+            min-height: 100vh; /* Minimum sayfa yüksekliği */
         }
 
-        .navbar {
-            background-color: white;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        .navbar { /* Navigasyon çubuğu stilleri */
+            background-color: white; /* Arka plan rengi */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Gölge efekti */
         }
 
-        .employee-card {
-            background: white;
-            border-radius: 10px;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
+        .employee-card { /* Çalışan kartı stilleri */
+            background: white; /* Arka plan rengi */
+            border-radius: 10px; /* Köşe yuvarlaklığı */
+            padding: 1rem; /* İç boşluk */
+            margin-bottom: 1rem; /* Alt boşluk */
+            transition: all 0.3s ease; /* Geçiş animasyonu */
+            cursor: pointer; /* İmleç stili */
+            position: relative; /* Pozisyon ayarı */
         }
 
-        .employee-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        .employee-card:hover { /* Çalışan kartı üzerine gelindiğinde */
+            transform: translateY(-2px); /* Yukarı kayma efekti */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Gölge efekti */
         }
 
-        .employee-avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-right: 1rem;
+        .employee-avatar { /* Çalışan avatarı stilleri */
+            width: 60px; /* Genişlik */
+            height: 60px; /* Yükseklik */
+            border-radius: 50%; /* Yuvarlak avatar */
+            object-fit: cover; /* Resim boyutlandırma */
+            margin-right: 1rem; /* Sağ boşluk */
         }
 
-        .employee-info {
-            flex: 1;
+        .employee-info { /* Çalışan bilgileri stilleri */
+            flex: 1; /* Esnek büyüme */
         }
 
-        .employee-name {
-            font-weight: 600;
-            color: var(--text-color);
-            margin-bottom: 0.25rem;
+        .employee-name { /* Çalışan adı stilleri */
+            font-weight: 600; /* Kalın yazı */
+            color: var(--text-color); /* Metin rengi */
+            margin-bottom: 0.25rem; /* Alt boşluk */
         }
 
-        .employee-department {
-            color: #666;
-            font-size: 0.9rem;
+        .employee-department { /* Departman bilgisi stilleri */
+            color: #666; /* Metin rengi */
+            font-size: 0.9rem; /* Yazı boyutu */
         }
 
-        .action-buttons {
-            position: absolute;
-            right: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            display: none;
+        .action-buttons { /* Aksiyon butonları stilleri */
+            position: absolute; /* Mutlak konumlandırma */
+            right: 1rem; /* Sağdan boşluk */
+            top: 50%; /* Üstten konum */
+            transform: translateY(-50%); /* Dikey ortalama */
+            display: none; /* Başlangıçta gizli */
         }
 
-        .employee-card:hover .action-buttons {
-            display: flex;
-            gap: 0.5rem;
+        .employee-card:hover .action-buttons { /* Kart üzerine gelindiğinde butonları göster */
+            display: flex; /* Esnek kutu */
+            gap: 0.5rem; /* Butonlar arası boşluk */
         }
 
-        .btn-action {
-            padding: 0.5rem;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
+        .btn-action { /* Aksiyon butonu stilleri */
+            padding: 0.5rem; /* İç boşluk */
+            border-radius: 50%; /* Yuvarlak buton */
+            width: 40px; /* Genişlik */
+            height: 40px; /* Yükseklik */
+            display: flex; /* Esnek kutu */
+            align-items: center; /* Dikey ortalama */
+            justify-content: center; /* Yatay ortalama */
+            transition: all 0.3s ease; /* Geçiş animasyonu */
         }
 
-        .btn-delete {
-            background-color: var(--error-color);
-            color: white;
+        .btn-delete { /* Silme butonu stilleri */
+            background-color: var(--error-color); /* Arka plan rengi */
+            color: white; /* Metin rengi */
         }
 
-        .btn-assign {
-            background-color: var(--success-color);
-            color: white;
+        .btn-assign { /* Görev atama butonu stilleri */
+            background-color: var(--success-color); /* Arka plan rengi */
+            color: white; /* Metin rengi */
         }
 
-        .modal-content {
-            border-radius: 15px;
+        .modal-content { /* Modal içeriği stilleri */
+            border-radius: 15px; /* Köşe yuvarlaklığı */
         }
 
-        .modal-header {
-            background-color: var(--primary-color);
-            color: white;
-            border-radius: 15px 15px 0 0;
+        .modal-header { /* Modal başlığı stilleri */
+            background-color: var(--primary-color); /* Arka plan rengi */
+            color: white; /* Metin rengi */
+            border-radius: 15px 15px 0 0; /* Üst köşe yuvarlaklığı */
         }
 
-        .detail-item {
-            margin-bottom: 1rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid #eee;
+        .detail-item { /* Detay öğesi stilleri */
+            margin-bottom: 1rem; /* Alt boşluk */
+            padding-bottom: 1rem; /* Alt iç boşluk */
+            border-bottom: 1px solid #eee; /* Alt çizgi */
         }
 
-        .detail-label {
-            font-weight: 600;
-            color: var(--text-color);
+        .detail-label { /* Detay etiketi stilleri */
+            font-weight: 600; /* Kalın yazı */
+            color: var(--text-color); /* Metin rengi */
         }
 
-        .detail-value {
-            color: #666;
+        .detail-value { /* Detay değeri stilleri */
+            color: #666; /* Metin rengi */
         }
 
-        .loading-spinner {
-            display: none;
-            text-align: center;
-            padding: 2rem;
+        .loading-spinner { /* Yükleme animasyonu stilleri */
+            display: none; /* Başlangıçta gizli */
+            text-align: center; /* Metin ortalama */
+            padding: 2rem; /* İç boşluk */
         }
     </style>
 </head>
-<body>
+<body> <!-- Sayfa gövdesi başlangıcı -->
    
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <i class="fas fa-users me-2"></i>
-                Çalışanlar
+    <nav class="navbar navbar-expand-lg navbar-light"> <!-- Navigasyon çubuğu -->
+        <div class="container"> <!-- Konteyner -->
+            <a class="navbar-brand" href="#"> <!-- Marka bağlantısı -->
+                <i class="fas fa-users me-2"></i> <!-- Kullanıcılar ikonu -->
+                Çalışanlar <!-- Başlık metni -->
             </a>
-            <div class="d-flex align-items-center">
-                <button class="btn btn-outline-primary" onclick="goBack()">
-                    <i class="fas fa-arrow-left me-2"></i>Geri
+            <div class="d-flex align-items-center"> <!-- Sağ taraf hizalama -->
+                <button class="btn btn-outline-primary" onclick="goBack()"> <!-- Geri butonu -->
+                    <i class="fas fa-arrow-left me-2"></i> <!-- Geri ikonu -->
+                    Geri <!-- Buton metni -->
                 </button>
             </div>
         </div>
     </nav>
 
-    <div class="container mt-4">
-        <div id="loadingSpinner" class="loading-spinner">
-            <div class="spinner-border text-primary" role="status">
-                <span class="visually-hidden">Yükleniyor...</span>
+    <div class="container mt-4"> <!-- Ana içerik konteyneri -->
+        <div id="loadingSpinner" class="loading-spinner"> <!-- Yükleme göstergesi -->
+            <div class="spinner-border text-primary" role="status"> <!-- Dönen yükleme animasyonu -->
+                <span class="visually-hidden">Yükleniyor...</span> <!-- Gizli yükleme metni -->
             </div>
         </div>
-        <div id="employeeList"></div>
+        <div id="employeeList"></div> <!-- Çalışan listesi konteyneri -->
     </div>
 
-
-    <div class="modal fade" id="employeeModal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Çalışan Detayları</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+    <div class="modal fade" id="employeeModal" tabindex="-1"> <!-- Çalışan detay modalı -->
+        <div class="modal-dialog modal-dialog-centered"> <!-- Modal diyalog kutusu -->
+            <div class="modal-content"> <!-- Modal içeriği -->
+                <div class="modal-header"> <!-- Modal başlığı -->
+                    <h5 class="modal-title">Çalışan Detayları</h5> <!-- Modal başlık metni -->
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button> <!-- Kapatma butonu -->
                 </div>
-                <div class="modal-body">
-                    <div class="text-center mb-4">
-                        <img src="https://ui-avatars.com/api/?background=4a90e2&color=fff" 
+                <div class="modal-body"> <!-- Modal gövdesi -->
+                    <div class="text-center mb-4"> <!-- Avatar konteyneri -->
+                        <img src="https://ui-avatars.com/api/?background=4a90e2&color=fff"
                              class="employee-avatar" 
                              id="modalAvatar" 
                              alt="Employee Avatar">
                     </div>
-                    <div class="detail-item">
+                    <div class="detail-item"> <!-- Ad Soyad detayı -->
                         <div class="detail-label">Ad Soyad</div>
                         <div class="detail-value" id="modalName"></div>
                     </div>
-                    <div class="detail-item">
+                    <div class="detail-item"> <!-- E-posta detayı -->
                         <div class="detail-label">E-posta</div>
                         <div class="detail-value" id="modalEmail"></div>
                     </div>
-                    <div class="detail-item">
+                    <div class="detail-item"> <!-- Telefon detayı -->
                         <div class="detail-label">Telefon</div>
                         <div class="detail-value" id="modalPhone"></div>
                     </div>
-                    <div class="detail-item">
+                    <div class="detail-item"> <!-- Departman detayı -->
                         <div class="detail-label">Departman</div>
                         <div class="detail-value" id="modalDepartment"></div>
                     </div>
-                    <div class="detail-item">
+                    <div class="detail-item"> <!-- Açıklama detayı -->
                         <div class="detail-label">Açıklama</div>
                         <div class="detail-value" id="modalDescription"></div>
                     </div>
-                    <div class="detail-item">
+                    <div class="detail-item"> <!-- Kayıt tarihi detayı -->
                         <div class="detail-label">Kayıt Tarihi</div>
                         <div class="detail-value" id="modalCreatedAt"></div>
                     </div>
@@ -200,74 +200,74 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        const token = localStorage.getItem('accessToken');
-        if (!token) {
-            window.location.href = 'home.html';
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> <!-- Bootstrap JavaScript -->
+    <script> <!-- JavaScript kodları başlangıcı -->
+        const token = localStorage.getItem('accessToken'); // Token'ı localStorage'dan al
+        if (!token) { // Token yoksa
+            window.location.href = 'home.html'; // Ana sayfaya yönlendir
         }
 
-        let employees = [];
-        const employeeModal = new bootstrap.Modal(document.getElementById('employeeModal'));
+        let employees = []; // Çalışan listesi dizisi
+        const employeeModal = new bootstrap.Modal(document.getElementById('employeeModal')); // Modal nesnesi oluştur
 
-        async function loadEmployees() {
+        async function loadEmployees() { // Çalışanları yükleme fonksiyonu
             try {
-                const token = localStorage.getItem('accessToken');
-                if (!token) {
-                    window.location.href = 'home.html';
+                const token = localStorage.getItem('accessToken'); // Token'ı al
+                if (!token) { // Token yoksa
+                    window.location.href = 'home.html'; // Ana sayfaya yönlendir
                     return;
                 }
 
-                const payloadBase64 = token.split('.')[1];
-                const decodedPayload = atob(payloadBase64);
-                const payload = JSON.parse(decodedPayload);
-                const currentUserId = payload["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"];
-                const currentUserRole = payload["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+                const payloadBase64 = token.split('.')[1]; // Token'ın payload kısmını al
+                const decodedPayload = atob(payloadBase64); // Base64'ten decode et
+                const payload = JSON.parse(decodedPayload); // JSON'a çevir
+                const currentUserId = payload["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"]; // Kullanıcı ID'sini al
+                const currentUserRole = payload["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]; // Kullanıcı rolünü al
 
-                const userResponse = await fetch(`http://localhost:5093/api/user/${currentUserId}`, {
+                const userResponse = await fetch(`https://localhost:7201/api/user/${currentUserId}`, { // Kullanıcı bilgilerini getir
                     headers: {
-                        'Authorization': `Bearer ${token}`
+                        'Authorization': `Bearer ${token}` // Token ile yetkilendirme
                     }
                 });
 
-                if (!userResponse.ok) {
+                if (!userResponse.ok) { // Yanıt başarısızsa
                     throw new Error('Kullanıcı bilgileri alınamadı');
                 }
 
-                const userData = await userResponse.json();
-                const companyId = userData.companyId;
+                const userData = await userResponse.json(); // Kullanıcı verilerini al
+                const companyId = userData.companyId; // Şirket ID'sini al
 
-                if (!companyId) {
+                if (!companyId) { // Şirket ID'si yoksa
                     throw new Error('Şirket bilgisi bulunamadı');
                 }
 
-                const response = await fetch(`http://localhost:5093/api/user/company`, {
+                const response = await fetch(`https://localhost:7201/api/user/company`, { // Şirket çalışanlarını getir
                     headers: {
-                        'Authorization': `Bearer ${token}`
+                        'Authorization': `Bearer ${token}` // Token ile yetkilendirme
                     }
                 });
 
-                if (!response.ok) {
+                if (!response.ok) { // Yanıt başarısızsa
                     throw new Error('Çalışanlar yüklenirken bir hata oluştu');
                 }
 
-                const allEmployees = await response.json();
+                const allEmployees = await response.json(); // Tüm çalışanları al
 
-                employees = allEmployees.filter(employee => {
-                    return employee.role !== "CompanyOwner" && employee.id !== currentUserId;
+                employees = allEmployees.filter(employee => { // Çalışanları filtrele
+                    return employee.role !== "CompanyOwner" && employee.id !== currentUserId; // Şirket sahibi ve mevcut kullanıcıyı hariç tut
                 });
 
-                displayEmployees(employees, currentUserRole);
+                displayEmployees(employees, currentUserRole); // Çalışanları görüntüle
             } catch (error) {
-                console.error('Çalışan yükleme hatası:', error);
-                alert('Çalışanlar yüklenirken bir hata oluştu');
+                console.error('Çalışan yükleme hatası:', error); // Hata logla
+                alert('Çalışanlar yüklenirken bir hata oluştu'); // Hata mesajı göster
             }
         }
 
-        function displayEmployees(employeeListData, currentUserRole) {
-            const employeeList = document.getElementById('employeeList');
+        function displayEmployees(employeeListData, currentUserRole) { // Çalışanları görüntüleme fonksiyonu
+            const employeeList = document.getElementById('employeeList'); // Çalışan listesi elementini al
 
-            if (employeeListData.length === 0) {
+            if (employeeListData.length === 0) { // Çalışan yoksa
                 employeeList.innerHTML = `
                     <div class="alert alert-info">
                         <i class="fas fa-info-circle me-2"></i>
@@ -276,83 +276,85 @@
                 `;
                 return;
             }
+// employeeList öğesinin içeriği, employeeListData'daki her çalışan için HTML kartları oluşturarak dolduruluyor
+employeeList.innerHTML = employeeListData.map(employee => ` 
+    <div class="employee-card d-flex align-items-center" onclick="showEmployeeDetails('${employee.id}')">
+       
+        <img src="https://ui-avatars.com/api/?name=${employee.firstName}+${employee.lastName}&background=4a90e2&color=fff" 
+             class="employee-avatar" 
+             alt="${employee.firstName} ${employee.lastName}">
+        <div class="employee-info">      
+            <div class="employee-name">${employee.firstName} ${employee.lastName}</div>
+            <div class="employee-department">${employee.department || 'Departman belirtilmemiş'}</div>
+        </div>
+        <div class="action-buttons">   
+            <button class="btn btn-action btn-assign" onclick="assignTask('${employee.id}'); event.stopPropagation();">
+                <i class="fas fa-tasks"></i>
+            </button>
+            ${currentUserRole === "CompanyOwner" ? `
+                <button class="btn btn-action btn-delete" onclick="deleteEmployee('${employee.id}', '${employee.role}'); event.stopPropagation();">
+                    <i class="fas fa-trash"></i>
+                </button>
+            ` : ''}
+        </div>
+    </div>
+`).join(''); // Tüm HTML dizileri birleştirilip employeeList'e atanır
 
-            employeeList.innerHTML = employeeListData.map(employee => `
-                <div class="employee-card d-flex align-items-center" onclick="showEmployeeDetails('${employee.id}')">
-                    <img src="https://ui-avatars.com/api/?name=${employee.firstName}+${employee.lastName}&background=4a90e2&color=fff" 
-                         class="employee-avatar" 
-                         alt="${employee.firstName} ${employee.lastName}">
-                    <div class="employee-info">
-                        <div class="employee-name">${employee.firstName} ${employee.lastName}</div>
-                        <div class="employee-department">${employee.department || 'Departman belirtilmemiş'}</div>
-                    </div>
-                    <div class="action-buttons">
-                        <button class="btn btn-action btn-assign" onclick="assignTask('${employee.id}'); event.stopPropagation();">
-                            <i class="fas fa-tasks"></i>
-                        </button>
-                        ${currentUserRole === "CompanyOwner" ? `
-                            <button class="btn btn-action btn-delete" onclick="deleteEmployee('${employee.id}', '${employee.role}'); event.stopPropagation();">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        ` : ''}
-                    </div>
-                </div>
-            `).join('');
         }
 
-        function showEmployeeDetails(employeeId) {
-            const employee = employees.find(emp => emp.id === employeeId);
-            if (!employee) return;
+        function showEmployeeDetails(employeeId) { // Çalışan detaylarını gösterme fonksiyonu
+            const employee = employees.find(emp => emp.id === employeeId); // Çalışanı bul
+            if (!employee) return; // Çalışan bulunamazsa çık
 
-            document.getElementById('modalAvatar').src = `https://ui-avatars.com/api/?name=${employee.firstName}+${employee.lastName}&background=4a90e2&color=fff`;
-            document.getElementById('modalName').textContent = `${employee.firstName} ${employee.lastName}`;
-            document.getElementById('modalEmail').textContent = employee.email;
-            document.getElementById('modalPhone').textContent = employee.phoneNumber;
-            document.getElementById('modalDepartment').textContent = employee.department;
-            document.getElementById('modalDescription').textContent = employee.userDescription || 'Açıklama bulunmuyor';
-            document.getElementById('modalCreatedAt').textContent = new Date(employee.createdAt).toLocaleDateString('tr-TR');
+            document.getElementById('modalAvatar').src = `https://ui-avatars.com/api/?name=${employee.firstName}+${employee.lastName}&background=4a90e2&color=fff`; // Avatar resmini ayarla
+            document.getElementById('modalName').textContent = `${employee.firstName} ${employee.lastName}`; // İsim
+            document.getElementById('modalEmail').textContent = employee.email; // E-posta
+            document.getElementById('modalPhone').textContent = employee.phoneNumber; // Telefon
+            document.getElementById('modalDepartment').textContent = employee.department; // Departman
+            document.getElementById('modalDescription').textContent = employee.userDescription || 'Açıklama bulunmuyor'; // Açıklama
+            document.getElementById('modalCreatedAt').textContent = new Date(employee.createdAt).toLocaleDateString('tr-TR'); // Kayıt tarihi
 
-            employeeModal.show();
+            employeeModal.show(); // Modalı göster
         }
 
-        async function deleteEmployee(employeeId, employeeRole) {
-            if (employeeRole === "Manager") {
-                window.location.href = 'unauthorized.html';
+        async function deleteEmployee(employeeId, employeeRole) { // Çalışan silme fonksiyonu
+            if (employeeRole === "Manager") { // Yönetici ise
+                window.location.href = 'unauthorized.html'; // Yetkisiz sayfasına yönlendir
                 return;
             }
 
-            if (!confirm('Bu çalışanı silmek istediğinizden emin misiniz?')) return;
+            if (!confirm('Bu çalışanı silmek istediğinizden emin misiniz?')) return; // Onay iste
 
             try {
-                const response = await fetch(`http://localhost:5093/api/user/${employeeId}`, {
+                const response = await fetch(`https://localhost:7201/api/user/${employeeId}`, { // Silme isteği gönder
                     method: 'DELETE',
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
                 });
 
-                if (response.ok) {
-                    employees = employees.filter(emp => emp.id !== employeeId);
-                    displayEmployees(employees);
-                    alert('Çalışan başarıyla silindi');
+                if (response.ok) { // Başarılı ise
+                    employees = employees.filter(emp => emp.id !== employeeId); // Listeden kaldır
+                    displayEmployees(employees); // Listeyi güncelle
+                    alert('Çalışan başarıyla silindi'); // Başarı mesajı
                 } else {
                     throw new Error('Çalışan silinirken bir hata oluştu');
                 }
             } catch (error) {
-                console.error('Error:', error);
-                alert('Çalışan silinirken bir hata oluştu');
+                console.error('Error:', error); // Hata logla
+                alert('Çalışan silinirken bir hata oluştu'); // Hata mesajı
             }
         }
 
-        function assignTask(employeeId) {
-            window.location.href = `gorev-ata.html?employeeId=${employeeId}`;
+        function assignTask(employeeId) { // Görev atama fonksiyonu
+            window.location.href = `gorev-ata.html?employeeId=${employeeId}`; // Görev atama sayfasına yönlendir
         }
 
-        function goBack() {
-            window.history.back();
+        function goBack() { // Geri gitme fonksiyonu
+            window.history.back(); // Önceki sayfaya dön
         }
 
-        loadEmployees();
+        loadEmployees(); // Sayfa yüklendiğinde çalışanları yükle
     </script>
 </body>
 </html>

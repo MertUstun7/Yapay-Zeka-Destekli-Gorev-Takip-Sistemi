@@ -32,18 +32,6 @@ namespace Repositories.EFCore
                    ?? throw new CompanyNotFoundException($"{companyId} şirketi bulunamadı.");
         }
 
-        //Şirkette bulunan tüm görevleri listelememizi sağlar.
-        public async Task<Company> GetWithTasksAsync(Guid companyId, bool trackChanges)
-        {
-            IQueryable<Company> query = _context.Companies
-                .Where(c => c.Id == companyId)
-                .Include(c => c.Tasks);
-            if (!trackChanges)
-                query = query.AsNoTracking();
-
-            return await query.SingleOrDefaultAsync()
-                   ?? throw new CompanyNotFoundException($"{companyId} şirketi bulunamadı.");
-        }
 
         // İlgili ID'de yer alan şirketin verilerini görüntülenmesini sağlar.
         public async Task<Company> GetByIdAsync(Guid id, bool trackChanges)

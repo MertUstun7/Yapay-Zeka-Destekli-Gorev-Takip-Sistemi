@@ -12,7 +12,7 @@ namespace Entities
         {
         }
 
-        //public DbSet<User> Users { get; set; }
+        
         public DbSet<Company> Companies { get; set; }
         public DbSet<TaskItem> TaskItems { get; set; }
         public DbSet<TaskAssignment> TaskAssignments { get; set; }
@@ -66,11 +66,13 @@ namespace Entities
             .WithMany(u => u.CreatedTasks)
             .HasForeignKey(t => t.CreatedById)
             .OnDelete(DeleteBehavior.Cascade);
+
             modelBuilder.Entity<TaskAssignment>()
             .HasOne(a => a.TaskItem)
             .WithMany(t => t.Assignments)
             .HasForeignKey(a => a.TaskItemId)
             .OnDelete(DeleteBehavior.Cascade);
+
             modelBuilder.Entity<TaskReport>()
             .HasOne(tr => tr.TaskItem)
             .WithMany() 

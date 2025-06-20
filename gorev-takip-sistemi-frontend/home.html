@@ -1,13 +1,22 @@
+<!--
+  Görev Takip Sistemi ana HTML dosyası. Kullanıcı arayüzü, giriş/kayıt modalları ve slayt gösterisi içerir.
+-->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Görev Takip Sistemi</title>
+    <!--
+      FontAwesome, AOS ve Google Fonts gibi harici kütüphaneler ekleniyor.
+    -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /*
+          Temel renk değişkenleri ve genel stiller tanımlanıyor.
+        */
         :root {
             --primary-color: #6366f1;
             --primary-dark: #4f46e5;
@@ -20,21 +29,27 @@
             --box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
             --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
+        /*
+          Tüm elementler için kutu modeli ve font ayarları.
+        */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Inter', system-ui, -apple-system, sans-serif;
         }
-
+        /*
+          Sayfa arka planı ve temel yazı rengi.
+        */
         body {
             background: linear-gradient(180deg, var(--secondary-color), #e2e8f0);
             color: var(--text-color);
             line-height: 1.7;
             overflow-x: hidden;
         }
-
+        /*
+          Navigasyon barı (üst menü) stilleri.
+        */
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -48,7 +63,9 @@
             top: 0;
             z-index: 1000;
         }
-
+        /*
+          Logo ve giriş butonu stilleri.
+        */
         .logo {
             display: flex;
             align-items: center;
@@ -57,23 +74,19 @@
             color: var(--text-color);
             transition: var(--transition);
         }
-
         .logo:hover {
             transform: scale(1.02);
         }
-
         .logo i {
             font-size: 2.2rem;
             color: var(--primary-color);
             filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
         }
-
         .logo h1 {
             font-size: 1.6rem;
             font-weight: 600;
             letter-spacing: -0.02em;
         }
-
         .login-btn {
             background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
             color: white;
@@ -86,19 +99,22 @@
             transition: var(--transition);
             box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
         }
-
         .login-btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4);
         }
-
+        /*
+          Ana başlık (hero) bölümü.
+        */
         .hero {
             margin-top: 80px;
             padding: 2rem 5%;
             position: relative;
             z-index: 2;
         }
-
+        /*
+          Slayt gösterisi arka planı ve slayt stilleri.
+        */
         .slideshow {
             position: fixed;
             top: 0;
@@ -107,7 +123,6 @@
             height: 100vh;
             z-index: 1;
         }
-
         .slide {
             position: absolute;
             top: 0;
@@ -118,19 +133,16 @@
             animation: fade 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             opacity: 0;
         }
-
         .slide.active {
             display: block;
             opacity: 1;
         }
-
         .slide img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             filter: brightness(0.9);
         }
-
         .slide-content {
             position: absolute;
             bottom: 15%;
@@ -141,7 +153,6 @@
             color: white;
             text-align: center;
         }
-
         .slide-content h3 {
             font-size: 2.8rem;
             font-weight: 700;
@@ -149,7 +160,6 @@
             text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
             letter-spacing: -0.02em;
         }
-
         .slide-content p {
             font-size: 1.3rem;
             font-weight: 400;
@@ -157,7 +167,6 @@
             margin: 0 auto;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
         }
-
         .slide-nav {
             position: fixed;
             bottom: 2.5rem;
@@ -167,7 +176,6 @@
             gap: 1.2rem;
             z-index: 3;
         }
-
         .slide-dot {
             width: 12px;
             height: 12px;
@@ -177,19 +185,18 @@
             transition: var(--transition);
             border: 2px solid rgba(255, 255, 255, 0.9);
         }
-
         .slide-dot:hover {
             background: rgba(255, 255, 255, 0.9);
             transform: scale(1.3);
         }
-
         .slide-dot.active {
             background: var(--primary-color);
             transform: scale(1.3);
             border-color: var(--primary-color);
         }
-
-        /* Modal Styles */
+        /*
+          Modal (açılır pencere) stilleri.
+        */
         .modal {
             display: none;
             position: fixed;
@@ -203,12 +210,10 @@
             transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             backdrop-filter: blur(8px);
         }
-
         .modal.active {
             display: flex;
             opacity: 1;
         }
-
         .modal-content {
             background: white;
             width: 90%;
@@ -223,11 +228,9 @@
             max-height: 90vh;
             overflow-y: auto;
         }
-
         .modal.active .modal-content {
             transform: scale(1);
         }
-
         .modal-close {
             position: absolute;
             top: 1rem;
@@ -246,18 +249,18 @@
             justify-content: center;
             border-radius: 50%;
         }
-
         .modal-close:hover {
             color: var(--text-color);
             background: rgba(0, 0, 0, 0.05);
             transform: rotate(90deg);
         }
-
+        /*
+          Form grupları ve input alanları için stiller.
+        */
         .form-group {
             margin-bottom: 0.5rem;
             position: relative;
         }
-
         .form-group label {
             display: block;
             margin-bottom: 0.2rem;
@@ -266,7 +269,6 @@
             font-size: 0.8rem;
             letter-spacing: -0.01em;
         }
-
         .form-group input {
             width: 100%;
             padding: 0.4rem 0.8rem;
@@ -277,14 +279,12 @@
             background: #f8fafc;
             height: 32px;
         }
-
         .form-group input:focus {
             border-color: var(--primary-color);
             outline: none;
             box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
             background: white;
         }
-
         .form-submit {
             width: 100%;
             padding: 0.6rem;
@@ -299,12 +299,10 @@
             box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
             margin-top: 0.5rem;
         }
-
         .form-submit:hover {
             transform: translateY(-3px);
             box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4);
         }
-
         .form-footer {
             text-align: center;
             margin-top: 0.8rem;
@@ -313,7 +311,6 @@
             padding-top: 0.5rem;
             border-top: 1px solid #e2e8f0;
         }
-
         .form-footer a {
             color: var(--primary-color);
             text-decoration: none;
@@ -321,29 +318,24 @@
             transition: var(--transition);
             margin-left: 0.5rem;
         }
-
         .form-footer a:hover {
             color: var(--primary-dark);
             text-decoration: underline;
         }
-
         .modal-header {
             text-align: center;
             margin-bottom: 1rem;
         }
-
         .modal-header h2 {
             font-size: 1.3rem;
             font-weight: 700;
             color: var(--text-color);
             margin-bottom: 0.2rem;
         }
-
         .modal-header p {
             color: var(--text-secondary);
             font-size: 0.85rem;
         }
-
         .form-group i {
             position: absolute;
             right: 0.8rem;
@@ -351,78 +343,65 @@
             color: var(--text-secondary);
             font-size: 0.9rem;
         }
-
         .form-group input:focus + i {
             color: var(--primary-color);
         }
-
+        /*
+          Responsive (mobil uyumlu) tasarım için medya sorguları.
+        */
         @media (max-width: 768px) {
             .navbar {
                 padding: 1rem 5%;
             }
-
             .logo h1 {
                 font-size: 1.3rem;
             }
-
             .hero {
                 margin-top: 60px;
                 padding: 1.5rem 5%;
             }
-
             .slide-content h3 {
                 font-size: 2rem;
             }
-
             .slide-content p {
                 font-size: 1.1rem;
             }
-
             .modal-content {
                 width: 95%;
                 padding: 1rem;
                 max-width: 360px;
             }
-
             .modal-close {
                 top: 0.8rem;
                 right: 0.8rem;
                 font-size: 1.2rem;
             }
-
             .form-group {
                 margin-bottom: 0.4rem;
             }
-
             .form-group label {
                 font-size: 0.75rem;
                 margin-bottom: 0.15rem;
             }
-
             .form-group input {
                 padding: 0.35rem 0.7rem;
                 font-size: 0.8rem;
                 height: 28px;
             }
-
             .form-submit {
                 padding: 0.5rem;
                 font-size: 0.85rem;
             }
-
             .form-footer {
                 margin-top: 0.6rem;
                 font-size: 0.75rem;
             }
-
             .modal-header h2 {
                 font-size: 1.2rem;
             }
-
             .modal-header p {
                 font-size: 0.8rem;
             }
-
             .form-group i {
                 font-size: 0.8rem;
                 top: 1.6rem;
@@ -432,6 +411,9 @@
 </head>
 <body>
     
+    <!--
+      Üstte sabit kalan navigasyon barı ve giriş butonu.
+    -->
     <nav class="navbar">
         <a href="#" class="logo">
             <i class="fas fa-tasks"></i>
@@ -440,10 +422,14 @@
         <button class="login-btn" onclick="showLoginModal()">Giriş Yap</button>
     </nav>
 
-    
+    <!--
+      Ana başlık (hero) bölümü. Şu an boş, ileride içerik eklenebilir.
+    -->
     <section class="hero"></section>
 
-    
+    <!--
+      Arka planda kayan slayt gösterisi ve açıklamaları.
+    -->
     <div class="slideshow" data-aos="fade-up" data-aos-delay="200">
         <div class="slide active">
             <img src="https://www.experteam.com.tr/wp-content/uploads/2023/03/bpm1.jpg" alt="Görev Yönetimi">
@@ -480,6 +466,9 @@
                 <p>Yapay zeka asistanınızla her zaman iş süreçlerinizde bir adım önde olun.</p>
             </div>
         </div>
+        <!--
+          Slaytlar arasında geçiş yapmak için kullanılan noktalar.
+        -->
         <div class="slide-nav">
             <div class="slide-dot active" onclick="showSlide(0)"></div>
             <div class="slide-dot" onclick="showSlide(1)"></div>
@@ -489,7 +478,9 @@
         </div>
     </div>
 
-    
+    <!--
+      Giriş (login) modalı. Kullanıcı e-posta ve şifresiyle giriş yapar.
+    -->
     <div class="modal" id="loginModal">
         <div class="modal-content">
             <button class="modal-close" onclick="closeModal('loginModal')">
@@ -520,7 +511,9 @@
         </div>
     </div>
 
-    
+    <!--
+      Kayıt (signup) modalı. Yeni kullanıcılar için kayıt formu.
+    -->
     <div class="modal" id="signupModal">
         <div class="modal-content">
             <button class="modal-close" onclick="closeModal('signupModal')">
@@ -576,20 +569,24 @@
         </div>
     </div>
 
+    <!--
+      JavaScript kodları: AOS başlatma, slayt gösterisi, modal açma/kapama ve form işlemleri.
+    -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Initialize AOS
+        // AOS (Animate On Scroll) kütüphanesini başlatır.
         AOS.init({
             duration: 1000,
             easing: 'ease-out',
             once: true
         });
 
-        // Slideshow functionality
+        // Slayt gösterisi için değişkenler ve fonksiyonlar.
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
         const dots = document.querySelectorAll('.slide-dot');
 
+        // Belirli bir slaytı gösteren fonksiyon.
         function showSlide(index) {
             slides.forEach(slide => {
                 slide.classList.remove('active');
@@ -603,21 +600,21 @@
             currentSlide = index;
         }
 
-        // Auto-advance slides with smoother transition
+        // Slaytları otomatik olarak belirli aralıklarla değiştirir.
         setInterval(() => {
             currentSlide = (currentSlide + 1) % slides.length;
             showSlide(currentSlide);
         }, 6000);
 
-        // Modal functionality
+        // Modal açma ve kapama fonksiyonları.
         function showLoginModal() {
-            document.getElementById('signupModal').classList.remove('active'); // Close signup modal if open
+            document.getElementById('signupModal').classList.remove('active'); // Kayıt modalı açıksa kapat
             document.getElementById('loginModal').classList.add('active');
             document.body.style.overflow = 'hidden';
         }
 
         function showSignupModal() {
-            document.getElementById('loginModal').classList.remove('active'); // Close login modal if open
+            document.getElementById('loginModal').classList.remove('active'); // Giriş modalı açıksa kapat
             document.getElementById('signupModal').classList.add('active');
             document.body.style.overflow = 'hidden';
         }
@@ -628,7 +625,7 @@
             document.body.style.overflow = '';
         }
 
-        // Close modal when clicking outside
+        // Modal dışında bir yere tıklanınca modalı kapatır.
         document.querySelectorAll('.modal').forEach(modal => {
             modal.addEventListener('click', function(e) {
                 if (e.target === this) {
@@ -637,14 +634,14 @@
             });
         });
 
-        // Form handling with basic validation feedback
+        // Giriş formunu işleyen fonksiyon. API'ye istek atar ve kullanıcı rolüne göre yönlendirir.
         function handleLogin(event) {
             event.preventDefault();
 
             const mail = document.getElementById('loginEmail').value;
             const password = document.getElementById('loginPassword').value;
 
-            fetch('http://localhost:5093/api/authentication/login', {
+            fetch('https://localhost:7201/api/authentication/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -663,12 +660,9 @@
 
                 const token = data.accessToken;
                 if (!token) throw new Error("accessToken bulunamadı!");
-
                 localStorage.setItem('accessToken', token);
-
                 const payload = JSON.parse(atob(token.split('.')[1]));
                 const role = payload["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
-
                 if (role === "CompanyOwner") {
                     window.location.href = "admin-page.html";
                 } else if (role === "Manager") {
@@ -684,10 +678,9 @@
                 alert("Giriş başarısız: " + error.message);
             });
         }
-
+        // Kayıt formunu işleyen fonksiyon. API'ye istek atar ve başarılıysa yönlendirir.
         function handleSignup(event) {
             event.preventDefault();
-
             const formData = {
                 firstName: document.getElementById('firstName').value,
                 lastName: document.getElementById('lastName').value,
@@ -697,8 +690,7 @@
                 taxNumber: document.getElementById('taxNumber').value,
                 companyName: document.getElementById('companyName').value
             };
-
-            fetch('http://localhost:5093/api/authentication', {
+            fetch('https://localhost:7201/api/authentication', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -711,7 +703,6 @@
                         throw new Error(text || 'Kayıt sırasında bir hata oluştu.');
                     });
                 }
-
                 // 201 durumu başarılı bir kayıt anlamına gelir
                 if (response.status === 201) {
                     alert('Kayıt başarılı! Giriş sayfasına yönlendiriliyorsunuz...');

@@ -3958,3 +3958,437 @@
 2025-06-02 12:21:46.5260 Info Validating config: TargetNames=logfile, ConfigItems=18, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
 2025-06-02 12:21:46.5260 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
 2025-06-02 12:21:46.5504 Info Configuration initialized.
+2025-06-12 19:33:17.6964 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-06-12 19:33:17.7154 Info Registered target NLog.Targets.Wrappers.AsyncTargetWrapper(Name=asyncFile)
+2025-06-12 19:33:17.7154 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'console' not found for logging rule: *.
+2025-06-12 19:33:17.7154 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-06-12 19:33:17.7269 Info Validating config: TargetNames=logfile, ConfigItems=18, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
+2025-06-12 19:33:17.7269 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
+2025-06-12 19:33:17.7380 Info Configuration initialized.
+2025-06-12 19:50:10.1941 Info AppDomain Shutting down. LogFactory closing...
+2025-06-12 19:50:10.2022 Info LogFactory has been closed.
+2025-06-12 22:14:29.8121 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-06-12 22:14:29.8284 Info Registered target NLog.Targets.Wrappers.AsyncTargetWrapper(Name=asyncFile)
+2025-06-12 22:14:29.8284 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'console' not found for logging rule: *.
+2025-06-12 22:14:29.8284 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-06-12 22:14:29.8284 Info Validating config: TargetNames=logfile, ConfigItems=18, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
+2025-06-12 22:14:29.8416 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
+2025-06-12 22:14:29.8416 Info Configuration initialized.
+2025-06-12 22:14:30.8174 Info AppDomain Shutting down. LogFactory closing...
+2025-06-12 22:14:30.8231 Info LogFactory has been closed.
+2025-06-13 12:50:18.1496 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-06-13 12:50:18.1680 Info Registered target NLog.Targets.Wrappers.AsyncTargetWrapper(Name=asyncFile)
+2025-06-13 12:50:18.1714 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'console' not found for logging rule: *.
+2025-06-13 12:50:18.1714 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-06-13 12:50:18.1714 Info Validating config: TargetNames=logfile, ConfigItems=18, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
+2025-06-13 12:50:18.1714 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
+2025-06-13 12:50:18.1953 Info Configuration initialized.
+2025-06-13 12:57:21.4733 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-06-13 12:57:21.4800 Info Registered target NLog.Targets.Wrappers.AsyncTargetWrapper(Name=asyncFile)
+2025-06-13 12:57:21.4855 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'console' not found for logging rule: *.
+2025-06-13 12:57:21.4855 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-06-13 12:57:21.4855 Info Validating config: TargetNames=logfile, ConfigItems=18, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
+2025-06-13 12:57:21.5021 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
+2025-06-13 12:57:21.5021 Info Configuration initialized.
+2025-06-14 14:38:26.5866 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-06-14 14:38:26.6033 Info Registered target NLog.Targets.Wrappers.AsyncTargetWrapper(Name=asyncFile)
+2025-06-14 14:38:26.6033 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'console' not found for logging rule: *.
+2025-06-14 14:38:26.6085 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-06-14 14:38:26.6085 Info Validating config: TargetNames=logfile, ConfigItems=18, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
+2025-06-14 14:38:26.6085 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
+2025-06-14 14:38:26.6085 Info Configuration initialized.
+2025-06-14 14:42:17.3026 Info AppDomain Shutting down. LogFactory closing...
+2025-06-14 14:42:17.3026 Info LogFactory has been closed.
+2025-06-15 09:34:53.9443 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-06-15 09:34:53.9518 Info Registered target NLog.Targets.Wrappers.AsyncTargetWrapper(Name=asyncFile)
+2025-06-15 09:34:53.9562 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'console' not found for logging rule: *.
+2025-06-15 09:34:53.9562 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-06-15 09:34:53.9562 Info Validating config: TargetNames=logfile, ConfigItems=18, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
+2025-06-15 09:34:53.9562 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
+2025-06-15 09:34:53.9811 Info Configuration initialized.
+2025-06-15 09:36:54.9701 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-06-15 09:36:54.9767 Info Registered target NLog.Targets.Wrappers.AsyncTargetWrapper(Name=asyncFile)
+2025-06-15 09:36:54.9767 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'console' not found for logging rule: *.
+2025-06-15 09:36:54.9767 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-06-15 09:36:54.9885 Info Validating config: TargetNames=logfile, ConfigItems=18, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
+2025-06-15 09:36:54.9885 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
+2025-06-15 09:36:54.9885 Info Configuration initialized.
+2025-06-15 09:37:07.9707 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-06-15 09:37:07.9833 Info Registered target NLog.Targets.Wrappers.AsyncTargetWrapper(Name=asyncFile)
+2025-06-15 09:37:07.9900 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'console' not found for logging rule: *.
+2025-06-15 09:37:07.9900 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-06-15 09:37:08.0049 Info Validating config: TargetNames=logfile, ConfigItems=18, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
+2025-06-15 09:37:08.0049 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
+2025-06-15 09:37:08.0287 Info Configuration initialized.
+2025-06-15 09:41:54.4021 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-06-15 09:41:54.4091 Info Registered target NLog.Targets.Wrappers.AsyncTargetWrapper(Name=asyncFile)
+2025-06-15 09:41:54.4128 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'console' not found for logging rule: *.
+2025-06-15 09:41:54.4128 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-06-15 09:41:54.4128 Info Validating config: TargetNames=logfile, ConfigItems=18, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
+2025-06-15 09:41:54.4259 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
+2025-06-15 09:41:54.4259 Info Configuration initialized.
+2025-06-15 09:42:13.4313 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-06-15 09:42:13.4390 Info Registered target NLog.Targets.Wrappers.AsyncTargetWrapper(Name=asyncFile)
+2025-06-15 09:42:13.4390 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'console' not found for logging rule: *.
+2025-06-15 09:42:13.4390 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-06-15 09:42:13.4532 Info Validating config: TargetNames=logfile, ConfigItems=18, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
+2025-06-15 09:42:13.4532 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
+2025-06-15 09:42:13.4694 Info Configuration initialized.
+2025-06-15 09:42:38.8098 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-06-15 09:42:38.8098 Info Registered target NLog.Targets.Wrappers.AsyncTargetWrapper(Name=asyncFile)
+2025-06-15 09:42:38.8098 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'console' not found for logging rule: *.
+2025-06-15 09:42:38.8098 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-06-15 09:42:38.8282 Info Validating config: TargetNames=logfile, ConfigItems=18, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
+2025-06-15 09:42:38.8282 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
+2025-06-15 09:42:38.8427 Info Configuration initialized.
+2025-06-15 09:43:58.4193 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-06-15 09:43:58.4193 Info Registered target NLog.Targets.Wrappers.AsyncTargetWrapper(Name=asyncFile)
+2025-06-15 09:43:58.4193 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'console' not found for logging rule: *.
+2025-06-15 09:43:58.4193 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-06-15 09:43:58.4332 Info Validating config: TargetNames=logfile, ConfigItems=18, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
+2025-06-15 09:43:58.4332 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
+2025-06-15 09:43:58.4332 Info Configuration initialized.
+2025-06-15 09:46:02.3510 Info AppDomain Shutting down. LogFactory closing...
+2025-06-15 09:46:02.3510 Info LogFactory has been closed.
+2025-06-16 11:45:34.9045 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-06-16 11:45:34.9137 Info Registered target NLog.Targets.Wrappers.AsyncTargetWrapper(Name=asyncFile)
+2025-06-16 11:45:34.9170 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'console' not found for logging rule: *.
+2025-06-16 11:45:34.9170 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-06-16 11:45:34.9170 Info Validating config: TargetNames=logfile, ConfigItems=18, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
+2025-06-16 11:45:34.9170 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
+2025-06-16 11:45:34.9418 Info Configuration initialized.
+2025-06-16 11:50:19.4888 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-06-16 11:50:19.4968 Info Registered target NLog.Targets.Wrappers.AsyncTargetWrapper(Name=asyncFile)
+2025-06-16 11:50:19.5012 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'console' not found for logging rule: *.
+2025-06-16 11:50:19.5012 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-06-16 11:50:19.5012 Info Validating config: TargetNames=logfile, ConfigItems=18, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
+2025-06-16 11:50:19.5137 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
+2025-06-16 11:50:19.5137 Info Configuration initialized.
+2025-06-16 11:53:41.0521 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-06-16 11:53:41.0521 Info Registered target NLog.Targets.Wrappers.AsyncTargetWrapper(Name=asyncFile)
+2025-06-16 11:53:41.0617 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'console' not found for logging rule: *.
+2025-06-16 11:53:41.0617 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-06-16 11:53:41.0617 Info Validating config: TargetNames=logfile, ConfigItems=18, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
+2025-06-16 11:53:41.0744 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
+2025-06-16 11:53:41.0744 Info Configuration initialized.
+2025-06-16 14:16:04.9609 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-06-16 14:16:04.9671 Info Registered target NLog.Targets.Wrappers.AsyncTargetWrapper(Name=asyncFile)
+2025-06-16 14:16:04.9671 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'console' not found for logging rule: *.
+2025-06-16 14:16:04.9671 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-06-16 14:16:04.9671 Info Validating config: TargetNames=logfile, ConfigItems=18, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
+2025-06-16 14:16:04.9810 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
+2025-06-16 14:16:04.9810 Info Configuration initialized.
+2025-06-16 19:32:06.7564 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-06-16 19:32:06.7631 Info Registered target NLog.Targets.Wrappers.AsyncTargetWrapper(Name=asyncFile)
+2025-06-16 19:32:06.7631 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'console' not found for logging rule: *.
+2025-06-16 19:32:06.7631 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-06-16 19:32:06.7753 Info Validating config: TargetNames=logfile, ConfigItems=18, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
+2025-06-16 19:32:06.7753 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
+2025-06-16 19:32:06.7753 Info Configuration initialized.
+2025-06-17 12:41:23.0105 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-06-17 12:41:23.0171 Info Registered target NLog.Targets.Wrappers.AsyncTargetWrapper(Name=asyncFile)
+2025-06-17 12:41:23.0171 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'console' not found for logging rule: *.
+2025-06-17 12:41:23.0171 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-06-17 12:41:23.0282 Info Validating config: TargetNames=logfile, ConfigItems=18, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
+2025-06-17 12:41:23.0282 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
+2025-06-17 12:41:23.0444 Info Configuration initialized.
+2025-06-17 16:41:29.9008 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-06-17 16:41:29.9008 Info Registered target NLog.Targets.Wrappers.AsyncTargetWrapper(Name=asyncFile)
+2025-06-17 16:41:29.9168 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Target 'console' not found for logging rule: *.
+2025-06-17 16:41:29.9168 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-06-17 16:41:29.9168 Info Validating config: TargetNames=logfile, ConfigItems=18, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
+2025-06-17 16:41:29.9168 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
+2025-06-17 16:41:29.9506 Info Configuration initialized.
+2025-06-17 21:26:13.6365 Info Registered target NLog.Targets.ConsoleTarget(Name=console)
+2025-06-17 21:26:13.6526 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-06-17 21:26:13.6526 Info Registered target NLog.Targets.Wrappers.AsyncTargetWrapper(Name=asyncFile)
+2025-06-17 21:26:13.6526 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-06-17 21:26:13.6652 Info Validating config: TargetNames=logfile, console, ConfigItems=27, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
+2025-06-17 21:26:13.6652 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
+2025-06-17 21:26:13.6652 Info Configuration initialized.
+2025-06-17 21:26:49.2374 Info Registered target NLog.Targets.ConsoleTarget(Name=console)
+2025-06-17 21:26:49.2664 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-06-17 21:26:49.2664 Info Registered target NLog.Targets.Wrappers.AsyncTargetWrapper(Name=asyncFile)
+2025-06-17 21:26:49.2751 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-06-17 21:26:49.2751 Info Validating config: TargetNames=logfile, console, ConfigItems=27, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
+2025-06-17 21:26:49.2956 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
+2025-06-17 21:26:49.3188 Info Configuration initialized.
+2025-06-17 21:27:07.7831 Info Registered target NLog.Targets.ConsoleTarget(Name=console)
+2025-06-17 21:27:07.7988 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-06-17 21:27:07.7988 Info Registered target NLog.Targets.Wrappers.AsyncTargetWrapper(Name=asyncFile)
+2025-06-17 21:27:07.7988 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-06-17 21:27:07.8108 Info Validating config: TargetNames=logfile, console, ConfigItems=27, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
+2025-06-17 21:27:07.8108 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
+2025-06-17 21:27:07.8221 Info Configuration initialized.
+2025-06-17 21:40:26.6076 Info Registered target NLog.Targets.ConsoleTarget(Name=console)
+2025-06-17 21:40:26.6265 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-06-17 21:40:26.6265 Info Registered target NLog.Targets.Wrappers.AsyncTargetWrapper(Name=asyncFile)
+2025-06-17 21:40:26.6265 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-06-17 21:40:26.6425 Info Validating config: TargetNames=logfile, console, ConfigItems=27, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
+2025-06-17 21:40:26.6425 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
+2025-06-17 21:40:26.6607 Info Configuration initialized.
+2025-06-17 22:04:00.4190 Info Registered target NLog.Targets.ConsoleTarget(Name=console)
+2025-06-17 22:04:00.4328 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-06-17 22:04:00.4328 Info Registered target NLog.Targets.Wrappers.AsyncTargetWrapper(Name=asyncFile)
+2025-06-17 22:04:00.4328 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-06-17 22:04:00.4328 Info Validating config: TargetNames=logfile, console, ConfigItems=27, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
+2025-06-17 22:04:00.4451 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
+2025-06-17 22:04:00.4451 Info Configuration initialized.
+2025-06-17 22:25:53.6548 Info AppDomain Shutting down. LogFactory closing...
+2025-06-17 22:25:53.6642 Info LogFactory has been closed.
+2025-06-17 23:12:18.4611 Info Registered target NLog.Targets.ConsoleTarget(Name=console)
+2025-06-17 23:12:18.4759 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-06-17 23:12:18.4759 Info Registered target NLog.Targets.Wrappers.AsyncTargetWrapper(Name=asyncFile)
+2025-06-17 23:12:18.4807 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-06-17 23:12:18.4807 Info Validating config: TargetNames=logfile, console, ConfigItems=27, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
+2025-06-17 23:12:18.4807 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
+2025-06-17 23:12:18.4978 Info Configuration initialized.
+2025-06-17 23:39:18.0513 Info Registered target NLog.Targets.ConsoleTarget(Name=console)
+2025-06-17 23:39:18.0702 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-06-17 23:39:18.0702 Info Registered target NLog.Targets.Wrappers.AsyncTargetWrapper(Name=asyncFile)
+2025-06-17 23:39:18.0702 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-06-17 23:39:18.0702 Info Validating config: TargetNames=logfile, console, ConfigItems=27, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
+2025-06-17 23:39:18.0702 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
+2025-06-17 23:39:18.0973 Info Configuration initialized.
+2025-06-17 23:39:32.8896 Info Registered target NLog.Targets.ConsoleTarget(Name=console)
+2025-06-17 23:39:32.9019 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-06-17 23:39:32.9019 Info Registered target NLog.Targets.Wrappers.AsyncTargetWrapper(Name=asyncFile)
+2025-06-17 23:39:32.9019 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-06-17 23:39:32.9019 Info Validating config: TargetNames=logfile, console, ConfigItems=27, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
+2025-06-17 23:39:32.9159 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
+2025-06-17 23:39:32.9159 Info Configuration initialized.
+2025-06-17 23:39:46.8118 Info AppDomain Shutting down. LogFactory closing...
+2025-06-17 23:39:46.8118 Info LogFactory has been closed.
+2025-06-17 23:52:58.8187 Info Registered target NLog.Targets.ConsoleTarget(Name=console)
+2025-06-17 23:52:58.8358 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-06-17 23:52:58.8358 Info Registered target NLog.Targets.Wrappers.AsyncTargetWrapper(Name=asyncFile)
+2025-06-17 23:52:58.8358 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-06-17 23:52:58.8358 Info Validating config: TargetNames=logfile, console, ConfigItems=27, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
+2025-06-17 23:52:58.8358 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
+2025-06-17 23:52:58.8574 Info Configuration initialized.
+2025-06-17 23:53:04.6754 Info AppDomain Shutting down. LogFactory closing...
+2025-06-17 23:53:04.6835 Info LogFactory has been closed.
+2025-06-18 00:02:41.2890 Info Registered target NLog.Targets.ConsoleTarget(Name=console)
+2025-06-18 00:02:41.3029 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-06-18 00:02:41.3029 Info Registered target NLog.Targets.Wrappers.AsyncTargetWrapper(Name=asyncFile)
+2025-06-18 00:02:41.3075 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-06-18 00:02:41.3075 Info Validating config: TargetNames=logfile, console, ConfigItems=27, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
+2025-06-18 00:02:41.3075 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
+2025-06-18 00:02:41.3255 Info Configuration initialized.
+2025-06-18 00:55:43.7339 Info Registered target NLog.Targets.ConsoleTarget(Name=console)
+2025-06-18 00:55:43.7626 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-06-18 00:55:43.7626 Info Registered target NLog.Targets.Wrappers.AsyncTargetWrapper(Name=asyncFile)
+2025-06-18 00:55:43.7626 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-06-18 00:55:43.7773 Info Validating config: TargetNames=logfile, console, ConfigItems=27, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
+2025-06-18 00:55:43.7773 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
+2025-06-18 00:55:43.7950 Info Configuration initialized.
+2025-06-18 00:58:19.3977 Info Registered target NLog.Targets.ConsoleTarget(Name=console)
+2025-06-18 00:58:19.4126 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-06-18 00:58:19.4126 Info Registered target NLog.Targets.Wrappers.AsyncTargetWrapper(Name=asyncFile)
+2025-06-18 00:58:19.4173 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-06-18 00:58:19.4173 Info Validating config: TargetNames=logfile, console, ConfigItems=27, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
+2025-06-18 00:58:19.4173 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
+2025-06-18 00:58:19.4386 Info Configuration initialized.
+2025-06-18 01:00:48.1352 Info Registered target NLog.Targets.ConsoleTarget(Name=console)
+2025-06-18 01:00:48.1506 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-06-18 01:00:48.1506 Info Registered target NLog.Targets.Wrappers.AsyncTargetWrapper(Name=asyncFile)
+2025-06-18 01:00:48.1506 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-06-18 01:00:48.1506 Info Validating config: TargetNames=logfile, console, ConfigItems=27, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
+2025-06-18 01:00:48.1665 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
+2025-06-18 01:00:48.1665 Info Configuration initialized.
+2025-06-18 02:37:59.2879 Info Registered target NLog.Targets.ConsoleTarget(Name=console)
+2025-06-18 02:37:59.3024 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-06-18 02:37:59.3024 Info Registered target NLog.Targets.Wrappers.AsyncTargetWrapper(Name=asyncFile)
+2025-06-18 02:37:59.3068 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-06-18 02:37:59.3068 Info Validating config: TargetNames=logfile, console, ConfigItems=27, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
+2025-06-18 02:37:59.3068 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
+2025-06-18 02:37:59.3304 Info Configuration initialized.
+2025-06-18 02:38:27.8284 Info Registered target NLog.Targets.ConsoleTarget(Name=console)
+2025-06-18 02:38:27.8476 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-06-18 02:38:27.8476 Info Registered target NLog.Targets.Wrappers.AsyncTargetWrapper(Name=asyncFile)
+2025-06-18 02:38:27.8525 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-06-18 02:38:27.8525 Info Validating config: TargetNames=logfile, console, ConfigItems=27, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
+2025-06-18 02:38:27.8525 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
+2025-06-18 02:38:27.8787 Info Configuration initialized.
+2025-06-18 02:38:33.0377 Info Registered target NLog.Targets.ConsoleTarget(Name=console)
+2025-06-18 02:38:33.0560 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-06-18 02:38:33.0560 Info Registered target NLog.Targets.Wrappers.AsyncTargetWrapper(Name=asyncFile)
+2025-06-18 02:38:33.0560 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-06-18 02:38:33.0560 Info Validating config: TargetNames=logfile, console, ConfigItems=27, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
+2025-06-18 02:38:33.0741 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
+2025-06-18 02:38:33.0864 Info Configuration initialized.
+2025-06-18 02:43:55.4298 Info Registered target NLog.Targets.ConsoleTarget(Name=console)
+2025-06-18 02:43:55.4462 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-06-18 02:43:55.4462 Info Registered target NLog.Targets.Wrappers.AsyncTargetWrapper(Name=asyncFile)
+2025-06-18 02:43:55.4462 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-06-18 02:43:55.4462 Info Validating config: TargetNames=logfile, console, ConfigItems=27, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
+2025-06-18 02:43:55.4616 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
+2025-06-18 02:43:55.4616 Info Configuration initialized.
+2025-06-18 02:48:38.0349 Info Registered target NLog.Targets.ConsoleTarget(Name=console)
+2025-06-18 02:48:38.0496 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-06-18 02:48:38.0496 Info Registered target NLog.Targets.Wrappers.AsyncTargetWrapper(Name=asyncFile)
+2025-06-18 02:48:38.0496 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-06-18 02:48:38.0597 Info Validating config: TargetNames=logfile, console, ConfigItems=27, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
+2025-06-18 02:48:38.0597 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
+2025-06-18 02:48:38.0757 Info Configuration initialized.
+2025-06-18 02:49:57.6844 Info Registered target NLog.Targets.ConsoleTarget(Name=console)
+2025-06-18 02:49:57.6994 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-06-18 02:49:57.6994 Info Registered target NLog.Targets.Wrappers.AsyncTargetWrapper(Name=asyncFile)
+2025-06-18 02:49:57.6994 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-06-18 02:49:57.7123 Info Validating config: TargetNames=logfile, console, ConfigItems=27, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
+2025-06-18 02:49:57.7123 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
+2025-06-18 02:49:57.7123 Info Configuration initialized.
+2025-06-18 02:53:26.4205 Info Registered target NLog.Targets.ConsoleTarget(Name=console)
+2025-06-18 02:53:26.4431 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-06-18 02:53:26.4431 Info Registered target NLog.Targets.Wrappers.AsyncTargetWrapper(Name=asyncFile)
+2025-06-18 02:53:26.4496 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-06-18 02:53:26.4496 Info Validating config: TargetNames=logfile, console, ConfigItems=27, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
+2025-06-18 02:53:26.4649 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
+2025-06-18 02:53:26.4794 Info Configuration initialized.
+2025-06-18 02:55:46.1565 Info Registered target NLog.Targets.ConsoleTarget(Name=console)
+2025-06-18 02:55:46.1698 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-06-18 02:55:46.1698 Info Registered target NLog.Targets.Wrappers.AsyncTargetWrapper(Name=asyncFile)
+2025-06-18 02:55:46.1698 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-06-18 02:55:46.1800 Info Validating config: TargetNames=logfile, console, ConfigItems=27, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
+2025-06-18 02:55:46.1800 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
+2025-06-18 02:55:46.1800 Info Configuration initialized.
+2025-06-18 02:59:07.1404 Info AppDomain Shutting down. LogFactory closing...
+2025-06-18 02:59:07.1404 Info LogFactory has been closed.
+2025-06-18 13:51:14.3520 Info Registered target NLog.Targets.ConsoleTarget(Name=console)
+2025-06-18 13:51:14.3698 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-06-18 13:51:14.3698 Info Registered target NLog.Targets.Wrappers.AsyncTargetWrapper(Name=asyncFile)
+2025-06-18 13:51:14.3698 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-06-18 13:51:14.3698 Info Validating config: TargetNames=logfile, console, ConfigItems=27, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
+2025-06-18 13:51:14.3866 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
+2025-06-18 13:51:14.3866 Info Configuration initialized.
+2025-06-18 15:03:18.8858 Info AppDomain Shutting down. LogFactory closing...
+2025-06-18 15:03:18.8858 Info LogFactory has been closed.
+2025-06-19 16:04:30.3800 Info Registered target NLog.Targets.ConsoleTarget(Name=console)
+2025-06-19 16:04:30.4006 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-06-19 16:04:30.4006 Info Registered target NLog.Targets.Wrappers.AsyncTargetWrapper(Name=asyncFile)
+2025-06-19 16:04:30.4065 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-06-19 16:04:30.4065 Info Validating config: TargetNames=logfile, console, ConfigItems=27, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
+2025-06-19 16:04:30.4186 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
+2025-06-19 16:04:30.4186 Info Configuration initialized.
+2025-06-19 20:20:38.9004 Info Registered target NLog.Targets.ConsoleTarget(Name=console)
+2025-06-19 20:20:38.9161 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-06-19 20:20:38.9161 Info Registered target NLog.Targets.Wrappers.AsyncTargetWrapper(Name=asyncFile)
+2025-06-19 20:20:38.9207 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-06-19 20:20:38.9207 Info Validating config: TargetNames=logfile, console, ConfigItems=27, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
+2025-06-19 20:20:38.9207 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
+2025-06-19 20:20:38.9385 Info Configuration initialized.
+2025-06-19 20:20:42.5931 Info AppDomain Shutting down. LogFactory closing...
+2025-06-19 20:20:42.5931 Info LogFactory has been closed.
+2025-06-19 20:30:19.7069 Info Registered target NLog.Targets.ConsoleTarget(Name=console)
+2025-06-19 20:30:19.7209 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-06-19 20:30:19.7209 Info Registered target NLog.Targets.Wrappers.AsyncTargetWrapper(Name=asyncFile)
+2025-06-19 20:30:19.7209 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-06-19 20:30:19.7325 Info Validating config: TargetNames=logfile, console, ConfigItems=27, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
+2025-06-19 20:30:19.7325 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
+2025-06-19 20:30:19.7325 Info Configuration initialized.
+2025-06-19 21:07:07.4942 Info Registered target NLog.Targets.ConsoleTarget(Name=console)
+2025-06-19 21:07:07.5111 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-06-19 21:07:07.5111 Info Registered target NLog.Targets.Wrappers.AsyncTargetWrapper(Name=asyncFile)
+2025-06-19 21:07:07.5149 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-06-19 21:07:07.5149 Info Validating config: TargetNames=logfile, console, ConfigItems=27, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
+2025-06-19 21:07:07.5149 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
+2025-06-19 21:07:07.5354 Info Configuration initialized.
+2025-06-19 21:20:29.8051 Info Registered target NLog.Targets.ConsoleTarget(Name=console)
+2025-06-19 21:20:29.8172 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-06-19 21:20:29.8172 Info Registered target NLog.Targets.Wrappers.AsyncTargetWrapper(Name=asyncFile)
+2025-06-19 21:20:29.8172 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-06-19 21:20:29.8261 Info Validating config: TargetNames=logfile, console, ConfigItems=27, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
+2025-06-19 21:20:29.8261 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
+2025-06-19 21:20:29.8261 Info Configuration initialized.
+2025-06-19 22:35:56.2121 Info AppDomain Shutting down. LogFactory closing...
+2025-06-19 22:35:56.2209 Info LogFactory has been closed.
+2025-06-20 15:36:12.2844 Info Registered target NLog.Targets.ConsoleTarget(Name=console)
+2025-06-20 15:36:12.3061 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-06-20 15:36:12.3061 Info Registered target NLog.Targets.Wrappers.AsyncTargetWrapper(Name=asyncFile)
+2025-06-20 15:36:12.3131 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-06-20 15:36:12.3131 Info Validating config: TargetNames=logfile, console, ConfigItems=27, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
+2025-06-20 15:36:12.3278 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
+2025-06-20 15:36:12.3434 Info Configuration initialized.
+2025-06-20 17:29:17.6779 Info Registered target NLog.Targets.ConsoleTarget(Name=console)
+2025-06-20 17:29:17.7017 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-06-20 17:29:17.7017 Info Registered target NLog.Targets.Wrappers.AsyncTargetWrapper(Name=asyncFile)
+2025-06-20 17:29:17.7017 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-06-20 17:29:17.7201 Info Validating config: TargetNames=logfile, console, ConfigItems=27, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
+2025-06-20 17:29:17.7201 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
+2025-06-20 17:29:17.7416 Info Configuration initialized.
+2025-06-20 17:37:03.0970 Info Registered target NLog.Targets.ConsoleTarget(Name=console)
+2025-06-20 17:37:03.1169 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-06-20 17:37:03.1169 Info Registered target NLog.Targets.Wrappers.AsyncTargetWrapper(Name=asyncFile)
+2025-06-20 17:37:03.1234 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-06-20 17:37:03.1234 Info Validating config: TargetNames=logfile, console, ConfigItems=27, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
+2025-06-20 17:37:03.1384 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
+2025-06-20 17:37:03.1384 Info Configuration initialized.
+2025-06-20 17:38:13.6778 Info Registered target NLog.Targets.ConsoleTarget(Name=console)
+2025-06-20 17:38:13.6961 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-06-20 17:38:13.6961 Info Registered target NLog.Targets.Wrappers.AsyncTargetWrapper(Name=asyncFile)
+2025-06-20 17:38:13.7014 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-06-20 17:38:13.7014 Info Validating config: TargetNames=logfile, console, ConfigItems=27, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
+2025-06-20 17:38:13.7014 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
+2025-06-20 17:38:13.7197 Info Configuration initialized.
+2025-06-20 17:40:34.8368 Info AppDomain Shutting down. LogFactory closing...
+2025-06-20 17:40:34.8368 Info LogFactory has been closed.
+2025-06-20 17:41:02.0842 Info Registered target NLog.Targets.ConsoleTarget(Name=console)
+2025-06-20 17:41:02.1000 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-06-20 17:41:02.1000 Info Registered target NLog.Targets.Wrappers.AsyncTargetWrapper(Name=asyncFile)
+2025-06-20 17:41:02.1000 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-06-20 17:41:02.1109 Info Validating config: TargetNames=logfile, console, ConfigItems=27, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
+2025-06-20 17:41:02.1109 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
+2025-06-20 17:41:02.1234 Info Configuration initialized.
+2025-06-20 17:43:27.8862 Info AppDomain Shutting down. LogFactory closing...
+2025-06-20 17:43:27.8942 Info LogFactory has been closed.
+2025-06-20 17:44:24.7375 Info Registered target NLog.Targets.ConsoleTarget(Name=console)
+2025-06-20 17:44:24.7553 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-06-20 17:44:24.7553 Info Registered target NLog.Targets.Wrappers.AsyncTargetWrapper(Name=asyncFile)
+2025-06-20 17:44:24.7553 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-06-20 17:44:24.7666 Info Validating config: TargetNames=logfile, console, ConfigItems=27, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
+2025-06-20 17:44:24.7666 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
+2025-06-20 17:44:24.7666 Info Configuration initialized.
+2025-06-20 18:14:24.4018 Info Registered target NLog.Targets.ConsoleTarget(Name=console)
+2025-06-20 18:14:24.4199 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-06-20 18:14:24.4199 Info Registered target NLog.Targets.Wrappers.AsyncTargetWrapper(Name=asyncFile)
+2025-06-20 18:14:24.4199 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-06-20 18:14:24.4199 Info Validating config: TargetNames=logfile, console, ConfigItems=27, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
+2025-06-20 18:14:24.4378 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
+2025-06-20 18:14:24.4378 Info Configuration initialized.
+2025-06-20 18:16:24.9695 Info Registered target NLog.Targets.ConsoleTarget(Name=console)
+2025-06-20 18:16:24.9842 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-06-20 18:16:24.9842 Info Registered target NLog.Targets.Wrappers.AsyncTargetWrapper(Name=asyncFile)
+2025-06-20 18:16:24.9842 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-06-20 18:16:24.9842 Info Validating config: TargetNames=logfile, console, ConfigItems=27, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
+2025-06-20 18:16:24.9980 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
+2025-06-20 18:16:24.9980 Info Configuration initialized.
+2025-06-20 18:18:31.3384 Info Registered target NLog.Targets.ConsoleTarget(Name=console)
+2025-06-20 18:18:31.3572 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-06-20 18:18:31.3572 Info Registered target NLog.Targets.Wrappers.AsyncTargetWrapper(Name=asyncFile)
+2025-06-20 18:18:31.3572 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-06-20 18:18:31.3572 Info Validating config: TargetNames=logfile, console, ConfigItems=27, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
+2025-06-20 18:18:31.3766 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
+2025-06-20 18:18:31.3909 Info Configuration initialized.
+2025-06-20 18:22:37.5613 Info Registered target NLog.Targets.ConsoleTarget(Name=console)
+2025-06-20 18:22:37.5890 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-06-20 18:22:37.5890 Info Registered target NLog.Targets.Wrappers.AsyncTargetWrapper(Name=asyncFile)
+2025-06-20 18:22:37.5952 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-06-20 18:22:37.6058 Info Validating config: TargetNames=logfile, console, ConfigItems=27, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
+2025-06-20 18:22:37.6058 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
+2025-06-20 18:22:37.6240 Info Configuration initialized.
+2025-06-20 18:31:26.4627 Info Registered target NLog.Targets.ConsoleTarget(Name=console)
+2025-06-20 18:31:26.4901 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-06-20 18:31:26.4901 Info Registered target NLog.Targets.Wrappers.AsyncTargetWrapper(Name=asyncFile)
+2025-06-20 18:31:26.4988 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-06-20 18:31:26.5142 Info Validating config: TargetNames=logfile, console, ConfigItems=27, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
+2025-06-20 18:31:26.5142 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
+2025-06-20 18:31:26.5396 Info Configuration initialized.
+2025-06-20 18:31:36.7398 Info Registered target NLog.Targets.ConsoleTarget(Name=console)
+2025-06-20 18:31:36.7524 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-06-20 18:31:36.7524 Info Registered target NLog.Targets.Wrappers.AsyncTargetWrapper(Name=asyncFile)
+2025-06-20 18:31:36.7524 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.4.0.3182. Product version: 5.4.0+4d45d445601312040107cbe2ac00e56c4bf4a60b. GlobalAssemblyCache: False
+2025-06-20 18:31:36.7524 Info Validating config: TargetNames=logfile, console, ConfigItems=27, FilePath=C:\Users\mertu\Desktop\internet_programlama\GorevTakipSistemi\GorevTakipSistemi\nlog.config
+2025-06-20 18:31:36.7660 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: asyncFile
+2025-06-20 18:31:36.7660 Info Configuration initialized.
+2025-06-20 18:58:59.7166 Info AppDomain Shutting down. LogFactory closing...
+2025-06-20 18:58:59.7257 Info LogFactory has been closed.

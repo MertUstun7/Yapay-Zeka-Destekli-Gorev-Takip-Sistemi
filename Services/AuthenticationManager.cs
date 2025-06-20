@@ -79,8 +79,6 @@ namespace Services
                 {
                     await _logger.LogInfo($"Vergi numarası: {companyOwnerRegistrationDto.TaxNumber} için  kayıt oluşturuldu");
                     await _userManager.AddToRoleAsync(user, "CompanyOwner");
-                    var company = _mapper.Map<Company>(companyOwnerRegistrationDto);
-                    //company.OwnerId = user.Id;
                     
                     var companyCreateDto = new CompanyDtoForCreate
                     {
@@ -93,7 +91,7 @@ namespace Services
                     var companyDto = await _companyManager.CreateAsync(companyCreateDto);
                     await _logger.LogInfo($"Şirket kaydı tamamlandı: {companyDto.Id}");
 
-                    // 4) Kullanıcının CompanyId alanını güncelle
+                    // Kullanıcının CompanyId alanını güncelle
                     user.CompanyId = companyDto.Id;
                     await _userManager.UpdateAsync(user);
 
@@ -128,6 +126,9 @@ namespace Services
             }
             return result;
         }
+
+
+
         // JWT imzası için güvenli bir anahtar oluşturur.
         private SigningCredentials GetSinginCredentials()
         {
@@ -198,7 +199,7 @@ namespace Services
             {
                 ValidateIssuer = true,
                 ValidateAudience = true,
-                ValidateLifetime = true,
+                ValidateLifetime = false,
                 ValidateIssuerSigningKey = true,
                 ValidIssuer = jwtSettings["validIssuer"],
                 ValidAudience = jwtSettings["validAudience"],
