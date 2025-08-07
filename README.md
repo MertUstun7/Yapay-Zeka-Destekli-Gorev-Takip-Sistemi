@@ -1,4 +1,4 @@
-# Görev Takip Sistemi
+# Yapay Zeka Destekli Görev Takip Sistemi
 
 ## Proje Hakkında
 Görev Takip Sistemi, ekiplerin ve bireylerin görevlerini etkili şekilde yönetebilmesi için geliştirilmiş, çok katmanlı bir web uygulamasıdır. Hem modern bir frontend arayüzü hem de ölçeklenebilir bir backend mimarisi sunar.
